@@ -4,7 +4,7 @@ const Footer = () => {
 
     return (
         <>
-            <p>Every data/image come from "https://api.rawg.io/"</p>
+            <p>All data/pictures from "https://api.rawg.io/"</p>
         </>
     )
 }
