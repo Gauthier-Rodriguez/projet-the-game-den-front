@@ -1,3 +1,4 @@
+import './Error.scss'
 
 const Error = () => {
 

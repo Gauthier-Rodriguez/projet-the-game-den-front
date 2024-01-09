@@ -1,3 +1,4 @@
+import './GameDetails.scss'
 
 const GameDetails = () => {
 
