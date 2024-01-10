@@ -2,7 +2,8 @@ import './Home.scss'
 
 const Home = () => {
 
-    // affichage des recommandations 
+    // affichage des recommandations - si utilisateur connecté
+    //possibilité de filtrer en cliquant sur les boutons plaform/genre/noteMC 
     // if(isAuthenticated){
     //     return(
     //         <div className="home__container">
@@ -37,7 +38,10 @@ const Home = () => {
     //         </div>
     //     )
     // }
+     // sinon affichage des jeux populaires
+     //possibilité de filtrer en cliquant sur les boutons plaform/genre/noteMC     
     // else{
+   
         return(
             <div className="home__container">
                 <select className="home__filter" name="platform" onChange="" >
@@ -58,7 +62,7 @@ const Home = () => {
                     <div className="card">
                         <img className="card__img"src="" alt="" />
                         <div className="card__list-logo">
-                        {/* plateforme sous forme de logo/dynamique en fonction des jeux */}
+                        {/* plateforme sous forme de logo (récupérer le logo de chaque plateforme/dynamique en fonction des jeux */}
                             <img className="card__logo" src="" alt="" /> 
                         </div>
                         <h2 className="card__title">Titre du jeu</h2>

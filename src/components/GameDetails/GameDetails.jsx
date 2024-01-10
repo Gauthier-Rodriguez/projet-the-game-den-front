@@ -2,6 +2,8 @@ import './GameDetails.scss'
 
 const GameDetails = () => {
 
+
+    //page détail du jeu avec image en fond   
     return(
         <div className='game'>
             <img className="game__img"src="background-image"  alt="" />

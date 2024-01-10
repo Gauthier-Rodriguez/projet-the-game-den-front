@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 const Header = () => {
 
     // if(isAuthenticated){
+    // affichage du coeur pour pouvoir accéder à sa page de favoris-pas visible pour visiteur    
     //     return(
     //         <div className="header">
     //             <Link className="header__link" to="/">

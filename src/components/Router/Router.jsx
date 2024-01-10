@@ -7,19 +7,23 @@ import Profil from '../Profil/Profil'
 import GameDetails from '../GameDetails/GameDetails'
 import Favorites from '../Favorites/Favorites'
 import Footer from '../Footer/Footer'
+import { UserController } from '../../context/UserContext'
 
-const Router = () => {
 
-    const location = useLocation();
+function Router() {
 
-    const pathsWithoutHeader = ['/login', '/profil'];
-    const isPathWithoutHeader = pathsWithoutHeader.includes(location.pathname);
+    //affichage du header et du footer sur toutes les pages sauf /login et /profil    
+    const location = useLocation()
 
-    const pathsWithoutFooter = ['/login', '/profil'];
+    const pathsWithoutHeader = ['/login', '/profil']
+    const isPathWithoutHeader = pathsWithoutHeader.includes(location.pathname)
+
+    const pathsWithoutFooter = ['/login', '/profil']
     const isPathWithoutFooter = pathsWithoutFooter.includes(location.pathname)
 
     return (
         <>
+            <UserController>
             {!isPathWithoutHeader && <Header />}
             <Routes>
                 <Route path="*" element={<Error />} />
@@ -29,7 +33,8 @@ const Router = () => {
                 <Route path="/game/:id" element={<GameDetails />} />
                 <Route path="/favorites" element={<Favorites />} />
             </Routes>
-            {!isPathWithoutFooter && <Footer /> }
+            {!isPathWithoutFooter && <Footer />}
+            </UserController>
         </>
     )
 }
