@@ -41,12 +41,15 @@ const Profil = () => {
         getProfil();
     }, []);
     
-
+    const handlePseudoChange = (e) => {
+        const newPseudo = e.target.value;
+        setDetails((prevDetails) => ({...prevDetails, pseudo : newPseudo}))
+    };
 
     return(
         <>
             <h1 className="profil__title">Welcome {details.firstName} {details.lastName} to your profil</h1>
-            <input className="profil__input" type="text" placeholder={details.pseudo} onChange="" />
+            <input className="profil__input" type="text" placeholder={details.pseudo} onChange={handlePseudoChange}/>
             <p>ce pseudo n'est pas disponible</p>
             <input className="profil__input" type="email" placeholder={details.email} onChange="" />
             <p>l'email est deja utilisé</p>
