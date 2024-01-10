@@ -1,39 +1,78 @@
 import './Login.scss'
+import React, {useState} from 'react'
+import {register, login} from '../../logic/UserFunction'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    let navigate = useNavigate()
+
+    const testLogin = (e) =>{
+        e.preventDefault()
+
+        const user = {
+            email : email,
+            password : password
+        }
+        
+        
+        login(user).then(res => {
+            if(res) {
+                navigate('/profile')
+            }
+        })
+
+    }
+
+    const createUser = (e) => {
+        e.preventDefault()
+    
+        const newUser = { // creates new object with name,email, password
+          name: name, // using useStates
+          email: email,
+          password: password
+        }
+    
+    
+        register(newUser).then(res => { // calls the register function from UserFunctions.js and passes newUser as argument
+          navigate(`/login`) // then navigates to login
+        })
+      }
 
     return(
         <div className="container" id="container">
             <div className="form-container sign-up">
-                <form className="container__form">
+                <form className="container__form" noValidate onSubmit={createUser}>
                     <h1 className="container__title">Créer un compte</h1>
-                    <div className="social-icons">
+                    {/* <div className="social-icons">
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-google-plus-g"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-facebook-f"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-github"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
-                    </div>
+                    </div> */}
                     <p className="container__text">Entrez votre email pour l'inscription</p>
-                    <input className="container__input" type="text" placeholder="Nom Prénom"/>
-                    <input className="container__input" type="email" placeholder="Email"/>
-                    <input className="container__input" type="password" placeholder="Votre mot de passe"/>
-                    <button className="container__button">S'INSCRIRE</button>
+                    <input className="container__input" type="email" placeholder="Email" value={email}onChange={(e) => setEmail(e.target.value)}/>
+                    <input className="container__input" type="password" placeholder="Votre mot de passe" value={password}onChange={(e) => setPassword(e.target.value)}/>
+                    <button className="container__button" type="submit">S'INSCRIRE</button>
                 </form>
             </div>
 
             <div className="form-container sign-in">
-                <form className="container__form">
+                <form className="container__form" noValidate onSubmit={testLogin}> 
                     <h1 className="container__title">Vous avez déja un compte ?</h1>
-                    <div className="social-icons">
+                    {/* <div className="social-icons">
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-google-plus-g"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-facebook-f"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-github"></i></a>
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
-                    </div>
+                    </div> */}
                     <p className="container__text">Identifiez vous avec votre adresse email</p>
-                    <input className="container__input" type="email" placeholder="Email"/>
-                    <input className="container__input" type="password" placeholder="Votre mot de passe"/>
-                    <button className="container__button">SE CONNECTER</button>
+                    <input className="container__input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input className="container__input" type="password" placeholder="Votre mot de passe" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <button className="container__button" type="submit">SE CONNECTER</button>
                     <a className="container__link" href="#">Vous avez oublié votre mot de passe ?</a>
                 </form>
             </div>
