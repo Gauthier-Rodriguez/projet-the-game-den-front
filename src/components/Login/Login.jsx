@@ -4,7 +4,9 @@ import {register, login} from '../../logic/UserFunction'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-
+    const [lastName, setLastName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [pseudo, setPseudo] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -31,7 +33,9 @@ const Login = () => {
         e.preventDefault()
     
         const newUser = { // creates new object with name,email, password
-          name: name, // using useStates
+          lastName: lastName,
+          firstName: firstName,
+          pseudo : pseudo,
           email: email,
           password: password
         }
@@ -54,6 +58,9 @@ const Login = () => {
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
                     </div> */}
                     <p className="container__text">Entrez votre email pour l'inscription</p>
+                    <input className="container__input" type="text" placeholder="Lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <input className="container__input" type="text" placeholder="Firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <input className="container__input" type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
                     <input className="container__input" type="email" placeholder="Email" value={email}onChange={(e) => setEmail(e.target.value)}/>
                     <input className="container__input" type="password" placeholder="Votre mot de passe" value={password}onChange={(e) => setPassword(e.target.value)}/>
                     <button className="container__button" type="submit">S'INSCRIRE</button>
