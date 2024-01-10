@@ -13,6 +13,7 @@ const GameDetails = () => {
             <p className="game__desc">description_raw</p>
             <p className="game__publisher">publisher</p>
             <p className="game__dev">developper</p> 
+            <img src="" alt="" />  
         </div>
     )
 }
