@@ -24,6 +24,7 @@ const Header = () => {
     // }
     // else{
         return(
+        
             <div className="header">
                 <Link className="header__link" to="/">
                     <img className="header__logo" src="" alt="logo The Game Den" />

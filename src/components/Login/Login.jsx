@@ -1,6 +1,6 @@
 import './Login.scss'
 import React, {useState} from 'react'
-import {register, login} from '../../logic/UserFunction'
+import {register, login} from '../../logic/AuthFunction'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {

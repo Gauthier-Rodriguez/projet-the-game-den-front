@@ -8,6 +8,7 @@ import GameDetails from '../GameDetails/GameDetails'
 import Favorites from '../Favorites/Favorites'
 import Footer from '../Footer/Footer'
 import { UserController } from '../../context/UserContext'
+import { HomeController } from '../../context/HomeContext'
 
 
 function Router() {
@@ -23,6 +24,7 @@ function Router() {
 
     return (
         <>
+            <HomeController>
             <UserController>
             {!isPathWithoutHeader && <Header />}
             <Routes>
@@ -35,6 +37,7 @@ function Router() {
             </Routes>
             {!isPathWithoutFooter && <Footer />}
             </UserController>
+            </HomeController>
         </>
     )
 }
