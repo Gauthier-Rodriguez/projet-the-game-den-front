@@ -23,7 +23,7 @@ const Login = () => {
         
         login(user).then(res => {
             if(res) {
-                navigate('/profile')
+                navigate('/')
             }
         })
 
@@ -31,18 +31,24 @@ const Login = () => {
 
     const createUser = (e) => {
         e.preventDefault()
-    
+   
         const newUser = { // creates new object with name,email, password
-          lastName: lastName,
-          firstName: firstName,
+          lastname: lastName,
+          firstname: firstName,
           pseudo : pseudo,
           email: email,
           password: password
         }
     
-    
         register(newUser).then(res => { // calls the register function from UserFunctions.js and passes newUser as argument
-          navigate(`/login`) // then navigates to login
+         console.log("coucou")
+         setLastName("");
+         setFirstName("");
+         setPseudo("");
+         setEmail("");
+         setPassword("");
+
+            navigate(`/profil`) // then navigates to login
         })
       }
 

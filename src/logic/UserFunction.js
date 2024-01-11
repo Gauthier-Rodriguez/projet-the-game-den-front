@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export const register = obj => {
+export const register = (obj) => {
     return axios.post('http://localhost:3000/api/register', {
-        lastName: obj.lastName,
-        firstName: obj.firstName,
+        lastname: obj.lastname,
+        firstname: obj.firstname,
         pseudo: obj.pseudo,
         email : obj.email,
         password : obj.password
@@ -13,7 +13,7 @@ export const register = obj => {
     .catch(err => console.log(err))
 }
 
-export const login = user => {
+export const login = (user) => {
     return axios.post('http://localhost:3000/api/login', {
         email : user.email,
         password : user.password
