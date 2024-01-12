@@ -20,8 +20,10 @@ const GameDetails = () => {
         fetchAdditionalInfo(selectedGame.id)
     }
 
+    const API_KEY = import.meta.env.VITE_API_KEY
+
     const fetchAdditionalInfo = async (gameId) => {
-        const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=112df870da604d21ba54e2920c7aa5b6`)
+        const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
         console.log(apiCall)
         setGameDetails(apiCall.data)
     }
