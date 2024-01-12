@@ -9,7 +9,7 @@ export const SearchController = ({children}) => {
     const [search, setSearch] = useState('')
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
-
+    
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const fetchSearch = async () => {
