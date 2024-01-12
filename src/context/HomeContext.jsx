@@ -17,7 +17,7 @@ export const HomeController = ({children}) => {
         try{
             const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added`)
             setPopular(apiCall.data)
-             console.log(apiCall.data) 
+            //console.log(apiCall.data) 
         } catch (err) {
             setError(err)
         }
