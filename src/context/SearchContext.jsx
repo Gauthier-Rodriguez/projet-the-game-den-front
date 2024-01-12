@@ -26,12 +26,13 @@ export const SearchController = ({children}) => {
         }
     }
 
+
     useEffect(() =>{
         fetchSearch()
     }, [])
 
     return(
-        <SearchContext.Provider value={[search, setSearch]}>
+        <SearchContext.Provider value={[search, setSearch, fetchSearch]}>
             {isLoading ? ( <Loader />) : (children)} 
          </SearchContext.Provider>
      )

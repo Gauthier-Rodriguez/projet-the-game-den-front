@@ -7,7 +7,7 @@ import axios from 'axios';
 const GameDetails = () => {
 
     const {id} = useParams();
-    console.log(id)
+    
 
     const [popular, setPopular] = useContext(HomeContext)
     const [gameDetails, setGameDetails]= useState('')
@@ -24,7 +24,7 @@ const GameDetails = () => {
 
     const fetchAdditionalInfo = async (gameId) => {
         const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
-        console.log(apiCall)
+        //console.log(apiCall)
         setGameDetails(apiCall.data)
     }
 

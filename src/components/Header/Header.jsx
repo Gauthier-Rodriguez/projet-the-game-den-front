@@ -1,22 +1,25 @@
 import './Header.scss'
 import {Link} from "react-router-dom"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {useContext} from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
 
-    const [search, setSearch] = useContext(SearchContext)
+    const [search, setSearch, fetchSearch] = useContext(SearchContext)
     const [localSearch, setLocalSearch] = useState('')
 
     let navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSearch(localSearch.toLowerCase())
+        fetchSearch(localSearch.toLowerCase())
         navigate('/search')
+        //console.log(localSearch)
     }
+
+   
 
     // if(isAuthenticated){
     // affichage du coeur pour pouvoir accéder à sa page de favoris-pas visible pour visiteur    
@@ -45,7 +48,7 @@ const Header = () => {
                     <img className="header__logo" src="" alt="logo The Game Den" />
                 </Link>
                 <form className="header__form" onSubmit={handleSubmit}>
-                    <input className="header__input" value={localSearch} type="text"  placeholder="Search" onChange={(event)=> setLocalSearch(event.target.value)} />
+                    <input className="header__input"  type="text"  placeholder="Search" onChange={(event)=> setSearch(event.target.value)} />
                     <button className="header__button" type="submit">
                         <img className="header__button-img" src="" />
                     </button>
