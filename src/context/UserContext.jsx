@@ -35,7 +35,7 @@ export const UserController = ({children}) => {
             password: decoded.password,
             })
         } catch (error) {
-            setError(err)
+            setError(error)
         } finally{
             setIsLoading(false)
         }

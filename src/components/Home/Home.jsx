@@ -20,10 +20,6 @@ const Home = () => {
     //                 <option className="filter__default" value="">Genre</option>
     //                 <option className="filter__list" value="nom-dynamique">nom-dynamique</option>
     //             </select>
-    //             <select className="home__filter" name="noteMC" onChange="">
-    //                 <option className="filter__default" value="">Note MC</option>
-    //                 <option className="filter__list" value="nom-dynamique">nom-dynamique</option>
-    //             </select>
 
     //             <h1 className="home__title">Recommendation</h1>
     //             <div className="home__list">
@@ -50,15 +46,11 @@ const Home = () => {
         return(
             <div className="home__container">
                 <select className="home__filter" name="platform" onChange="" >
-                    <option className="filter__default"value="">Platform</option>
+                    <option className="filter__default"value="" disabled>Platform</option>
                     <option className="filter__list"value="nom-dynamique">nom-dynamique</option>
                 </select>
                 <select className="home__filter" name="genre" onChange="" >
-                    <option className="filter__default" value="">Genre</option>
-                    <option className="filter__list" value="nom-dynamique">nom-dynamique</option>
-                </select>
-                <select className="home__filter" name="noteMC" onChange="">
-                    <option className="filter__default" value="">Note MC</option>
+                    <option className="filter__default" value="" disabled>Genre</option>
                     <option className="filter__list" value="nom-dynamique">nom-dynamique</option>
                 </select>
 

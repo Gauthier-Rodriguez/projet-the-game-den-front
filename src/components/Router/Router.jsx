@@ -7,8 +7,10 @@ import Profil from '../Profil/Profil'
 import GameDetails from '../GameDetails/GameDetails'
 import Favorites from '../Favorites/Favorites'
 import Footer from '../Footer/Footer'
+import SearchResult from '../SearchResult/SearchResult'
 import { UserController } from '../../context/UserContext'
 import { HomeController } from '../../context/HomeContext'
+import { SearchController} from '../../context/SearchContext'
 
 
 function Router() {
@@ -24,12 +26,14 @@ function Router() {
 
     return (
         <>
+            <SearchController>
             <HomeController>
             <UserController>
             {!isPathWithoutHeader && <Header />}
             <Routes>
                 <Route path="*" element={<Error />} />
                 <Route path="/" element={<Home />} />
+                <Route path="/search" element={<SearchResult />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/game/:id" element={<GameDetails />} />
@@ -38,6 +42,7 @@ function Router() {
             {!isPathWithoutFooter && <Footer />}
             </UserController>
             </HomeController>
+            </SearchController>
         </>
     )
 }
