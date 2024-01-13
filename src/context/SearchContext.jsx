@@ -14,7 +14,7 @@ export const SearchController = ({children}) => {
 
     const fetchSearch = async () => {
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}`)
+            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_precise=true&ordering=-released`)
             setSearch(apiCall.data)
             console.log(apiCall.data)
         } 
