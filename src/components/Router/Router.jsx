@@ -11,6 +11,7 @@ import SearchResult from '../SearchResult/SearchResult'
 import { UserController } from '../../context/UserContext'
 import { HomeController } from '../../context/HomeContext'
 import { SearchController} from '../../context/SearchContext'
+import { FilterController } from '../../context/FilterContext'
 
 
 function Router() {
@@ -26,6 +27,7 @@ function Router() {
 
     return (
         <>
+            <FilterController>
             <SearchController>
             <HomeController>
             <UserController>
@@ -43,6 +45,7 @@ function Router() {
             </UserController>
             </HomeController>
             </SearchController>
+            </FilterController>
         </>
     )
 }

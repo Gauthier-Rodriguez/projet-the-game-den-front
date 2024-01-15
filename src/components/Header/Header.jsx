@@ -1,7 +1,7 @@
 import './Header.scss'
 import {Link} from "react-router-dom"
 import {useState, useEffect} from "react"
-import {useContext} from 'react'
+import {useContext, useRef} from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,15 +9,18 @@ const Header = () => {
 
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
     const [localSearch, setLocalSearch] = useState('')
+    const inputRef = useRef(null);
 
     let navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchSearch(localSearch.toLowerCase())
-        navigate('/search')
-        //console.log(localSearch)
+        fetchSearch(localSearch.toLowerCase());
+        navigate('/search');
+        setSearch(''); // Réinitialise la valeur de recherche
     }
+
+   
 
    
 
@@ -48,7 +51,7 @@ const Header = () => {
                     <img className="header__logo" src="" alt="logo The Game Den" />
                 </Link>
                 <form className="header__form" onSubmit={handleSubmit}>
-                    <input className="header__input"  type="text"  placeholder="Search" onChange={(event)=> setSearch(event.target.value)} />
+                    <input className="header__input"  type="text"  placeholder="Search" onChange={(event) => setSearch(event.target.value)}/>
                     <button className="header__button" type="submit">
                         <img className="header__button-img" src="" />
                     </button>

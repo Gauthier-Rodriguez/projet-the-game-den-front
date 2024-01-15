@@ -2,28 +2,34 @@ import './SearchResult.scss'
 import { useContext } from 'react'
 import {Link} from  'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import {FilterContext} from '../../context/FilterContext'
+import Filter from '../Filter/Filter'
 
 const SearchResult = () => {
 
     const [search, setSearch] = useContext(SearchContext)
+    const { filters } = useContext(FilterContext);
+
+    
+    const filteredGames = (search.results || []).filter((game) => {
+        return (
+            (!filters || !filters.platform || game.platforms.some((platform) => platform.platform.name === filters.platform)) &&
+            (!filters || !filters.genre || game.genres.some((genre) => genre.name === filters.genre))
+        );
+    });
+    
+    const gamesToDisplay = (search.results || []).length > 0 ? (filters.platform || filters.genre ? filteredGames : search.results) : [];
+
 
 
     return (
         <div className="home__container">
-        <select className="home__filter" name="platform" onChange="" >
-            <option className="filter__default"value="" disabled>Platform</option>
-            <option className="filter__list"value="nom-dynamique">nom-dynamique</option>
-        </select>
-        <select className="home__filter" name="genre" onChange="" >
-            <option className="filter__default" value="" disabled>Genre</option>
-            <option className="filter__list" value="nom-dynamique">nom-dynamique</option>
-        </select>
-
+        <Filter />
         <h1 className="home__title">Results</h1>
         <div className="home__list">
-            {search.results && (
+            {gamesToDisplay && (
             <>
-                {search.results.map((game) => (
+                {gamesToDisplay.map((game) => (
                 <Link key={game.id} to={`/game/${game.id}`} > 
                 <div className="card">
                     <img className="card__img" src={game.background_image} alt={game.name} />
