@@ -15,14 +15,13 @@ const Header = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchSearch(localSearch.toLowerCase());
+        const newSearch = e.target[0].value.toLowerCase();
+        setSearch(newSearch);
+        fetchSearch(newSearch);
         navigate('/search');
-        setSearch(''); // Réinitialise la valeur de recherche
+        
+        inputRef.current.value = '';
     }
-
-   
-
-   
 
     // if(isAuthenticated){
     // affichage du coeur pour pouvoir accéder à sa page de favoris-pas visible pour visiteur    
@@ -50,8 +49,8 @@ const Header = () => {
                 <Link className="header__link" to="/">
                     <img className="header__logo" src="" alt="logo The Game Den" />
                 </Link>
-                <form className="header__form" onSubmit={handleSubmit}>
-                    <input className="header__input"  type="text"  placeholder="Search" onChange={(event) => setSearch(event.target.value)}/>
+                <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
+                    <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>
                     <button className="header__button" type="submit">
                         <img className="header__button-img" src="" />
                     </button>
@@ -60,6 +59,6 @@ const Header = () => {
             </div>
         )
     }
-// }
+ 
 
 export default Header

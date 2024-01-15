@@ -12,7 +12,7 @@ export const SearchController = ({children}) => {
     
     const API_KEY = import.meta.env.VITE_API_KEY
 
-    const fetchSearch = async () => {
+    const fetchSearch = async (search) => {
         try{
             const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_exact=true&ordering=-released&exclude_stores=9,8,4&parent_platforms=1,2,3,7`)
             
