@@ -4,7 +4,6 @@ import { HomeContext } from '../../context/HomeContext'
 import {FilterContext} from '../../context/FilterContext'
 import {Link} from  'react-router-dom'
 import Filter from '../Filter/Filter'
-import Pagination from '../Pagination/Pagination'
 
 const Home = () => {
 
@@ -84,7 +83,6 @@ const Home = () => {
                     </Link>
                     ))}
                 </div>
-                <Pagination />
             </div>
         )
     }

@@ -9,10 +9,7 @@ export const HomeController = ({children}) => {
     const [popular, setPopular] = useState([])
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
-    const [currentPage, setCurrentPage]= useState(1)
-    const [totalPages, setTotalPages]= useState(1)
-    const [totalOfPages, setTotalOfPages] = useState(0);
-
+    
     
     const ResultsPerPage = 50;
     
@@ -32,7 +29,7 @@ export const HomeController = ({children}) => {
             });
 
             setPopular({ ...apiCall.data, results: sortedResults });
-            setTotalPages(apiCall.data.count || 1)
+            
              
         } catch (err) {
             setError(err)
@@ -42,18 +39,13 @@ export const HomeController = ({children}) => {
         }
     }
     
-    const handlePage = (newPage) => {
-        setCurrentPage(newPage)
-        fetchPopular(newPage)
-    }
     
     useEffect(()=>{
-        fetchPopular(currentPage), 
-        setTotalOfPages(Math.ceil(parseInt(totalPages,20) / ResultsPerPage));
-    }, [currentPage, totalPages])
+        fetchPopular()
+    }, [])
 
     return(
-        <HomeContext.Provider value={[popular, setPopular, currentPage, totalPages, handlePage]}>
+        <HomeContext.Provider value={[popular, setPopular]}>
             {isLoading ? ( <Loader />) : (children)} 
          </HomeContext.Provider>
      )
