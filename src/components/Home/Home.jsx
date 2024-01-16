@@ -4,10 +4,12 @@ import { HomeContext } from '../../context/HomeContext'
 import {FilterContext} from '../../context/FilterContext'
 import {Link} from  'react-router-dom'
 import Filter from '../Filter/Filter'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const Home = () => {
 
     const [popular, setPopular] = useContext(HomeContext)
+    const fetchPopular = useContext(HomeContext)
     const { filters } = useContext(FilterContext);
 
     const filteredGames = popular.results.filter((game) => {
@@ -62,7 +64,12 @@ const Home = () => {
             <div className="home__container">
                 <Filter />
                 <h1 className="home__title">Popular in 2023</h1>
+                    
                 <div className="home__list">
+                    <InfiniteScroll
+                        dataLength={gamesToDisplay.length}
+                        next={fetchPopular}
+                        hasMore={true}>
                     {gamesToDisplay.map((game) => (
                     <Link key={game.id} to={`/game/${game.id}`}> 
                     <div className="card">
@@ -82,7 +89,9 @@ const Home = () => {
                     </div>
                     </Link>
                     ))}
+                    </InfiniteScroll>
                 </div>
+                
             </div>
         )
     }
