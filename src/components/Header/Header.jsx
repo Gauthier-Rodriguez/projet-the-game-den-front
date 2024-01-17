@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 const Header = () => {
 
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
-    const [localSearch, setLocalSearch] = useState('')
     const inputRef = useRef(null);
 
     let navigate = useNavigate()

@@ -23,7 +23,7 @@ export const SearchController = ({children}) => {
             });
 
             setSearch({ ...apiCall.data, results: sortedResults });
-            //console.log(apiCall.data)
+            console.log(apiCall.data)
     
         } 
         catch (error){
