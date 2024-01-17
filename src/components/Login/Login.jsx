@@ -1,21 +1,21 @@
 import './Login.scss'
 import {useState, useContext} from 'react'
-import {register, login} from '../../logic/AuthFunction'
 import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-    
+    const {value3, value4} = useContext(UserContext)
+    const [login, register] = value3
+    const [isAuthenticated, setIsAuthenticated]= value4
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
     const [pseudo, setPseudo] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [details, setDetails, isAuthenticated, setIsAuthenticated]= useContext(UserContext)
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
    const createUser = (e) => {
-        e.preventDefault()
+        e.preventDefault();
    
         const newUser = { // creates new object with name,email, password
           lastname: lastName,
@@ -36,22 +36,23 @@ const Login = () => {
             navigate(`/login`) // then navigates to login
         })
       }
-
-    const userLogin = (e) =>{
-        e.preventDefault()
+    
+    const userLogin = async (e) =>{
+       e.preventDefault();
 
         const user = {
-            email : email,
-            password : password
-        }
+            Email : email,
+            Password : password
+        };
         
-        login(user).then(res => {
-            if(res) {
-                setIsAuthenticated(true)
-                
-                navigate('/')
-            }
-        })
+        login(user)
+        .then(res => {
+        if (res) {
+            console.log(res)
+        setIsAuthenticated(true);
+        console.log("isAuthenticated", isAuthenticated);
+        navigate('/');
+        }})
 
     }
 
@@ -114,4 +115,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login;

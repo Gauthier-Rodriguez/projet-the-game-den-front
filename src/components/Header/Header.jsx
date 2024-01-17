@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 
 const Header = () => {
-    const [details, setDetails, isAuthenticated, setIsAuthenticated]= useContext(UserContext)
+    const {value4} = useContext(UserContext)
+    const [isAuthenticated, setIsAuthenticated] = value4
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
     const [localSearch, setLocalSearch] = useState('')
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
-    let navigate = useNavigate()
+
+    console.log("update header", isAuthenticated);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,7 +26,7 @@ const Header = () => {
         
         inputRef.current.value = '';
     }
-    console.log(isAuthenticated)
+    
 
       if(isAuthenticated){
      //affichage du coeur pour pouvoir accéder à sa page de favoris-pas visible pour visiteur    

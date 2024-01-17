@@ -19,6 +19,34 @@ export const UserController = ({children}) => {
     })
 
 
+    const register = (obj) => {
+    return axios.post('http://localhost:3000/api/register', {
+        lastname: obj.lastname,
+        firstname: obj.firstname,
+        pseudo: obj.pseudo,
+        email : obj.email,
+        password : obj.password
+    }
+    )
+    .then(res => console.log('Registered'))
+    .catch(err => console.log(err))
+}
+
+    const login = (user) => {
+    return axios.post('http://localhost:3000/api/login', {
+        Email : user.Email,
+        Password : user.Password
+    })
+    .then(res => {
+         console.log(res.headers.get('auth-token'))
+        localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
+        console.log(res.data)
+        return res.data
+    })
+    .catch(err => {
+        console.error(err);
+    })
+}
 //récupération des données utilisateur/méthode GET avec apiCall
     const getProfil = async () => {
         try{
@@ -59,7 +87,7 @@ export const UserController = ({children}) => {
     }, []);
 
     return(
-        <UserContext.Provider value={[details, error, isLoading, getProfil, updateProfil, isAuthenticated, setIsAuthenticated]}>
+        <UserContext.Provider value={{value1 : [details, setDetails, error, isLoading], value2 : [getProfil, updateProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated]}}>
             {(children)}
         </UserContext.Provider>
     )
