@@ -1,0 +1,19 @@
+.filter{
+    
+    max-width: 50%;
+    padding:3px;
+    
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        margin : auto;
+    }
+
+    &__title{
+        background-color: #24274a;
+        color:var(--color-secondary);
+        border: 2px;
+    }
+    
+}
+

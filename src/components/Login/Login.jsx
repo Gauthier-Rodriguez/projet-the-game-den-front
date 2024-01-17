@@ -12,6 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [details, setDetails, isAuthenticated, setIsAuthenticated]= useContext(UserContext)
+
     let navigate = useNavigate()
 
    const createUser = (e) => {

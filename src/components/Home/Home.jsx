@@ -63,7 +63,7 @@ const Home = () => {
         return(
             <div className="home__container">
                 <Filter />
-                <h1 className="home__title">Popular in 2023</h1>
+                <h1 className="home__title">Popular games</h1>
                     
                 <div className="home__list">
                     <InfiniteScroll

@@ -20,18 +20,20 @@ const Filter = () => {
     
     return(
         <>
-                <select className="home__filter" name="platform" onChange={handlePlatformChange} >
-                    <option className="filter__default"value="">Platform</option>
+            <div className='filter__container'>
+                <select className="filter__title" name="platform" onChange={handlePlatformChange} >
+                    <option className=""value="">Platform</option>
                     {platforms.map(platform => (
                     <option key={platform.id} className="filter__list" value={platform.name}>{platform.name}</option>
                 ))}
                 </select>
-                <select className="home__filter" name="genre"  onChange={handleGenreChange}>
-                    <option className="filter__default" value="">Genre</option>
+                <select className="filter__title" name="genre"  onChange={handleGenreChange}>
+                    <option className="" value="">Genre</option>
                     {genres.map(genre => (
                     <option key={genre.id} className="filter__list" value={genre.name}>{genre.name}</option>
                 ))}
                 </select>
+            </div>    
         </>
     )
 }

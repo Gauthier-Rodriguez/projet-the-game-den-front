@@ -30,7 +30,8 @@ export const UserController = ({children}) => {
             const userData = await axios.get(`http://localhost:3000/api/users/${decoded.id}`)
             console.log(userData.data)
 
-            setDetails(userData.data)
+            setDetails({ ...userData.data, id: decoded.id })
+           
         } catch (error) {
             setError(error)
         } finally{
@@ -60,7 +61,13 @@ export const UserController = ({children}) => {
 
     return(
         <UserContext.Provider value={[details, error, isLoading, getProfil, updateProfil, isAuthenticated, setIsAuthenticated]}>
-            {(children)}
+            {isLoading ? (
+                // Afficher un composant de chargement ici si nécessaire
+                <p>Loading...</p>
+            ) : (
+                // Rendre les composants consommateurs une fois les données récupérées
+                children
+            )}
         </UserContext.Provider>
     )
 }

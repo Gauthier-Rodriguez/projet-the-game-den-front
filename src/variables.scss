@@ -1,0 +1,13 @@
+:root {
+  max-width : 100%;
+  height : 100vh;
+  --color-primary: #0c0f36; 
+  --color-secondary: #fdffff;
+  --color-tertiary: #24274a;
+  --spacing: 1rem;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-primary);
+}
