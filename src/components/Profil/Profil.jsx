@@ -2,13 +2,14 @@ import './Profil.scss'
 import ModalGenre from './ModalGenre/ModalGenre'
 import ModalPlatform from './ModalPlatform/ModalPlatform'
 import React, {useState, useEffect, useContext} from "react"
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 
 
 const Profil = () => {
 
-    const [details, setDetails, logOut]= useContext(UserContext)
-
+    const [details, setDetails, isAuthenticated, setIsAuthenticated]= useContext(UserContext)
+    const navigate = useNavigate();
     const [modalGenre, setModalGenre]= useState(false);
     const [modalPlatform, setModalPlatform]= useState(false);
 
@@ -29,6 +30,16 @@ const Profil = () => {
         setModalGenre(false)
     }
 
+    const openPseudoModal= () => {
+        setModalPseudo(true)
+    }
+
+    const openEmailModal= () => {
+        setModalEmail(true)
+    }
+    const openPasswordModal= () => {
+        setModalPassword(true)
+    }
 
 // modification des inputs des données du profil   
     const handlePseudoChange = (e) => {
@@ -46,22 +57,27 @@ const Profil = () => {
         setDetails((prevDetails) => ({...prevDetails, password : newPassword}))
     }
 
-
+    const logOut = (e) => {
+        e.preventDefault();
+        console.log('deconnexion');
+        localStorage.removeItem('usertoken');
+        
+        navigate(`/`);
+       setIsAuthenticated(false);
+    };
+    console.log(isAuthenticated)
     //ouverture d'une modale au clic sur boutons genre et plateforme pour pouvoir sélectionner ses favoris
     return(
         <>
-            <h1 className="profil__title">Welcome {details.firstName} {details.lastName} to your profil</h1>
-            <input className="profil__input" type="text" placeholder={details.pseudo} onChange={handlePseudoChange}/>
-            <p>ce pseudo n'est pas disponible</p>
-            <input className="profil__input" type="email" placeholder={details.email} onChange={handleEmailChange} />
-            <p>l'email est deja utilisé</p>
-            <input className="profil__input" type="password" placeholder={details.password} onChange={handlePasswordChange} />
-            <p>message alerte avec minimum etc</p>
-            <button className="profil__button" onClick={openPlatformModal} >Platform</button>
-            {modalPlatform && <ModalPlatform onClose={closePlatformModal}/>}
-            <button className="profil__button" onClick={openGenreModal}>Genre</button>
-            {modalGenre && <ModalGenre onClose={closeGenreModal}/>}
-            <button className="profil__button" onClick={logOut}>Log out</button>
+          <h1 className="profil__title">Hello {details.pseudo}</h1>
+            
+        	<div className='pseudo'>{details.Pseudo}<button className="profil__button" onClick={openPseudoModal}></button></div>
+        	<div className='email'>{details.Email}<button className="profil__button" onClick={openEmailModal}></button></div>
+        	<div className='password'>*******<button className="profil__button" onClick={openPasswordModal}></button></div>
+        	<div className='genre'>{details.genre}<button className="profil__button" onClick={openPlatformModal}></button></div>
+        	<div className='platform'>{details.platform}<button className="profil__button" onClick={openGenreModal}></button></div>
+
+        	<button className="profil__button" onClick={(e) => logOut(e)}>Log out</button> 
         </>
     )
 }

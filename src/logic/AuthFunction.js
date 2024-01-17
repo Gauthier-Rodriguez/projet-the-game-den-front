@@ -23,6 +23,7 @@ export const login = (user) => {
         // console.log(res.headers.get('auth-token'))
         localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
         return res.data
-    }) 
+        
+    })
     .catch(err => console.error(err))
 }

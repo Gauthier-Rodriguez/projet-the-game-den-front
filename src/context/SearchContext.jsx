@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect} from "react";
 import Loader from "../components/Loader/Loader";
 import axios from 'axios'; 
+import Login from "../components/Login/Login";
 
 export const SearchContext = createContext()
 
@@ -41,7 +42,7 @@ export const SearchController = ({children}) => {
 
     return(
         <SearchContext.Provider value={[search, setSearch, fetchSearch]}>
-            {isLoading ? ( <Loader />) : (children)} 
+            {isLoading ? ( <Loader />) : (children)}
          </SearchContext.Provider>
      )
 
