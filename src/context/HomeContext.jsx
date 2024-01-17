@@ -19,7 +19,7 @@ export const HomeController = ({children}) => {
         setPageNumber(pageNumber+1);
         try{
             
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added&page=1&page_size=10`)
+            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added&page=1&page_size=20`)
             
             const sortedResults = apiCall.data.results.sort((a, b) => {
                 const releaseDateA = new Date(a.released).getTime() || 0;
