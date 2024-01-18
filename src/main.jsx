@@ -7,6 +7,7 @@ import './variables.scss'
 import './mixin.scss'
 
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Router />

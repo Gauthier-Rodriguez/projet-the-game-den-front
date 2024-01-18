@@ -1,9 +1,11 @@
+
 .filter{ 
     display: flex;
     justify-content: space-between;
     margin : auto;
     margin-bottom: calc(1.5* var(--spacing));
    
+
     &__title{
         background-color: #24274a;
         color:var(--color-secondary);
