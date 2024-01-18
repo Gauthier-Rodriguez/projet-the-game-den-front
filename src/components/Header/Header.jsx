@@ -42,8 +42,10 @@ const Header = () => {
                          <img className="header__button-img" src={loupe} />
                      </button>
                  </form>
+
                  <p className="header__pseudo">Pseudo</p>
-                 <img className="header__like" src={loupe} alt="logo like" />
+                 
+                 <Link className="header__link" to="/favorites"><img className="header__like" src="#" alt="logo like" /></Link>
                  <Link className="header__link" to="/profil"><img className="header__profil" src="" alt="logo profil" /></Link>
              </div>
          )

@@ -37,17 +37,17 @@ const Login = () => {
         })
       }
     
-    const userLogin = async (e) =>{
+    const userLogin = (e) =>{
        e.preventDefault();
 
         const user = {
-            Email : email,
-            Password : password
+            email : email,
+            password : password
         };
         
         login(user)
         .then(res => {
-        if (response) {
+        if (res) {
             console.log(res)  
         setIsAuthenticated(true);
         console.log("isAuthenticated", isAuthenticated);

@@ -32,19 +32,17 @@ export const UserController = ({children}) => {
     .catch(err => console.log(err))
 }
 
-    const login = (user) => {
+const login = (user) => {
     return axios.post('http://localhost:3000/api/login', {
-        Email : user.Email,
-        Password : user.Password
-    })
+        email : user.email,
+        password : user.password
+    }
+    )
     .then(res => {
-         console.log(res.headers.get('auth-token'))
+        // console.log(res.headers.get('auth-token'))
         localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
-        console.log(res.data)
         return res.data
-    })
-    .catch(err => {
-        console.error(err);
+        
     })
 }
 //récupération des données utilisateur/méthode GET avec apiCall
@@ -82,9 +80,7 @@ export const UserController = ({children}) => {
         navigate(`/`);
     }; */
 
-    useEffect(() => {
-        getProfil();
-    }, []);
+    
 
     return(
         <UserContext.Provider value={{value1 : [details, setDetails, error, isLoading], value2 : [getProfil, updateProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated]}}>

@@ -11,15 +11,16 @@ import ModalPassword from './ModalPassword/ModalPassword';
 
 const Profil = () => {
 
-    const {value1, value4} = useContext(UserContext)
+    const {value1, value2, value4} = useContext(UserContext)
     const [details, setDetails] = value1
+    const [getProfil] = value2;
     const [isAuthenticated, setIsAuthenticated] = value4 
     const navigate = useNavigate();
-    const [modalGenre, setModalGenre]= useState(false);
-    const [modalPlatform, setModalPlatform]= useState(false);
     const [isModalPseudo, setModalPseudo] = useState(false);
     const [isModalEmail, setModalEmail] = useState(false);
     const [isModalPassword, setModalPassword] = useState(false);
+    const [isModalGenre, setModalGenre] = useState(false);
+    const [isModalPlatform, setModalPlatform] = useState(false);
    
 
 // modification des inputs des données du profil   
@@ -63,6 +64,22 @@ const Profil = () => {
         setModalPassword(false)
     }
 
+    const openGenreModal = (e) => {
+        setModalGenre(true)
+    }
+
+    const closeGenreModal = (e) => {
+        setModalGenre(false)
+    }
+
+    const openPlatformModal = (e) => {
+        setModalPlatform(true)
+    }
+
+    const closePlatformModal = (e) => {
+        setModalPlatform(false)
+    }
+
     const logOut = (e) => {
         e.preventDefault();
         console.log('deconnexion');
@@ -75,11 +92,13 @@ const Profil = () => {
     console.log(isAuthenticated)
 
 
-  
+    useEffect(() => {
+        getProfil();
+    }, [isAuthenticated]);
 
     if(isAuthenticated){ 
     return(
-        <div>
+        <div className='profil'>
             <Link to='/'>HOME</Link>
           <h1 className="profil__title">Hello {details.Pseudo}</h1>
             
@@ -105,11 +124,18 @@ const Profil = () => {
             </>) : null}
 
         	<div className='genre'>{details.genre ? details.genre : "Genres"}
-            <button className="profil__button" onClick={(e) => console.log("genre button")}>Edit</button>
+            <button className="profil__button" onClick={(e) => {openGenreModal(e)}}>Edit</button>
             </div>
+            {isModalGenre ? (<>
+            <ModalGenre onClose={closeGenreModal}/>
+            </>) : null}
+
         	<div className='platform'>{details.platform ? details.platform : "Platfom"}
-            <button className="profil__button" onClick={(e) => console.log("platform button")}>Edit</button>
+            <button className="profil__button" onClick={(e) => {openPlatformModal(e)}}>Edit</button>
             </div>
+            {isModalPlatform ? (<>
+            <ModalPlatform onClose={closePlatformModal}/>
+            </>) : null}
 
         	<button className="profil__button" onClick={(e) => logOut(e)}>Log out</button> 
         </div>
