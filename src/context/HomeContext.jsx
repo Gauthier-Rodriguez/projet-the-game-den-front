@@ -10,16 +10,15 @@ export const HomeController = ({children}) => {
     const [popular, setPopular] = useState([])
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
-    const [pageNumber, setPageNumber]=useState(0)
     
 
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const fetchPopular = async () => {
-        setPageNumber(pageNumber+1);
+    
         try{
             
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added&page=1&page_size=20`)
+            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added&page_size=60`)
             
             const sortedResults = apiCall.data.results.sort((a, b) => {
                 const releaseDateA = new Date(a.released).getTime() || 0;

@@ -60,13 +60,15 @@
         display: flex;
 
         &__link{
-            width: 10%;
+            padding-left: calc(3*var(--spacing));
+            width: 15%;
+            height: 100%;
         }
 
         &__form {
             width: 60%; 
             top: 45%;
-            left: 10%;
+            left: 20%;
             transform: translateY(-50%);
         }
             
