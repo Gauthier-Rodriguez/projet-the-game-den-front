@@ -35,18 +35,24 @@ const Header = () => {
          return(
              <div className="header">
                  <Link className="header__link" to="/">
-                     <img className="header__logo" src={logo} alt="logo The Game Den" />
+
+                     <img className="header__logo" src="../../assets/logo.png" alt="logo The Game Den" />
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
-                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     <button className="header__button" type="submit">
-                         <img className="header__button-img" src={loupe} />
-                     </button>
+                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
+                 <button className="header__button" type="submit">
+                         <img className="header__button-img"  />
+                </button>
+
                  </form>
 
                  <p className="header__pseudo">Pseudo</p>
-                 
-                 <Link className="header__link" to="/favorites"><img className="header__like" src="#" alt="logo like" /></Link>
-                 <Link className="header__link" to="/profil"><img className="header__profil" src="" alt="logo profil" /></Link>
+
+                 <img className="header__like" src="" alt="logo like" />
+                 <Link className="header__link" to="/profil">
+                    <img className="header__profil" src="" alt="logo profil" />
+                </Link>
+
              </div>
          )
      }

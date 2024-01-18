@@ -56,7 +56,8 @@ const login = (user) => {
             const userData = await axios.get(`http://localhost:3000/api/users/${decoded.id}`)
             console.log(userData.data)
 
-            setDetails(userData.data)
+            setDetails({ ...userData.data, id: decoded.id })
+           
         } catch (error) {
             setError(error)
         } finally{
@@ -83,8 +84,10 @@ const login = (user) => {
     
 
     return(
+
         <UserContext.Provider value={{value1 : [details, setDetails, error, isLoading], value2 : [getProfil, updateProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated]}}>
             {(children)}
+
         </UserContext.Provider>
     )
 }

@@ -13,8 +13,10 @@ const GameDetails = () => {
 
     const [popular, setPopular] = useContext(HomeContext)
     const [search, setSearch] = useContext(SearchContext)
+
     const {value1} = useContext(UserContext)
     const [details] = value1
+
     const [gameDetails, setGameDetails]= useState('')
     const [isFavorite, setIsFavorite] = useState(false)
 
@@ -67,31 +69,44 @@ const GameDetails = () => {
     return(
         <div className='game'>
             {gameDetails && gameDetails.background_image && <img className="game__img"src={gameDetails.background_image}  alt={gameDetails.name} /> }
-            {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name} </h1> }
-            {gameDetails && gameDetails.released && <p className="game__release">{gameDetails.released}</p> }
-            {gameDetails && gameDetails.genres && (
-            <>
-                {gameDetails.genres.map((genre) => ( 
-                <p className="game__genre">{genre.name}</p>
-                ))}
-            </>
-            )}
-            {gameDetails && gameDetails.metacritic && <div className="game__meta">{gameDetails.metacritic}</div>}
-            {gameDetails && gameDetails.description_raw && <p className="game__desc">{gameDetails.description_raw}</p>}
-            {gameDetails && gameDetails.publishers && (
-            <>
-                {gameDetails.publishers.map((publisher)=> (
-                <p className="game__publisher">Publisher : {publisher.name}</p>
-                ))}
-            </>
-            )}
-            {gameDetails && gameDetails.developers && (
-            <>
-                {gameDetails.developers.map((developer)=>(
-                <p className="game__dev">Developpers : {developer.name}</p> 
-                ))}
-            </>
-            )}
+
+                <div className='game__information'>
+                    {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name} </h1> }
+                        {gameDetails && gameDetails.platforms && (
+                        <>
+                            {gameDetails.platforms.map((platform) => ( 
+                            <p key={platform.id} className="game__platforms">Platform :{platform.platform.name}</p>
+                            ))} 
+                        </>
+                        )}
+                        
+                        {gameDetails && gameDetails.genres && (
+                        <>
+                            {gameDetails.genres.map((genre) => ( 
+                            <p className="game__genre">{genre.name}</p>
+                            ))}
+                        </>
+                        )}
+
+                    {gameDetails && gameDetails.metacritic && <div className="game__meta">{gameDetails.metacritic}</div>}
+                    {gameDetails && gameDetails.released && <p className="game__release">Release date : {gameDetails.released}</p> }
+                    {gameDetails && gameDetails.description_raw && <p className="game__desc">{gameDetails.description_raw}</p>}
+                    {gameDetails && gameDetails.publishers && (
+                    <>
+                        {gameDetails.publishers.map((publisher)=> (
+                        <p className="game__publisher">Publisher : {publisher.name}</p>
+                        ))}
+                    </>
+                    )}
+                    {gameDetails && gameDetails.developers && (
+                    <>
+                        {gameDetails.developers.map((developer)=>(
+                        <p className="game__dev">Developpers : {developer.name}</p> 
+                        ))}
+                    </>
+                    )}
+                </div>    
+
             <button className="favorite" onClick={handleToggleFavorite} >
                 <img className="favorite__img-" src="" alt='' /> 
             </button>
