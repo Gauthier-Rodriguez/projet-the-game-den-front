@@ -5,13 +5,14 @@
         max-width: 100vw;
         margin: auto;
         padding: calc(var(--spacing) /2);
+        background-color: azure;
     }
 
     &__title{
         color: var(--color-secondary);
         text-align: center;
         font-weight: bold;
-        font-size: 25px;
+        font-size: calc(2*var(--spacing));
         margin-bottom: var(--spacing);
     }
 
@@ -22,11 +23,70 @@
 }
 
 .card{
-    width: 100%;
-    height: 100vh;
+    width: 90%;
+    height: 50vh;
+    background-color: var(--color-tertiary);
+    border-radius: var(--spacing);
+    margin: auto;
+    margin-bottom: var(--spacing);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: calc(3 *var(--spacing));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: box-shadow transform 0.3s ease-in-out; 
+    filter: drop-shadow(0 0 1rem rgb(33, 33, 33));
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.5);
 
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    }
+
+    &__img-container{
+        width: 100%;
+        height: 60%;
+        clip-path: polygon(0 0,100% 0, 100% 85%, 0 100% );
+    }
     &__img{
         width: 100%;
-        height: 50%;
+        height: 100%;
+        border-radius: var(--spacing) var(--spacing) 0 0;
+    }
+
+    &__list-platforms{
+        display: flex;
+        flex-wrap: nowrap;
+        gap: calc(var(--spacing) /2);
+        color: var(--color-secondary);
+        padding-left: calc(2 * var(--spacing));
+        margin-bottom: var(--spacing);
+    }
+
+    &__platforms{
+        font-size: calc(var(--spacing)/1.1);
+    }
+
+    &__title{
+        font-size: calc(1.5 * var(--spacing));
+        color: var(--color-secondary);
+        text-align: center;
+    }
+}
+
+
+@media screen and (min-width: 768px){
+    .home{
+        &__list{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: calc(1.5* var(--spacing));
+        }
+    }
+
+    .card{
+        width: 30%;
+        height: 45vh;
     }
 }

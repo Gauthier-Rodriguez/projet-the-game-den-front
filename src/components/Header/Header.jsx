@@ -8,11 +8,11 @@ import { UserContext } from '../../context/UserContext'
 import logo from '../../assets/logo.png'
 import loupe from '../../assets/loupe.svg'
 
+
 const Header = () => {
     const {value4} = useContext(UserContext)
     const [isAuthenticated, setIsAuthenticated] = value4
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
-    const [localSearch, setLocalSearch] = useState('')
     const inputRef = useRef(null);
     const navigate = useNavigate();
 

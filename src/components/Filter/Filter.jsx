@@ -20,9 +20,9 @@ const Filter = () => {
     
     return(
         <>
-            <div className='filter__container'>
+            <div className='filter'>
                 <select className="filter__title" name="platform" onChange={handlePlatformChange} >
-                    <option className=""value="">Platform</option>
+                    <option>Platform</option>
                     {platforms.map(platform => (
                     <option key={platform.id} className="filter__list" value={platform.name}>{platform.name}</option>
                 ))}
