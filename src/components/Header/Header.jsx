@@ -5,7 +5,7 @@ import {useContext, useRef} from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.svg'
 import loupe from '../../assets/loupe.svg'
 
 
