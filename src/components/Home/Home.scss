@@ -1,9 +1,9 @@
 .home{
 
-
     &__container{
+        margin-top: 25vh;
         max-width: 100vw;
-        margin: auto;
+        height: 100vh;
         padding: calc(var(--spacing) /2);
         background: rgb(26,27,28);
         background: linear-gradient(180deg, rgba(26,27,28,1) 0%, rgba(42,45,49,1) 5%);
