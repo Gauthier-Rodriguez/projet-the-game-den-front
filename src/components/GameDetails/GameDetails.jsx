@@ -13,7 +13,10 @@ const GameDetails = () => {
 
     const [popular, setPopular] = useContext(HomeContext)
     const [search, setSearch] = useContext(SearchContext)
-    const [details] = useContext(UserContext)
+
+    const {value1} = useContext(UserContext)
+    const [details] = value1
+
     const [gameDetails, setGameDetails]= useState('')
     const [isFavorite, setIsFavorite] = useState(false)
 
@@ -66,6 +69,7 @@ const GameDetails = () => {
     return(
         <div className='game'>
             {gameDetails && gameDetails.background_image && <img className="game__img"src={gameDetails.background_image}  alt={gameDetails.name} /> }
+
                 <div className='game__information'>
                     {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name} </h1> }
                         {gameDetails && gameDetails.platforms && (
@@ -102,6 +106,7 @@ const GameDetails = () => {
                     </>
                     )}
                 </div>    
+
             <button className="favorite" onClick={handleToggleFavorite} >
                 <img className="favorite__img-" src="" alt='' /> 
             </button>

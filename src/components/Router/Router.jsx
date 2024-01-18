@@ -26,7 +26,6 @@ function Router() {
     const isPathWithoutFooter = pathsWithoutFooter.includes(location.pathname)
 
     return (
-        <>
             <FilterController>
             <SearchController>
             <HomeController>
@@ -46,7 +45,6 @@ function Router() {
             </HomeController>
             </SearchController>
             </FilterController>
-        </>
     )
 }
 
