@@ -70,7 +70,8 @@ const Home = () => {
                             <h2 className="card__title">{game.name}</h2>
                             <div className="card__list-platforms">
                                 {game.parent_platforms.map((platform) => (
-                                    <p key={platform.id} className="card__platforms"> {platform.platform.name}</p>   
+                                    <img key={platform.id} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+                                     
                                 ))}
                             </div>          
                     </div>
