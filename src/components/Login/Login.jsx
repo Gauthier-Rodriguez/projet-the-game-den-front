@@ -47,8 +47,8 @@ const Login = () => {
         
         login(user)
         .then(res => {
-        if (res) {
-            console.log(res)
+        if (response) {
+            console.log(res)  
         setIsAuthenticated(true);
         console.log("isAuthenticated", isAuthenticated);
         navigate('/');

@@ -13,7 +13,8 @@ const GameDetails = () => {
 
     const [popular, setPopular] = useContext(HomeContext)
     const [search, setSearch] = useContext(SearchContext)
-    const [details] = useContext(UserContext)
+    const {value1} = useContext(UserContext)
+    const [details] = value1
     const [gameDetails, setGameDetails]= useState('')
     const [isFavorite, setIsFavorite] = useState(false)
 
