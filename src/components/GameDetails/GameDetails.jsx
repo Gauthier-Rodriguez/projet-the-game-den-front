@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react'
 import { HomeContext } from '../../context/HomeContext'
 import { SearchContext } from '../../context/SearchContext';
+import { UserContext} from '../../context/UserContext'
 import axios from 'axios';
 
 const GameDetails = () => {
@@ -12,8 +13,13 @@ const GameDetails = () => {
 
     const [popular, setPopular] = useContext(HomeContext)
     const [search, setSearch] = useContext(SearchContext)
+    const {value1} = useContext(UserContext)
+    const [details] = value1
     const [gameDetails, setGameDetails]= useState('')
     const [isFavorite, setIsFavorite] = useState(false)
+
+    const userId=details.id;
+    console.log(userId)
 
     const findPopularGame = async () => {
         const selectedGame = await popular.results.find((game => game.id === parseInt(id)))
@@ -46,13 +52,16 @@ const GameDetails = () => {
         findSearchGame()
     }, [] ); 
 
-    // const handleToggleFavorite = async () => {
-    //     const gameId = gameDetails.id
-    //     if (!isFavorite) {
-    //         await axios.post('http://localhost:3000/api/favorites', {gameId})
-    //     }
-    //     setIsFavorite((prevIsFavorite) => !prevIsFavorite)
-    // }
+    const handleToggleFavorite = async () => {
+        console.log("UserID:", userId);
+        const gameId = gameDetails.id
+        if (!isFavorite) {
+            await axios.post(`http://localhost:3000/api/users/${userId}/games/${gameId}`)
+        } else {
+            await axios.delete(`http://localhost:3000/api/users/${userId}/games/${gameId}`)
+        }
+        setIsFavorite((prevIsFavorite) => !prevIsFavorite)
+    }
     
     //page détail du jeu avec image en fond   
     return(
@@ -83,8 +92,8 @@ const GameDetails = () => {
                 ))}
             </>
             )}
-            <button className="favorite" onClick='' >
-                <img className="favorite__img-" src="" alt='' />
+            <button className="favorite" onClick={handleToggleFavorite} >
+                <img className="favorite__img-" src="" alt='' /> 
             </button>
         </div>
     )
