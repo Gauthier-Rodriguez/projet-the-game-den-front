@@ -1,6 +1,7 @@
 import './Login.scss'
-import React, {useState} from 'react'
+import {useState, useContext} from 'react'
 import {register, login} from '../../logic/AuthFunction'
+import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -10,27 +11,11 @@ const Login = () => {
     const [pseudo, setPseudo] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [details, setDetails, isAuthenticated, setIsAuthenticated]= useContext(UserContext)
 
     let navigate = useNavigate()
 
-    const testLogin = (e) =>{
-        e.preventDefault()
-
-        const user = {
-            email : email,
-            password : password
-        }
-        
-        
-        login(user).then(res => {
-            if(res) {
-                navigate('/')
-            }
-        })
-
-    }
-
-    const createUser = (e) => {
+   const createUser = (e) => {
         e.preventDefault()
    
         const newUser = { // creates new object with name,email, password
@@ -42,16 +27,36 @@ const Login = () => {
         }
     
         register(newUser).then(res => { // calls the register function from UserFunctions.js and passes newUser as argument
-         console.log("coucou")
+        
          setLastName("");
          setFirstName("");
          setPseudo("");
          setEmail("");
          setPassword("");
 
-            navigate(`/profil`) // then navigates to login
+            navigate(`/login`) // then navigates to login
         })
       }
+
+    const userLogin = (e) =>{
+        e.preventDefault()
+
+        const user = {
+            email : email,
+            password : password
+        }
+        
+        login(user).then(res => {
+            if(res) {
+                setIsAuthenticated(true)
+                
+                navigate('/')
+            }
+        })
+
+    }
+
+ 
 
     return(
         <div className="container" id="container">
@@ -75,7 +80,7 @@ const Login = () => {
             </div>
 
             <div className="form-container sign-in">
-                <form className="container__form" noValidate onSubmit={testLogin}> 
+                <form className="container__form" noValidate onSubmit={userLogin}> 
                     <h1 className="container__title">Vous avez déja un compte ?</h1>
                     {/* <div className="social-icons">
                         <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-google-plus-g"></i></a>

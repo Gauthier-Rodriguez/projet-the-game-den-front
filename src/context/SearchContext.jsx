@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect} from "react";
 import Loader from "../components/Loader/Loader";
 import axios from 'axios'; 
+import Login from "../components/Login/Login";
 
 export const SearchContext = createContext()
 
@@ -14,7 +15,7 @@ export const SearchController = ({children}) => {
 
     const fetchSearch = async (search) => {
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_precise=true&ordering=-released&exclude_stores=9,8,4&parent_platforms=1,2,3,7`)
+            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_exact=true&ordering=-added&exclude_stores=9,8,4&parent_platforms=1,2,3,7`)
             
             const sortedResults = apiCall.data.results.sort((a, b) => {
                 const releaseDateA = new Date(a.released).getTime() || 0;
@@ -41,7 +42,7 @@ export const SearchController = ({children}) => {
 
     return(
         <SearchContext.Provider value={[search, setSearch, fetchSearch]}>
-            {isLoading ? ( <Loader />) : (children)} 
+            {isLoading ? ( <Loader />) : (children)}
          </SearchContext.Provider>
      )
 
