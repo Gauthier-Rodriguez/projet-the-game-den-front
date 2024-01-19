@@ -6,7 +6,8 @@ import { SearchContext } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import logo from '../../assets/logo.svg'
-import loupe from '../../assets/loupe.svg'
+import solidHeart from '../../assets/solidHeart.svg'
+import profil from '../../assets/profil.svg'
 
 
 const Header = () => {
@@ -41,11 +42,11 @@ const Header = () => {
 
                  </form>
                  <p className="header__pseudo">{details.Pseudo}</p>
-                <Link className="header__profil-link" to="/favorites">
-                 <img className="header__like" src="" alt="logo like" />
+                <Link className="header__like-link" to="/favorites">
+                 <img className="header__like-img" src={solidHeart} alt="logo like" />
                 </Link>
                  <Link className="header__profil-link" to="/profil">
-                    <img className="header__profil-img" src="" alt="logo profil" />
+                    <img className="header__profil-img" src={profil} alt="logo profil" />
 
                 </Link>
 

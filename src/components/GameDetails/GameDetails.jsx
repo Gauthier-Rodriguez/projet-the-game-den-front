@@ -1,19 +1,16 @@
 import './GameDetails.scss';
 import { useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { HomeContext } from '../../context/HomeContext';
-import { SearchContext } from '../../context/SearchContext';
+import { UserContext} from '../../context/UserContext';
+import heart from '../../assets/heart.svg';
+import solidHeart from '../../assets/solidHeart.svg';
 
-import { UserContext} from '../../context/UserContext'
-import coeur from '../../assets/coeur.svg'
 
 import axios from 'axios';
 
 const GameDetails = () => {
 
     const {id} = useParams();
-    const [popular, setPopular] = useContext(HomeContext)
-    const [search, setSearch] = useContext(SearchContext)
     const {value1, value4, value6} = useContext(UserContext)
     const [details] = value1
     const [isAuthenticated] = value4
@@ -37,7 +34,6 @@ const GameDetails = () => {
         }
     }
     useEffect(() => { fetchGameDetails()}, []);
-
 
     const handleToggleFavorite = async () => {
         const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image}
@@ -106,10 +102,11 @@ const GameDetails = () => {
             </div>
             {gameDetails && gameDetails.description_raw && <p className="game__desc">{gameDetails.description_raw}</p>}
           </div>
-      
-          <button className="favorite" onClick={handleToggleFavorite}>
-            <img className="favorite__img-" src="" alt='' />
-          </button>
+          {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="favorite__img" src={solidHeart} /></div>)
+           : (<div onClick={handleToggleFavorite}><img className="favorite__img" src={heart}/></div>)}
+          
+            
+          
         </>
     );
 }      

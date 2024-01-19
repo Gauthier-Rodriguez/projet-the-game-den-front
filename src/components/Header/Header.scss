@@ -51,7 +51,7 @@
     }
 
     &__pseudo{
-        font-size: 1.2rem;
+        font-size: 2rem;
         color: var(--color-quaternary);
         position: absolute;
         right: calc(var(--spacing) / 2);
@@ -60,17 +60,12 @@
         padding-right: calc(6*var(--spacing));
     }
 
-
-    &__like{
-
-        font-size: 1rem;
-        color: var(--color-quaternary);
+    &__like-link{
         position: absolute;
-        right: calc(var(--spacing)*10);
+        right: calc(var(--spacing)*3);
         top: 50%;
         transform: translateY(-65%);
         padding-right: var(--spacing);
-
     }
 
     &__profil-link{
@@ -83,10 +78,23 @@
         padding-right: var(--spacing);
     }
 
-    &__profil-img{
-        width: 100%;
-        height: 100%;
+    &__like-img{
+        width: calc(var(--spacing)*2.2);
+        height: calc(var(--spacing)*2.2);
+        &:hover {
+        transform: scale(1.10);
     }
+    }
+    
+
+    &__profil-img{
+        width: calc(var(--spacing)*2.2);
+        height: calc(var(--spacing)*2.2);
+        &:hover {
+        transform: scale(1.10);
+    }
+    }
+   
 }
 
 @media screen and (min-width: 768px){
