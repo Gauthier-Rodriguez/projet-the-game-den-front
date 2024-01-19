@@ -3,9 +3,9 @@ import './Footer.scss'
 const Footer = () => {
 
     return (
-        <>
-            <p className="footer">All data/pictures from "https://api.rawg.io/"</p>
-        </>
+        <div className='footer'>
+            <p className="footer__desc">All data/pictures from "https://api.rawg.io/"</p>
+        </div>
     )
 }
 

@@ -1,9 +1,9 @@
 .footer{
+   height: 5vh;
 
-    color: var(--color-secondary);
-    text-align: center;
-    font-style: italic;
-    max-width: 100%;
-    height: auto;
-
+    &__desc{
+        color: var(--color-quaternary);
+        text-align: center;
+        font-style: italic;
+    }
 }

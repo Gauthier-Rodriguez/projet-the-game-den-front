@@ -2,14 +2,14 @@
 .filter{ 
     display: flex;
     justify-content: space-between;
-    margin : auto;
-    margin-bottom: calc(1.5* var(--spacing));
+    margin-bottom: var(--spacing);
    
-
     &__title{
-        background-color: #24274a;
-        color:var(--color-secondary);
-        border: 2px;
+        background-color: var(--color-quaternary);
+    }
+
+    &__option{
+        color: var(--color-primary);
     }
     
 }
@@ -21,12 +21,6 @@
         gap: var(--spacing);
         justify-content: flex-start;
         padding-left: calc(3*var(--spacing));
-
-        &__list{
-            
-            background-color: rgba(0, 0, 0, 0.1);
-            
-        }
     }
 }
 
