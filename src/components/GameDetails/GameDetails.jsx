@@ -23,35 +23,6 @@ const GameDetails = () => {
     const userId=details.id;
     const API_KEY = import.meta.env.VITE_API_KEY
 
-//     Display the game details page with the background image
-/*     const findPopularGame = async () => {
-        const selectedGame = await popular.results.find((game => game.id === parseInt(id)))
-        setGameDetails(selectedGame)
-        
-        if (selectedGame) {
-        fetchAdditionalInfo(selectedGame.id)
-        }
-    } */
-
-/*     const findSearchGame = async () => {
-        const selectedGame = await search.results.find((game => game.id === parseInt(id))) 
-        setGameDetails(selectedGame)
-
-        if (selectedGame) {
-            fetchAdditionalInfo(selectedGame.id)
-        }
-    } */
-
-/*     const fetchAdditionalInfo = async (gameId) => {
-        const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
-
-        setGameDetails(apiCall.data)
-        console.log(apiCall.data)
-    }
-    useEffect(()=>{
-        findPopularGame()
-        findSearchGame()
-    }, [] );  */
 
     const fetchGameDetails = async () => {
         const gameId = id
@@ -66,13 +37,7 @@ const GameDetails = () => {
         }
     }
     useEffect(() => { fetchGameDetails()}, []);
-// like and dislike functions
 
-
-   /*  const favoriteGame = async () => {
-        
-    }
-    useEffect(() => {fetchGameDetails(), favoriteGame()}, [favorites]); */
 
     const handleToggleFavorite = async () => {
         const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image}
@@ -91,8 +56,7 @@ const GameDetails = () => {
             setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.gameId !== currentGame.gameId))
             setIsFavoriteGame(false)
         }
-    }
-        
+    } 
 
     //page détail du jeu avec image en fond   
 

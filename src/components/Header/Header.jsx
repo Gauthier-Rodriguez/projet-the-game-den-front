@@ -41,8 +41,9 @@ const Header = () => {
 
                  </form>
                  <p className="header__pseudo">{details.Pseudo}</p>
-
+                <Link className="header__profil-link" to="/favorites">
                  <img className="header__like" src="" alt="logo like" />
+                </Link>
                  <Link className="header__profil-link" to="/profil">
                     <img className="header__profil-img" src="" alt="logo profil" />
 

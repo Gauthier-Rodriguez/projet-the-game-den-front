@@ -83,7 +83,7 @@
 
 @media screen and (min-width: 768px){
     .home{
-
+    
         &__container{
             margin-top: 10vh;
         }
@@ -99,17 +99,8 @@
         &__title{
             font-size: calc(3*var(--spacing));
         }
-        &__container{
-            margin-top: 12vh;
-    };
-    &__title{
-        margin-bottom: calc(2*var(--spacing));
-        transition: all 0.4s ease-in-out;
+        
 
-        &:hover {
-            color: white;
-        }
-    };
     }
 
     .card{
