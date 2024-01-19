@@ -33,19 +33,19 @@ const Header = () => {
          return(
              <div className="header">
                  <Link className="header__link" to="/">
-
-                     <img className="header__logo" src="../../assets/logo.png" alt="logo The Game Den" />
+                     <img className="header__logo" src={logo} alt="logo The Game Den" />
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
-                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>
-                 </form>
 
+                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
+
+                 </form>
                  <p className="header__pseudo">{details.Pseudo}</p>
-                 <Link className="header__link" to="/favorites">
+
                  <img className="header__like" src="" alt="logo like" />
-                 </Link>
-                 <Link className="header__link" to="/profil">
-                    <img className="header__profil" src="" alt="logo profil" />
+                 <Link className="header__profil-link" to="/profil">
+                    <img className="header__profil-img" src="" alt="logo profil" />
+
                 </Link>
 
              </div>
