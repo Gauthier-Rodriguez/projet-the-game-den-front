@@ -1,0 +1,102 @@
+
+
+.game{
+    width: 100%;
+    height: 100vh;
+    color: var(--color-secondary);
+    position : relative;
+    z-index: 1;
+    display: flex;
+    margin: auto;
+    
+    &__img{
+        width: 100%;
+        height: 90%;
+        opacity: 0.3;
+        z-index: 1;
+        border-radius: var(--spacing) var(--spacing) 0 0;
+        
+    }
+
+    &__information{
+        width: 95%;
+        height: 50%;
+        z-index: 3;
+        margin:8px;
+        margin-top: 80%;
+        position : absolute;
+        display: grid;
+        grid-template-areas: 'title platform'
+                              'genre platform'
+                              'released platform'
+                              'desc platform'
+                              'publisher platform'
+                              'developper platform' ;
+        gap: calc(var(--spacing)/2);
+        font-size: 10px;  
+    }
+
+    &__title{
+        height: 5%;
+        width: 50%;
+        font-weight: bold;
+        font-size: 20px;
+        position: relative;
+        grid-area: title;
+    }
+
+    &__platforms{
+        height: 5%;
+        width: 50%;
+        grid-area: platform;
+    }
+
+    &__release{
+        height: 5%;
+        width: 100%;
+        grid-area: released;
+    }
+
+    &__genre{
+       width: 100%;
+       grid-area: genre;
+
+    }
+
+    &__meta{
+
+        height: 5%;
+    }
+
+    &__desc{
+        height: 30%;
+        font-style: italic;
+        grid-area: desc;
+   
+    }
+
+    &__publisher{
+        height: 5%;
+        width: 50%;
+        grid-area: publisher;
+    }
+
+    &__dev{
+        height: 5%;
+        width: 50%;
+        grid-area: developper;
+    }
+
+    @media screen and (min-width: 768px){
+        .game{
+            &__img{
+                width: 100%;
+                height: 95%
+            }
+        }
+    
+       
+    }
+
+    
+}
