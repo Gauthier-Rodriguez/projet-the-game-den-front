@@ -10,8 +10,8 @@ import loupe from '../../assets/loupe.svg'
 
 
 const Header = () => {
-    const {value4} = useContext(UserContext)
-    const [details, setDetails] = value4
+    const {value4, value1} = useContext(UserContext)
+    const [details, setDetails] = value1
     const [isAuthenticated, setIsAuthenticated] = value4
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
     const inputRef = useRef(null);
@@ -36,22 +36,15 @@ const Header = () => {
          return(
              <div className="header">
                  <Link className="header__link" to="/">
-
-                     <img className="header__logo" src="../../assets/logo.png" alt="logo The Game Den" />
+                     <img className="header__logo" src={logo} alt="logo The Game Den" />
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
                  <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
-                 <button className="header__button" type="submit">
-                         <img className="header__button-img"  />
-                </button>
-
                  </form>
-
                  <p className="header__pseudo">{details.Pseudo}</p>
-
                  <img className="header__like" src="" alt="logo like" />
-                 <Link className="header__link" to="/profil">
-                    <img className="header__profil" src="" alt="logo profil" />
+                 <Link className="header__profil-link" to="/profil">
+                    <img className="header__profil-img" src="" alt="logo profil" />
                 </Link>
 
              </div>
