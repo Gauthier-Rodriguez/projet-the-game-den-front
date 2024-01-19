@@ -17,9 +17,6 @@ const Header = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-
-    console.log("update header", isAuthenticated);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const newSearch = e.target[0].value.toLowerCase();
@@ -39,12 +36,16 @@ const Header = () => {
                      <img className="header__logo" src={logo} alt="logo The Game Den" />
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
+
                  <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
+
                  </form>
                  <p className="header__pseudo">{details.Pseudo}</p>
+
                  <img className="header__like" src="" alt="logo like" />
                  <Link className="header__profil-link" to="/profil">
                     <img className="header__profil-img" src="" alt="logo profil" />
+
                 </Link>
 
              </div>

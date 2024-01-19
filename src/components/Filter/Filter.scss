@@ -5,11 +5,13 @@
     margin-bottom: var(--spacing);
    
     &__title{
+
         background-color: var(--color-quaternary);
     }
 
     &__option{
         color: var(--color-primary);
+
     }
     
 }
@@ -21,7 +23,9 @@
         gap: var(--spacing);
         justify-content: flex-start;
         padding-left: calc(3*var(--spacing));
+
         padding-top: var(--spacing);
     }
 }
+
 
