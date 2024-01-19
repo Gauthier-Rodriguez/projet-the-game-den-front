@@ -34,8 +34,6 @@ const Login = () => {
          setPseudo("");
          setEmail("");
          setPassword("");
-
-            navigate(`/login`) // then navigates to login
         })
       }
     
@@ -72,51 +70,51 @@ const Login = () => {
             <div className="container" id="container">
                 <div className="form-container sign-up">
                     <form className="container__form" noValidate onSubmit={createUser}>
-                        <h1 className="container__title">Créer un compte</h1>
+                        <h1 className="container__title">Create an account</h1>
                         {/* <div className="social-icons">
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-google-plus-g"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-facebook-f"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-github"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
                         </div> */}
-                        <p className="container__text">Entrez votre email pour l'inscription</p>
-                        <input className="container__input" type="text" placeholder="Lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        <input className="container__input" type="text" placeholder="Firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <p className="container__text">Enter your email address to register</p>
+                        <input className="container__input" type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <input className="container__input" type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         <input className="container__input" type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
                         <input className="container__input" type="email" placeholder="Email" value={email}onChange={(e) => setEmail(e.target.value)}/>
-                        <input className="container__input" type="password" placeholder="Votre mot de passe" value={password}onChange={(e) => setPassword(e.target.value)}/>
-                        <button className="container__button" type="submit">S'INSCRIRE</button>
+                        <input className="container__input" type="password" placeholder="Password" value={password}onChange={(e) => setPassword(e.target.value)}/>
+                        <button className="container__button" type="submit">SIGN UP</button>
                     </form>
                 </div>
 
                 <div className="form-container sign-in">
                     <form className="container__form" noValidate onSubmit={userLogin}> 
-                        <h1 className="container__title">Vous avez déja un compte ?</h1>
+                        <h1 className="container__title">Already got an account?</h1>
                         {/* <div className="social-icons">
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-google-plus-g"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-facebook-f"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-github"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
                         </div> */}
-                        <p className="container__text">Identifiez vous avec votre adresse email</p>
+                        <p className="container__text">Login with your email address</p>
                         <input className="container__input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        <input className="container__input" type="password" placeholder="Votre mot de passe" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        <button className="container__button" type="submit">SE CONNECTER</button>
-                        <a className="container__link" href="#">Vous avez oublié votre mot de passe ?</a>
+                        <input className="container__input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        <button className="container__button" type="submit">LOGIN</button>
+                        {/* <a className="container__link" href="#">Forgot your password?</a> */}
                     </form>
                 </div>
 
                 <div className="toggle-container">
                     <div className="toggle">
                         <div className="toggle__panel toggle-left">
-                            <h1 className="toggle__title"> Content de vous revoir  !</h1>
-                            <p className="toggle__text">Entrer vos informations personnelles</p>
-                            <button className="container__button hidden" id="login" onClick={handleLoginClick}>SE CONNECTER</button>
+                            <h1 className="toggle__title"> Nice to see you again!</h1>
+                            <p className="toggle__text">Enter your personal data</p>
+                            <button className="container__button hidden" id="login" onClick={handleLoginClick}>LOGIN</button>
                         </div>
                         <div className="toggle__panel toggle-right">
-                            <h1 className="toggle__title"> Bonjour, bienvenue ! </h1>
-                            <p className="toggle__text">Enregistrer vos informations personnelles</p>
-                            <button className="container__button hidden" id="register" onClick={handleRegisterClick}>S'INSCRIRE</button>
+                            <h1 className="toggle__title"> Welcome! </h1>
+                            <p className="toggle__text">Register your personal data</p>
+                            <button className="container__button hidden" id="register" onClick={handleRegisterClick}>SIGN UP</button>
                         </div>
                     </div>
                 </div>

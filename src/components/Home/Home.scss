@@ -109,6 +109,16 @@
 @media screen and (min-width: 1200px){
     .card{
         width: 20vw;
-        height: 35vh;
+        height: 40vh;
+        
+        &__platforms{
+            width: calc(var(--spacing)*1.1);
+            height: calc(var(--spacing)*1.1);
+        }
+
+        &__title{
+            box-sizing: border-box;
+        }
     }
+
 }
