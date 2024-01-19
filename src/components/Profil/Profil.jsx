@@ -92,9 +92,7 @@ const Profil = () => {
     console.log(isAuthenticated)
 
 
-    useEffect(() => {
-        getProfil();
-    }, [isAuthenticated]);
+    
 
     if(isAuthenticated){ 
     return(

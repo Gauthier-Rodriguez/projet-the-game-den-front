@@ -10,15 +10,12 @@ import loupe from '../../assets/loupe.svg'
 
 
 const Header = () => {
-    const {value4} = useContext(UserContext)
-    const [details, setDetails] = value4
+    const {value4, value1} = useContext(UserContext)
+    const [details, setDetails] = value1
     const [isAuthenticated, setIsAuthenticated] = value4
     const [search, setSearch, fetchSearch] = useContext(SearchContext)
     const inputRef = useRef(null);
     const navigate = useNavigate();
-
-
-    console.log("update header", isAuthenticated);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,16 +37,13 @@ const Header = () => {
                      <img className="header__logo" src="../../assets/logo.png" alt="logo The Game Den" />
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
-                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
-                 <button className="header__button" type="submit">
-                         <img className="header__button-img"  />
-                </button>
-
+                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>
                  </form>
 
                  <p className="header__pseudo">{details.Pseudo}</p>
-
+                 <Link className="header__link" to="/favorites">
                  <img className="header__like" src="" alt="logo like" />
+                 </Link>
                  <Link className="header__link" to="/profil">
                     <img className="header__profil" src="" alt="logo profil" />
                 </Link>

@@ -1,70 +1,95 @@
-import './GameDetails.scss'
+import './GameDetails.scss';
 import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react'
-import { HomeContext } from '../../context/HomeContext'
+import { useContext, useEffect, useState } from 'react';
+import { HomeContext } from '../../context/HomeContext';
 import { SearchContext } from '../../context/SearchContext';
-import { UserContext} from '../../context/UserContext'
+import { UserContext} from '../../context/UserContext';
+import heart from '../../assets/heart-solid.svg';
 import axios from 'axios';
 
 const GameDetails = () => {
 
     const {id} = useParams();
-    
-
     const [popular, setPopular] = useContext(HomeContext)
     const [search, setSearch] = useContext(SearchContext)
-
-    const {value1} = useContext(UserContext)
+    const {value1, value4, value6} = useContext(UserContext)
     const [details] = value1
-
+    const [isAuthenticated] = value4
+    const [favorites, setFavorites] = value6
+    const [isFavoriteGame, setIsFavoriteGame] = useState(false)
     const [gameDetails, setGameDetails]= useState('')
-    const [isFavorite, setIsFavorite] = useState(false)
-
     const userId=details.id;
-    console.log(userId)
+    const API_KEY = import.meta.env.VITE_API_KEY
 
-    const findPopularGame = async () => {
+//     Display the game details page with the background image
+/*     const findPopularGame = async () => {
         const selectedGame = await popular.results.find((game => game.id === parseInt(id)))
         setGameDetails(selectedGame)
         
         if (selectedGame) {
         fetchAdditionalInfo(selectedGame.id)
         }
-    }
+    } */
 
-    const findSearchGame = async () => {
+/*     const findSearchGame = async () => {
         const selectedGame = await search.results.find((game => game.id === parseInt(id))) 
         setGameDetails(selectedGame)
 
         if (selectedGame) {
             fetchAdditionalInfo(selectedGame.id)
         }
-    }
+    } */
 
-    const API_KEY = import.meta.env.VITE_API_KEY
-
-    const fetchAdditionalInfo = async (gameId) => {
+/*     const fetchAdditionalInfo = async (gameId) => {
         const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
-        //console.log(apiCall)
         setGameDetails(apiCall.data)
     }
-
     useEffect(()=>{
         findPopularGame()
         findSearchGame()
-    }, [] ); 
+    }, [] );  */
+
+    const fetchGameDetails = async () => {
+        const gameId = id
+        const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
+        setGameDetails(apiCall.data)
+        const currentGame = apiCall.data.id
+        const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
+        if (isFavorite) {
+            setIsFavoriteGame(true)
+        }else{
+            setIsFavoriteGame(false)
+        }
+    }
+    useEffect(() => { fetchGameDetails()}, []);
+// like and dislike functions
+
+
+   /*  const favoriteGame = async () => {
+        
+    }
+    useEffect(() => {fetchGameDetails(), favoriteGame()}, [favorites]); */
 
     const handleToggleFavorite = async () => {
-        console.log("UserID:", userId);
-        const gameId = gameDetails.id
-        if (!isFavorite) {
-            await axios.post(`http://localhost:3000/api/users/${userId}/games/${gameId}`)
-        } else {
-            await axios.delete(`http://localhost:3000/api/users/${userId}/games/${gameId}`)
+        const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image}
+        
+        if(!isAuthenticated) return(
+            alert("You must be logged in to add a game to your favorites")
+            )
+
+        if (!isFavoriteGame) {
+            await axios.post(`http://localhost:3000/api/users/${userId}/games`, currentGame)
+            setFavorites((prevFavorites) => [...prevFavorites, currentGame])
+            setIsFavoriteGame(true)}
+
+        if (isFavoriteGame) {
+            await axios.delete(`http://localhost:3000/api/users/${userId}/games`, {data : currentGame})
+            setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.gameId !== currentGame.gameId))
+            setIsFavoriteGame(false)
         }
-        setIsFavorite((prevIsFavorite) => !prevIsFavorite)
     }
-    
+        
+
     //page détail du jeu avec image en fond   
     return(
         <div className='game'>
@@ -105,10 +130,11 @@ const GameDetails = () => {
                         ))}
                     </>
                     )}
-                </div>    
+                </div>
 
-            <button className="favorite" onClick={handleToggleFavorite} >
-                <img className="favorite__img-" src="" alt='' /> 
+            <button className="favorite" onClick={handleToggleFavorite}>
+               {isFavoriteGame ? (<p>DISLIKE</p>) : (<p>LIKE</p>)}
+                <img className="favorite__img" src="#" alt='' /> 
             </button>
         </div>
     )
