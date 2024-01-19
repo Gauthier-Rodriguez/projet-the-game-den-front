@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect} from "react";
 import Loader from "../components/Loader/Loader";
 import axios from 'axios'; 
-import Login from "../components/Login/Login";
 
 export const SearchContext = createContext()
 

@@ -45,8 +45,9 @@ const GameDetails = () => {
 
     const fetchAdditionalInfo = async (gameId) => {
         const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
-        //console.log(apiCall)
+        
         setGameDetails(apiCall.data)
+        console.log(apiCall.data)
     }
 
     useEffect(()=>{
@@ -72,10 +73,10 @@ const GameDetails = () => {
 
                 <div className='game__information'>
                     {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name} </h1> }
-                        {gameDetails && gameDetails.platforms && (
+                        {gameDetails && gameDetails.parent_platforms && (
                         <>
-                            {gameDetails.platforms.map((platform) => ( 
-                            <p key={platform.id} className="game__platforms">{platform.platform.name}</p>
+                            {gameDetails.parent_platforms.map((platform) => ( 
+                            <img key={platform.id} className="game__platforms" src={`src/assets/${platform.platform.slug}.svg`}/>
                             ))} 
                         </>
                         )}

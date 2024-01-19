@@ -5,7 +5,7 @@ import {FilterContext} from '../../context/FilterContext'
 import {Link} from  'react-router-dom'
 import Filter from '../Filter/Filter'
 import Footer from '../Footer/Footer'
-import InfiniteScroll from 'react-infinite-scroll-component'
+//import InfiniteScroll from 'react-infinite-scroll-component'
 
 const Home = () => {
 
