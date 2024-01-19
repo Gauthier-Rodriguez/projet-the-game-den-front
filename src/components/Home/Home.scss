@@ -1,15 +1,20 @@
 .home{
 
-
     &__container{
+        margin-top: 25vh;
         max-width: 100vw;
-        margin: auto;
+        height: 100vh;
         padding: calc(var(--spacing) /2);
-        background-color: azure;
+        background: rgb(26,27,28);
+        background: linear-gradient(180deg, rgba(26,27,28,1) 0%, rgba(42,45,49,1) 5%);
     }
 
     &__title{
+<<<<<<< HEAD
         color: var(--color-primary);
+=======
+        color: var(--color-quaternary);
+>>>>>>> 490750555875f1f0cd6f1b6b9282cffaa32e1d0c
         text-align: center;
         font-weight: bold;
         font-size: calc(2*var(--spacing));
@@ -33,11 +38,11 @@
     display: flex;
     flex-direction: column;
     gap: calc(3 *var(--spacing));
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.639);
     transition: box-shadow transform 0.3s ease-in-out; 
     filter: drop-shadow(0 0 1rem rgb(33, 33, 33));
-    box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.5);
-
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.166), 0 4px 6px rgba(0, 0, 0, 0.354);
+    
     &:hover {
         transform: scale(1.05);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
@@ -61,15 +66,19 @@
         color: var(--color-secondary);
         padding-left: calc(2 * var(--spacing));
         margin-bottom: var(--spacing);
+        
     }
 
     &__platforms{
+        width: calc(var(--spacing)*2);
+        height: calc(var(--spacing)*2);
         font-size: calc(var(--spacing)/1.1);
     }
+  
 
     &__title{
         font-size: calc(1.5 * var(--spacing));
-        color: var(--color-secondary);
+        color: var(--color-quaternary);
         text-align: center;
     }
 }
