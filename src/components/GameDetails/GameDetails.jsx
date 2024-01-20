@@ -6,6 +6,8 @@ import heart from '../../assets/heart.svg';
 import solidHeart from '../../assets/solidHeart.svg';
 
 
+
+
 import axios from 'axios';
 
 const GameDetails = () => {
@@ -36,24 +38,23 @@ const GameDetails = () => {
     useEffect(() => { fetchGameDetails()}, []);
 
     const handleToggleFavorite = async () => {
-        const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image}
-        
+        const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image};
         if(!isAuthenticated) return(
             alert("You must be logged in to add a game to your favorites")
-            )
+            );
 
         if (!isFavoriteGame) {
-            await axios.post(`http://localhost:3000/api/users/${userId}/games`, currentGame)
-            setFavorites((prevFavorites) => [...prevFavorites, currentGame])
-            setIsFavoriteGame(true)}
+            await axios.post(`http://localhost:3000/api/users/${userId}/games`, currentGame);
+            setFavorites((prevFavorites) => [...prevFavorites, currentGame]);
+            setIsFavoriteGame(true);
+          };
 
         if (isFavoriteGame) {
-            await axios.delete(`http://localhost:3000/api/users/${userId}/games`, {data : currentGame})
-            setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.gameId !== currentGame.gameId))
-            setIsFavoriteGame(false)
-        }
-    } 
-
+            await axios.delete(`http://localhost:3000/api/users/${userId}/games`, {data : currentGame});
+            setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.gameId !== currentGame.gameId));
+            setIsFavoriteGame(false);
+        };
+    };
     //page détail du jeu avec image en fond   
 
     return (
@@ -99,14 +100,12 @@ const GameDetails = () => {
                   ))}
                 </>
               )}
+           
             </div>
             {gameDetails && gameDetails.description_raw && <p className="game__desc">{gameDetails.description_raw}</p>}
-          </div>
-          {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="favorite__img" src={solidHeart} /></div>)
-           : (<div onClick={handleToggleFavorite}><img className="favorite__img" src={heart}/></div>)}
-          
-            
-          
+          </div>            
+           {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="heart-solid" src={solidHeart} /></div>)
+           : (<div onClick={handleToggleFavorite}><img className="heart-outline" src={heart}/></div>)} 
         </>
     );
 }      

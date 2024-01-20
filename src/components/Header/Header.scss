@@ -81,7 +81,7 @@
     &__like-img{
         width: calc(var(--spacing)*2.2);
         height: calc(var(--spacing)*2.2);
-        &:hover {
+        &:active {
         transform: scale(1.10);
     }
     }
@@ -90,7 +90,7 @@
     &__profil-img{
         width: calc(var(--spacing)*2.2);
         height: calc(var(--spacing)*2.2);
-        &:hover {
+        &:active {
         transform: scale(1.10);
     }
     }
