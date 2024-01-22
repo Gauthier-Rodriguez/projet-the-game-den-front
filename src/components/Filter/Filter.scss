@@ -3,15 +3,16 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--spacing);
+    
    
     &__title{
-
+        border-radius: var(--spacing);
         background-color: var(--color-quaternary);
     }
 
     &__option{
         color: var(--color-primary);
-
+        opacity: 0.2;
     }
     
 }

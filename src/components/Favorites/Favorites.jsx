@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer'
 
 const Favorites = () => {
 const {value1, value6} = useContext(UserContext);
@@ -21,24 +22,25 @@ useEffect(() => {
 
     return (
         <div className="favorites__container">
-            <h1 className="favorites__title">Liked</h1>
-           <div className="favorties__list">
-            {favorites.length > 0 ? (
+        {favorites.length > 0 ? (
+            <>
+                <h1 className="favorites__title">Liked</h1>
                 <div className="favorites__list">
                     {favorites.map((favorite) => (
-                        <div key={favorite.id} className="card">
+                        <div key={favorite.id} className="favcard">
                             <Link className="favcard__img-container" to={`/game/${favorite.GameID}`}>
-                                <img className="favcard__img" src={favorite.Image} alt={favorite.Name} /> 
+                                <img className="favcard__img" src={favorite.Image} alt={favorite.Name} />
                             </Link>
                             <h2 className="favcard__title">{favorite.Name}</h2>
                         </div>
                     ))}
                 </div>
-            ) : (
-                <p>No liked games yet. Start adding your favorite games!</p>
-            )}
-            </div>
-        </div>
+
+            </>
+        ) : (
+            <p className="error">No liked games yet. Start adding your favorite games!</p>
+        )}
+    </div>
     )
 };
 

@@ -9,21 +9,33 @@
     display: flex;
     flex-direction: column;
     margin-top : 15vh;
-    
+    border-radius: var(--spacing);
     
     &__img{
         max-width: 100%;
         height: 100vh;
         opacity: 0.2;
-        z-index: 1;    
+        z-index: 1; 
     }
 
+    // .blur-mask{
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //      width: 100%;
+    //     height: 20%; /* Ajustez la hauteur floue en modifiant cette valeur */
+    //     background: linear-gradient(to bottom, transparent, white);
+    //     pointer-events: none;
+       
+    // }
+    
     &__information{
+        font-size: calc(var(--spacing)/1.1);
         width: 95%;
-        height: 100%;
+        height: 100vh;
         z-index: 3;
         position : absolute;
-        top: 20%;
+        top: 33%;
         margin-left: calc(var(--spacing)/2);
         gap: calc(var(--spacing)/2);
     }
@@ -31,11 +43,24 @@
     /**
       Information Variations
       */
-    &__information-right{
-
+    &__information--right{
+        top : 38%;
+        width : 50%;
+        
     }
-    &__information-left{
+    &__information--left{
+        top: 38%;
+        left:60%;
+        width : 50%;
+    }
 
+    &__information--box{
+        margin : 6px;
+    }
+
+    &__information--box-title{
+        font-weight: bold;
+        font-size: calc(1.3 * var(--spacing));
     }
 
     &__title{
@@ -50,51 +75,43 @@
         gap: calc(var(--spacing)/2)
     }
 
-    &__platforms{
-        font-size: calc(var(--spacing)/1.2);
-    }
-
-    &__release{
-        
-    }
-
+   
     &__list-genres{
         align-self: flex-end;
         display: flex;
         flex-direction: row;
-        gap: calc(var(--spacing)/2)
+        gap: calc(var(--spacing)/2);
+        
     }
     
-    &__genre{
-        font-size: calc(var(--spacing)/1.2);
-    }
-
-    &__meta{
-
-    }
 
     &__desc{
         font-style: italic;
+        font-size: calc(var(--spacing)/1.2);
+        text-align: left;
+        padding:6px;
     }
 
-    &__publisher{
-        
-    }
 
     &__dev{
         height: 5%;
         width: 50%;
         grid-area: developper;
+        
     }
 
-    @media screen and (min-width: 768px){
-        .game{
-            &__img{
-                width: 100%;
-                height: 95%
-            }
-        }
-    }
+
+}
+
+
+
+.readmore-button{
+    background-color: var(--color-secondary);
+    color:var(--color-quaternary);
+    border-radius: var(--spacing);
+    border: none;
+    width:25%;
+    margin:auto;
 }
 
 .heart-solid{
@@ -102,8 +119,8 @@
         position: absolute;
         z-index: 1000;
         color: red;
-        right: calc(var(--spacing)*3);
-        top: 50%;
+        right: calc(var(--spacing)*1.5);
+        top: 80%;
         width: calc(var(--spacing)*3);
         height: calc(var(--spacing)*3);
         &:active {
@@ -117,8 +134,8 @@
         position: absolute;
         z-index: 1000;
         color: red;
-        right: calc(var(--spacing)*3);
-        top: 50%;
+        right: calc(var(--spacing)*1.5);
+        top: 80%;
         width: calc(var(--spacing)*3);
         height: calc(var(--spacing)*3);
         &:active {
@@ -126,3 +143,29 @@
         }
     }
 
+@media screen and (min-width: 768px){
+
+    .game{
+        &__information{
+            top : 35%;
+        }
+
+        &__information--box{
+            margin : 10px;
+        }
+
+        
+    }
+
+    .readmore-button{
+        display: none;
+    }
+
+    .heart-outline{
+        top:105%;
+    }
+
+    .heart-solid{
+        top:105%;
+    }
+}

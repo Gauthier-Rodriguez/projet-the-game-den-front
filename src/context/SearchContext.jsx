@@ -8,13 +8,14 @@ export const SearchController = ({children}) => {
 
     const [search, setSearch] = useState('')
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const fetchSearch = async (search) => {
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_exact=true&ordering=-added&exclude_stores=9,8,4&parent_platforms=1,2,3,7`)
+            setIsLoading(true)
+            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_exact=true&ordering=-added&exclude_stores=9,8,4&parent_platforms=1,2,3,7&page_size=100`)
             
             const sortedResults = apiCall.data.results.sort((a, b) => {
                 const releaseDateA = new Date(a.released).getTime() || 0;
@@ -40,7 +41,7 @@ export const SearchController = ({children}) => {
     }, [])
 
     return(
-        <SearchContext.Provider value={[search, setSearch, fetchSearch]}>
+        <SearchContext.Provider value={[search, setSearch, fetchSearch, isLoading, setIsLoading]}>
             {isLoading ? ( <Loader />) : (children)}
          </SearchContext.Provider>
      )
