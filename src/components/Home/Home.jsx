@@ -17,8 +17,7 @@ const Home = () => {
     const [recoGames] = value7
     const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular.results;
 
-    const filteredGames = popular.results.filter((game) => {
-       
+    const filteredGames = popular.results && popular.results.filter((game) => {
         return (
             (!filters.platform || game.platforms.some((platform) => platform.platform.name === filters.platform)) &&
             (!filters.genre || game.genres.some((genre) => genre.name === filters.genre))
@@ -44,6 +43,7 @@ const Home = () => {
                                 {game.parent_platforms.map((platform) => (
                                         <img key={platform.id} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
 
+
                                     ))}
                                 </div> 
                                 <h2 className="card__title">{game.name}</h2>
@@ -63,7 +63,7 @@ const Home = () => {
         return(
             <div className="home__container">
                 <Filter />
-                <h1 className="home__title">Popular games</h1>
+                <h1 className="home__title">Popular games in 2023</h1>
                     
                 <div className="home__list">
                     {gamesToDisplay.map((game) => ( 
@@ -83,6 +83,7 @@ const Home = () => {
                     </>
                        ))}
                 </div>
+                <Footer />
             </div>
         )
     }

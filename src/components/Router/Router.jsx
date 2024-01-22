@@ -22,9 +22,6 @@ function Router() {
     const pathsWithoutHeader = ['/login', '/profil']
     const isPathWithoutHeader = pathsWithoutHeader.includes(location.pathname)
 
-    const pathsWithoutFooter = ['/login', '/profil']
-    const isPathWithoutFooter = pathsWithoutFooter.includes(location.pathname)
-
     return (
             <FilterController>
             <SearchController>
@@ -40,7 +37,6 @@ function Router() {
                 <Route path="/game/:id" element={<GameDetails />} />
                 <Route path="/favorites" element={<Favorites />} />
             </Routes>
-            {!isPathWithoutFooter && <Footer />}
             </UserController>
             </HomeController>
             </SearchController>

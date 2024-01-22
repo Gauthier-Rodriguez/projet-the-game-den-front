@@ -2,7 +2,6 @@
 
     width: 100vw;
     height: 15vh;
-
     display: flex;
     position: fixed;
     z-index: 1000;
@@ -35,6 +34,7 @@
         border-radius: var(--spacing);
         background-color: var(--color-quaternary);
         margin: auto;
+        border-style: none;
     }
 
     &__input::placeholder{
@@ -49,28 +49,28 @@
         top: 50%;
         transform: translateY(-65%);
         padding-right: var(--spacing);
+        text-decoration: none;
     }
 
     &__pseudo{
-        font-size: 2rem;
+        font-size: 1.2rem;
         color: var(--color-quaternary);
         position: absolute;
-        right: calc(var(--spacing) / 2);
         top: 50%;
+        right: calc(var(--spacing) / 2);
         transform: translateY(-65%);
-        padding-right: calc(6*var(--spacing));
+        padding-right: calc(4.5*var(--spacing));
     }
 
     &__like-link{
         position: absolute;
-        right: calc(var(--spacing)*3);
+        right: calc(var(--spacing) / 2);
         top: 50%;
         transform: translateY(-65%);
-        padding-right: var(--spacing);
+        padding-right: calc(var(--spacing)*2.8);
     }
 
     &__profil-link{
-        font-size: 1rem;
         color: var(--color-quaternary);
         position: absolute;
         right: calc(var(--spacing) / 2);
@@ -80,22 +80,41 @@
     }
 
     &__like-img{
-        width: calc(var(--spacing)*2.2);
-        height: calc(var(--spacing)*2.2);
-        &:active {
-        transform: scale(1.10);
-    }
+        width: calc(var(--spacing)* 1.3);
+        height: calc(var(--spacing)* 1.3);
     }
     
 
     &__profil-img{
-        width: calc(var(--spacing)*2.2);
-        height: calc(var(--spacing)*2.2);
+        width: calc(var(--spacing)*1.3);
+        height: calc(var(--spacing)*1.3);
         &:active {
         transform: scale(1.10);
     }
     }
    
+}
+@media screen and (min-width: 476px){
+    .header{
+        &__pseudo{
+            font-size: 1.5rem;
+            padding-right: calc(5*var(--spacing));
+        }
+
+        &__like-link{
+            padding-right: calc(3*var(--spacing));
+        }
+
+        &__like-img{
+            width: calc(var(--spacing)* 1.5);
+            height: calc(var(--spacing)* 1.5);
+        }
+
+        &__profil-img{
+            width: calc(var(--spacing)* 1.5);
+            height: calc(var(--spacing)*1.5);
+        }
+    }
 }
 
 @media screen and (min-width: 768px){
@@ -107,7 +126,7 @@
         }
 
         &__form {
-            width: 50%; 
+             max-width: 55%;
             top: 45%;
             left: 20%;
             transform: translateY(-30%);
@@ -115,13 +134,29 @@
             
         &__login{
             top: 70%;
-            padding-right: calc(3var(--spacing));
+            padding-right: calc(2*var(--spacing));
             font-size: calc(1.3*var(--spacing));
         }
+
 
         &__logo{
             width: 100%;
             height: 100%;
+
+        &__pseudo{
+            top: 70%;
+            padding-right: calc(5*var(--spacing));
+        }
+        
+        &__like-link{
+            top: 70%;
+            padding-right: calc(3*var(--spacing));
+        }
+
+        &__profil-link{
+            top: 70%;
+            padding-right: var(--spacing);
+
         }
     }
 }
@@ -130,6 +165,29 @@
     .header{
         &__link{
             width: 14%;
+        }
+
+        &__pseudo{
+            font-size: 1.8rem;
+            padding-right: calc(7*var(--spacing));
+        }
+
+        &__like-link{
+            padding-right: calc(4.5*var(--spacing));
+        }
+
+        &__profil-link{
+            padding-right: calc(2*var(--spacing));
+        }
+
+        &__like-img{
+            width: calc(2*var(--spacing));
+            height: calc(2*var(--spacing));
+        }
+
+        &__profil-img{
+            width: calc(2*var(--spacing));
+            height: calc(2*var(--spacing));
         }
     }
 }
