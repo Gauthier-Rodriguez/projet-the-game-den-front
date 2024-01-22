@@ -18,7 +18,6 @@ export const FilterController = ({children}) => {
         try{
             const apiCall = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
             setGenres(apiCall.data.results)
-            //console.log(apiCall.data.results) 
         } catch (error) {
             setError(error)
         }
@@ -30,8 +29,9 @@ export const FilterController = ({children}) => {
     const fetchPlatforms = async () =>{
 
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/platforms?key=112df870da604d21ba54e2920c7aa5b6`)
+            const apiCall = await axios.get(`https://api.rawg.io/api/platforms?key=${API_KEY}`)
             setPlatforms(apiCall.data.results)
+            //console.log(apiCall.data.results)
             
         } catch (error) {
             setError(error)
