@@ -35,7 +35,7 @@ useEffect(() => {
                         </div>
                     ))}
                 </div>
-                <Footer />
+
             </>
         ) : (
             <p className="error">No liked games yet. Start adding your favorite games!</p>

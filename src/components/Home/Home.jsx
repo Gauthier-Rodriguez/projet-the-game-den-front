@@ -13,15 +13,14 @@ const Home = () => {
     const fetchPopular = useContext(HomeContext)
     const { filters } = useContext(FilterContext);
 
-    const filteredGames = popular.results.filter((game) => {
-       
+    const filteredGames = popular.results && popular.results.filter((game) => {
         return (
             (!filters.platform || game.platforms.some((platform) => platform.platform.name === filters.platform)) &&
             (!filters.genre || game.genres.some((genre) => genre.name === filters.genre))
         );
     });
-
-    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular.results;
+    
+    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : (popular.results || []);
 
     // affichage des recommandations - si utilisateur connecté
     //possibilité de filtrer en cliquant sur les boutons plaform/genre/noteMC 
