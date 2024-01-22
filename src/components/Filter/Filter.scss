@@ -1,20 +1,31 @@
-.filter{
-    
-    max-width: 50%;
-    padding:3px;
-    
-    &__container{
-        display: flex;
-        justify-content: space-between;
-        margin : auto;
-        margin-bottom: calc(1.5* var(--spacing));
+
+.filter{ 
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing);
+   
+    &__title{
+
+        background-color: var(--color-quaternary);
     }
 
-    &__title{
-        background-color: #24274a;
-        color:var(--color-secondary);
-        border: 2px;
+    &__option{
+        color: var(--color-primary);
+
     }
     
 }
+
+
+@media screen and (min-width: 768px){
+    .filter{
+        display: flex;
+        gap: var(--spacing);
+        justify-content: flex-start;
+        padding-left: calc(3*var(--spacing));
+
+        padding-top: var(--spacing);
+    }
+}
+
 

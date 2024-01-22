@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect} from "react";
 import Loader from "../components/Loader/Loader";
 import axios from 'axios'; 
-import Login from "../components/Login/Login";
 
 export const SearchContext = createContext()
 
@@ -24,7 +23,7 @@ export const SearchController = ({children}) => {
             });
 
             setSearch({ ...apiCall.data, results: sortedResults });
-            
+            console.log(apiCall.data)
     
         } 
         catch (error){

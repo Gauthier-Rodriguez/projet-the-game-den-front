@@ -13,6 +13,7 @@ export const UserController = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
+    const [favoriteGames, setFavoriteGames] = useState([])
     const [details, setDetails] = useState({
         pseudo: "",
         email: ""
@@ -54,10 +55,16 @@ const login = (user) => {
             console.log(decoded);
 
             const userData = await axios.get(`http://localhost:3000/api/users/${decoded.id}`)
+           
             console.log(userData.data)
 
             setDetails({ ...userData.data, id: decoded.id })
-           
+            
+            const response = await axios.get(`http://localhost:3000/api/users/${decoded.id}/games`)
+            const favorites = response.data;
+            setFavoriteGames(favorites);
+            console.log(favoriteGames);
+
         } catch (error) {
             setError(error)
         } finally{
@@ -65,27 +72,13 @@ const login = (user) => {
         }
     }
 
-//modification des données du profil utilisateur avec MAJ au serveur/méthode PUT    
-    const updateProfil = async () => {
-     
-    }
-
-
-//deconnexion     
- 
-
-   /*  const logOut = () => {
-        console.log('deconnexion');
-        localStorage.removeItem('usertoken');
-        setIsAuthenticated(false);
-        navigate(`/`);
-    }; */
-
-    
+    useEffect(() => {
+        getProfil();
+    }, [isAuthenticated]);
 
     return(
 
-        <UserContext.Provider value={{value1 : [details, setDetails, error, isLoading], value2 : [getProfil, updateProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated]}}>
+        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames]}}>
             {(children)}
 
         </UserContext.Provider>
