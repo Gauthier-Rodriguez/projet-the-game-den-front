@@ -59,7 +59,7 @@ const Home = () => {
         return(
             <div className="home__container">
                 <Filter />
-                <h1 className="home__title">Popular games</h1>
+                <h1 className="home__title">Popular games in 2023</h1>
                     
                 <div className="home__list">
                     {gamesToDisplay.map((game) => ( 
@@ -79,6 +79,7 @@ const Home = () => {
                     </>
                        ))}
                 </div>
+                <Footer />
             </div>
         )
     }

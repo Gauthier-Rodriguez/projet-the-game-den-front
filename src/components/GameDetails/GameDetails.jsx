@@ -19,6 +19,7 @@ const GameDetails = () => {
     const [favorites, setFavorites] = value6
     const [isFavoriteGame, setIsFavoriteGame] = useState(false)
     const [gameDetails, setGameDetails]= useState('')
+    const [showFullDescription, setShowFullDescription]=useState(false)
     const userId=details.id;
     const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -60,49 +61,72 @@ const GameDetails = () => {
     return (
         <>
           <div className='game'>
-            {gameDetails && gameDetails.background_image && <img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} />}
+            {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /><div className="blur-mask"></div></>}
             <div className='game__information'>
               {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
               <div className='game__information game__information--left'>
-                <h2 className='platforms__title'>Platforms :</h2>
-                {gameDetails && gameDetails.parent_platforms && (
-                  <div className='plateforms__list'>
-                    {gameDetails.platforms.map((platform) => (
-                      <p key={platform.id} className="platforms__name">{platform.platform.name}</p>
-                    ))}
-                  </div>
-                )}
-                <h2 className='genres__title'>Genres :</h2>
-                {gameDetails && gameDetails.genres && (
-                  <div className='genres__list'>
-                    {gameDetails.genres.map((genre) => (
-                      <p key={genre.id} className="game__name">{genre.name}</p>
-                    ))}
-                  </div>
-                )}
+                <div className='game__information--box'>
+                  <h2 className='game__information--box-title'>Platforms :</h2>
+                  {gameDetails && gameDetails.parent_platforms && (
+                    <div className='plateforms__list'>
+                      {gameDetails.platforms.map((platform) => (
+                        <p key={platform.id} className="platforms__name">{platform.platform.name}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className='game_information--box'>
+                  <h2 className='game__information--box-title'>Genres :</h2>
+                  {gameDetails && gameDetails.genres && (
+                  < div className='genres__list'>
+                      {gameDetails.genres.map((genre) => (
+                        <p key={genre.id} className="game__name">{genre.name}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-            <div className='game__information game__information--right'>
-              {gameDetails && gameDetails.released && <p className="game__release">Release date: {gameDetails.released}</p>}
-              {gameDetails && gameDetails.publishers && (
-                <>
-                  <h2>Publisher:</h2>
-                  {gameDetails.publishers.map((publisher) => (
-                    <p key={publisher.id} className="game__publisher">{publisher.name}</p>
-                  ))}
-                </>
+            
+              <div className='game__information game__information--right'>
+                <div className='game__information--box'>
+                  {gameDetails && gameDetails.released && <p className="game__release"><h2 className='game__information--box-title'>Release date:</h2> {gameDetails.released}</p>}
+                </div>
+                <div className='game__information--box'> 
+                  {gameDetails && gameDetails.publishers && (
+                    <>
+                      <h2 className='game__information--box-title'>Publishers:</h2>
+                      {gameDetails.publishers.map((publisher) => (
+                        <p key={publisher.id} className="game__publisher">{publisher.name}</p>
+                      ))}
+                    </>
+                  )}
+                </div>
+                <div className='game__information--box'>
+                  {gameDetails && gameDetails.developers && (
+                    <>
+                      <h2 className='game__information--box-title'>Developers:</h2>
+                      {gameDetails.developers.map((developer) => (
+                        <p key={developer.id} className="game__dev">{developer.name}</p>
+                      ))}
+                    </>
+                  )}
+                </div>
+           </div>
+            </div>            
+            {gameDetails && gameDetails.description_raw && 
+            <p className="game__desc">
+              {showFullDescription ? gameDetails.description_raw : gameDetails.description_raw.slice(0,300) + "..."}
+            </p>}
+              {!showFullDescription && (
+                <button className="readmore-button" onClick={()=>setShowFullDescription(true)}>
+                Read more...
+                </button>
               )}
-              {gameDetails && gameDetails.developers && (
-                <>
-                  <h2>Developers:</h2>
-                  {gameDetails.developers.map((developer) => (
-                    <p key={developer.id} className="game__dev">{developer.name}</p>
-                  ))}
-                </>
-              )}
-           
-            </div>
-            {gameDetails && gameDetails.description_raw && <p className="game__desc">{gameDetails.description_raw}</p>}
+              {/* {showFullDescription && (
+                <button onClick={setShowFullDescription(false)}>
+                Read less...
+                </button>
+              )} */}
           </div>            
            {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="heart-solid" src={solidHeart} /></div>)
            : (<div onClick={handleToggleFavorite}><img className="heart-outline" src={heart}/></div>)} 
