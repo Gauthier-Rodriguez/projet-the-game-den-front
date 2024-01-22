@@ -4,10 +4,6 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext} from '../../context/UserContext';
 import heart from '../../assets/heart.svg';
 import solidHeart from '../../assets/solidHeart.svg';
-
-
-
-
 import axios from 'axios';
 
 const GameDetails = () => {
@@ -19,7 +15,7 @@ const GameDetails = () => {
     const [favorites, setFavorites] = value6
     const [isFavoriteGame, setIsFavoriteGame] = useState(false)
     const [gameDetails, setGameDetails]= useState('')
-    const [showFullDescription, setShowFullDescription]=useState(false)
+    const [showFullDescription, setShowFullDescription]=useState(true)
     const userId=details.id;
     const API_KEY = import.meta.env.VITE_API_KEY
 
@@ -61,12 +57,12 @@ const GameDetails = () => {
     return (
         <>
           <div className='game'>
-            {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /><div className="blur-mask"></div></>}
+            {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /></>}
             <div className='game__information'>
               {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
-              <div className='game__information game__information--left'>
+              <div className='game__information game__information--right'>
                 <div className='game__information--box'>
-                  <h2 className='game__information--box-title'>Platforms :</h2>
+                  <h2 className='game__information--box-title'>Platforms:</h2>
                   {gameDetails && gameDetails.parent_platforms && (
                     <div className='plateforms__list'>
                       {gameDetails.platforms.map((platform) => (
@@ -76,18 +72,18 @@ const GameDetails = () => {
                   )}
                 </div>
                 <div className='game_information--box'>
-                  <h2 className='game__information--box-title'>Genres :</h2>
+                  <h2 className='game__information--box-title'>Genres:</h2>
                   {gameDetails && gameDetails.genres && (
                   < div className='genres__list'>
                       {gameDetails.genres.map((genre) => (
                         <p key={genre.id} className="game__name">{genre.name}</p>
                       ))}
-                    </div>
+                  </div>
                   )}
                 </div>
               </div>
             
-              <div className='game__information game__information--right'>
+              <div className='game__information game__information--left'>
                 <div className='game__information--box'>
                   {gameDetails && gameDetails.released && <p className="game__release"><h2 className='game__information--box-title'>Release date:</h2> {gameDetails.released}</p>}
                 </div>
@@ -111,14 +107,14 @@ const GameDetails = () => {
                     </>
                   )}
                 </div>
-           </div>
+              </div>
             </div>            
             {gameDetails && gameDetails.description_raw && 
             <p className="game__desc">
               {showFullDescription ? gameDetails.description_raw : gameDetails.description_raw.slice(0,300) + "..."}
             </p>}
               {!showFullDescription && (
-                <button className="readmore-button" onClick={()=>setShowFullDescription(true)}>
+                <button className="readmore-button" onClick={setShowFullDescription(true)}>
                 Read more...
                 </button>
               )}
