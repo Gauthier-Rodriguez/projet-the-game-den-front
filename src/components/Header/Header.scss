@@ -15,8 +15,9 @@
     }
 
     &__logo{
-        width: 100%;
+        width: 40vw;
         height: 100%;
+        
     }
 
     &__form{
@@ -137,6 +138,11 @@
             font-size: calc(1.3*var(--spacing));
         }
 
+
+        &__logo{
+            width: 100%;
+            height: 100%;
+
         &__pseudo{
             top: 70%;
             padding-right: calc(5*var(--spacing));
@@ -150,6 +156,7 @@
         &__profil-link{
             top: 70%;
             padding-right: var(--spacing);
+
         }
     }
 }

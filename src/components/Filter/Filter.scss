@@ -6,8 +6,10 @@
     
    
     &__title{
-        border-radius: var(--spacing);
-        background-color: var(--color-quaternary);
+        background-color: var(--color-primary);
+        color: var(--color-quaternary);
+        border-radius: 8px;
+        height: 4vh;
     }
 
     &__option{
@@ -26,7 +28,31 @@
         padding-left: calc(3*var(--spacing));
 
         padding-top: var(--spacing);
+
+        &__title{
+            
+
+        &:hover {
+            transition: all 0.8s ease-in-out;
+            background-color: var(--color-quaternary);
+            color: var(--color-primary);
+            }
     }
-}
+};
+
+};
+    /*&__title{
+        transition: all 0.8s ease-in-out;
+    
+    
+    &:hover{
+        background-color: var(--color-primary);
+        color: var(--color-quaternary);
+        }
+    }*/
+
+    
+
+
 
 

@@ -5,14 +5,15 @@
         max-width: 100vw;
         padding: calc(var(--spacing) /2);
         background: rgb(26,27,28);
-        //background: linear-gradient(180deg, rgba(26,27,28,1) 0%, rgba(42,45,49,1) 5%);
     }
 
     &__title{
         color: var(--color-quaternary);
         text-align: center;
         font-weight: bold;
-        font-size: calc(1.5*var(--spacing));
+
+        font-size: calc(2*var(--spacing));
+
         margin-bottom: var(--spacing);
         
     }
@@ -20,6 +21,7 @@
     &__list{
         width: 100%;
         height: auto;
+
     }   
 }
 
@@ -35,11 +37,6 @@
     flex-direction: column;
     transition: box-shadow transform 0.3s ease-in-out; 
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.166), 0 4px 6px rgba(0, 0, 0, 0.354);
-    
-    &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
-    }
 
     &__img-container{
         width: 100%;
@@ -113,6 +110,23 @@
     .card{
         width: 30vw;
         height: 35vh;
+        transition: all 0.8s ease-in-out;
+   
+    &:hover{
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+        background-color: var(--color-quaternary);
+
+        .card__title{
+            transition: all 0.8s ease-in-out;
+            color: var(--color-primary);
+        }
+        .card__platforms{
+            transition: all 0.8s ease-in-out;
+            filter: brightness(0) contrast(0.8);
+            -webkit-filter: brightness(0) contrast(0.8);
+        }
+    }
 
         &__list-platforms{
             padding-left: calc(1.2*var(--spacing));
@@ -124,6 +138,7 @@
     .card{
         width: 20vw;
         height: 40vh;
+        
         
         &__platforms{
             width: calc(var(--spacing)*1.1);

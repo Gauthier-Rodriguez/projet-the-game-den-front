@@ -18,34 +18,37 @@ export const UserController = ({children}) => {
         pseudo: "",
         email: ""
     })
+    const [recoGames, setRecoGames] = useState([])
+    const [userGenres, setUserGenres] = useState([]);
+    const [userPlatform, setUserPlatform] = useState([]);
 
+    const API_KEY = import.meta.env.VITE_API_KEY
 
     const register = (obj) => {
-    return axios.post('http://localhost:3000/api/register', {
-        lastname: obj.lastname,
-        firstname: obj.firstname,
-        pseudo: obj.pseudo,
-        email : obj.email,
-        password : obj.password
-    }
+        return axios.post('http://localhost:3000/api/register', {
+            lastname: obj.lastname,
+            firstname: obj.firstname,
+            pseudo: obj.pseudo,
+            email : obj.email,
+            password : obj.password
+        }
     )
     .then(res => console.log('Registered'))
     .catch(err => console.log(err))
 }
 
-const login = (user) => {
-    return axios.post('http://localhost:3000/api/login', {
-        email : user.email,
-        password : user.password
+    const login = (user) => {
+        return axios.post('http://localhost:3000/api/login', {
+            email : user.email,
+            password : user.password
+        }
+        )
+        .then(res => {
+            // console.log(res.headers.get('auth-token'))
+            localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
+            return res.data
+        })
     }
-    )
-    .then(res => {
-        // console.log(res.headers.get('auth-token'))
-        localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
-        return res.data
-        
-    })
-}
 //récupération des données utilisateur/méthode GET avec apiCall
     const getProfil = async () => {
         try{
@@ -63,7 +66,6 @@ const login = (user) => {
             const response = await axios.get(`http://localhost:3000/api/users/${decoded.id}/games`)
             const favorites = response.data;
             setFavoriteGames(favorites);
-            console.log(favoriteGames);
 
         } catch (error) {
             setError(error)
@@ -71,14 +73,41 @@ const login = (user) => {
             setIsLoading(false)
         }
     }
-
     useEffect(() => {
-        getProfil();
+        getProfil()
     }, [isAuthenticated]);
+    const recommendations = async () => { 
+      
+        if(isAuthenticated){
+            try{ 
+                const GenreID = details.genres.map(id => id.GenreID);
+                const userGenre = GenreID.join(',');
+                const PlatformID = details.platforms.map(id => id.PlatformID);
+                const userPlatform = PlatformID.join(',');
+                console.log(userGenre)
+
+                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
+                const reco = genreAndPlatformMatch.data.results;
+                setRecoGames(reco);
+            }
+            catch (error) {
+            setError(error)
+            }
+            finally{
+                setIsLoading(false)
+            }
+        } 
+    } 
+   
+    useEffect(() => {
+        recommendations()
+    }, []); 
+   
+
 
     return(
 
-        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames]}}>
+        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames], value7 : [recoGames], value8 : [userGenres, setUserGenres],value9 : [userPlatform, setUserPlatform]}}>
             {(children)}
 
         </UserContext.Provider>

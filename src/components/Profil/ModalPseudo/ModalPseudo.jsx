@@ -9,6 +9,7 @@ const ModalPseudo = ({onClose}) => {
 
   const PseudoChange = async (e) => {
     e.preventDefault();
+    console.log(details.id);
     const newPseudo = e.target[0].value;
      console.log(newPseudo);
     await axios.patch(`http://localhost:3000/api/users/${details.id}`, {Pseudo : newPseudo});
