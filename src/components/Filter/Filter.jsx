@@ -23,13 +23,13 @@ const Filter = () => {
             <div className='filter'>
                 <select className="filter__title" name="platform" onChange={handlePlatformChange} >
                     <option>Platform</option>
-                    {platforms.map(platform => (
+                    {platforms && platforms.map(platform => (
                     <option key={platform.id} className="filter__option" value={platform.name}>{platform.name}</option>
                 ))}
                 </select>
                 <select className="filter__title" name="genre"  onChange={handleGenreChange}>
                     <option>Genre</option>
-                    {genres.map(genre => (
+                    {genres && genres.map(genre => (
                     <option key={genre.id} className="filter__option" value={genre.name}>{genre.name}</option>
                 ))}
                 </select>
