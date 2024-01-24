@@ -142,22 +142,6 @@
         &__logo{
             width: 100%;
             height: 100%;
-
-        &__pseudo{
-            top: 70%;
-            padding-right: calc(5*var(--spacing));
-        }
-        
-        &__like-link{
-            top: 70%;
-            padding-right: calc(3*var(--spacing));
-        }
-
-        &__profil-link{
-            top: 70%;
-            padding-right: var(--spacing);
-
-            }
         }
     }
 }
