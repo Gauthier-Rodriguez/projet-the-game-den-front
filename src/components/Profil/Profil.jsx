@@ -15,7 +15,6 @@ const Profil = () => {
 
     const {value1, value2, value4} = useContext(UserContext)
     const [details, setDetails] = value1
-    const [getProfil] = value2;
     const [isAuthenticated, setIsAuthenticated] = value4 
     const navigate = useNavigate();
     const [isModalPseudo, setModalPseudo] = useState(false);

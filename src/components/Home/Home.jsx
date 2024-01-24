@@ -1,49 +1,41 @@
-import './Home.scss'
-import { useContext, useEffect, useState} from 'react'
-import { HomeContext } from '../../context/HomeContext'
-import {FilterContext} from '../../context/FilterContext'
-import {UserContext} from '../../context/UserContext'
-import {Link} from  'react-router-dom'
-import Filter from '../Filter/Filter'
-import Footer from '../Footer/Footer'
-import axios from 'axios'
+import './Home.scss';
+import { useContext, useEffect, useState} from 'react';
+import { HomeContext } from '../../context/HomeContext';
+import {FilterContext} from '../../context/FilterContext';
+import {UserContext} from '../../context/UserContext';
+import {Link} from  'react-router-dom';
+import Filter from '../Filter/Filter';
+import Footer from '../Footer/Footer';
+import axios from 'axios';
 //import InfiniteScroll from 'react-infinite-scroll-component'
 const API_KEY = import.meta.env.VITE_API_KEY
 
 const Home = () => {
     const [popular] = useContext(HomeContext)
     const {filters} = useContext(FilterContext);
-    const {value1, value4, value7} = useContext(UserContext)
+    const {value1, value2, value4, value7} = useContext(UserContext)
     const [details] = value1
-
+    const [getProfil] = value2
     const [isAuthenticated, setIsAuthenticated] = value4
-
     const [recoGames, setRecoGames] = value7
 
-    const recommendations = async () => { 
-      
+    const recommendations = async () => {
         if(isAuthenticated){
-            
+           
                 const GenreID = details.genres.map(id => id.GenreID);
                 const userGenre = GenreID.join(',');
                 const PlatformID = details.platforms.map(id => id.PlatformID);
                 const userPlatform = PlatformID.join(',');
-
-                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
+                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&platforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
                 const reco = genreAndPlatformMatch.data.results;
                 setRecoGames(reco);
-        } 
+        }
     } 
 
     useEffect(() => {
-        recommendations()
-    }, [isAuthenticated]); 
-
-    useEffect(() => {
-        const jwt = localStorage.getItem('usertoken');
-        if(jwt){{setIsAuthenticated(true)}
-        }}, [])
-
+        getProfil();
+       recommendations();
+    }, [isAuthenticated, recoGames]); 
 
     const filteredGames = popular.results && popular.results.filter((game) => {
         return (
@@ -69,7 +61,7 @@ const Home = () => {
                                 </Link>
                                 <div className="card__list-platforms">
                                 {game.parent_platforms.map((platform, index) => (
-                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`./src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
 
 
                                     ))}
@@ -81,6 +73,7 @@ const Home = () => {
                     </>
                        ))}
                 </div>
+                <Footer />
             </div>
         )
     }
@@ -115,30 +108,5 @@ const Home = () => {
     }
 }
 
-/*
-<script>
-                                        const cards = document.querySelectorAll('.card');
-
-                                        function updateCardStyle () {
-                                            const windowHeight = window.innerHeight;
-
-                                            cards.forEach(card => {
-                                                const cardHeight = card.getBoundingClientRect();
-                                                const isVisible = cardHeight.top < windowHeight && cardHeight.bottom >= 0;
-
-                                               if (isVisible) {
-                                                card.classList.add('scrolled');
-                                               } else {
-                                                card.classList.remove('scrolled');
-                                               }
-                                            });
-                                        }
-
-                                        window.addEventListener('scroll', updateCardStyle);
-                                        window.addEventListener('resize, updateCardStyle);
-
-                                        updateCardStyle();
-                                    </script>
-*/ 
 
 export default Home
