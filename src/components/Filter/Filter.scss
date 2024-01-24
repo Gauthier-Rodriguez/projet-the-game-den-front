@@ -10,12 +10,15 @@
         color: var(--color-quaternary);
         border-radius: 8px;
         height: 4vh;
+        backdrop-filter: blur(10px);
     }
 
     &__option{
         color: var(--color-primary);
-        backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
         opacity: 0.2;
+        max-height: 100%;
+        
     }
     
 }

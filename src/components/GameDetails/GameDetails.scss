@@ -1,16 +1,12 @@
 
 .game{
-
-    max-width: 90vw;
-    height: 100%;
     color: var(--color-quaternary);
     position : relative;
-    margin:auto;
     display: flex;
     flex-direction: column;
     margin-top : 15vh;
     border-radius: var(--spacing);
-    
+
     &__img{
         max-width: 100%;
         height: 45vh;
@@ -23,35 +19,40 @@
         font-size: calc(var(--spacing)/1.1);
         width: 95%;
         height: 100vh;
-        z-index: 3;
         position : absolute;
-        top: 28%;
+        top: 20%;
         margin-left: calc(var(--spacing)/2);
-        gap: calc(var(--spacing)/2);
     }
 
     /**
       Information Variations
       */
     &__information--left{
-        top : 38%;
+        top : 37%;
         width : 50%;
         height : 20%;
     }
     &__information--right{
-        top: 38%;
-        left:60%;
-        width : 50%;
+        top: 37%;
+        left:50%;
+        width:50%;
         height : 20%;
+        text-align: right;
     }
 
     &__information--box{
         margin : 6px;
     }
 
+
     &__information--box-title{
         font-weight: bold;
         font-size: calc(1.3 * var(--spacing));
+    }
+    &__information--box-title-right{
+        font-weight: bold;
+        font-size: calc(1.3 * var(--spacing));
+        padding-left: calc(3.5*var(--spacing));
     }
 
     &__title{
@@ -72,29 +73,63 @@
         top : 150%;
     }
 
+    &__release{
+        font-size: calc(var(--spacing)/1.2);
+    }
+
+    &__publisher{
+        font-size: calc(var(--spacing)/1.2);
+    }
+    
+    &__dev{
+        font-size: calc(var(--spacing)/1.2);
+    }
 }
 
-.readmore-button{
-    display : none;
-    background-color: yellow;
-    color:var(--color-quaternary);
-    border-radius: var(--spacing);
-    border: none;
-    width:25%;
-    margin:auto;
+.platforms__list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-end;
+    padding-left: 40%;
 }
 
-.readless-button{
-    display : none;
+.platforms__name{
+    font-size: calc(var(--spacing)/1.2);
 }
+
+.genres__list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-end;
+}
+.genres__name{
+    font-size: calc(var(--spacing)/1.2);
+}
+
+
+
+// .readmore-button{
+//     display : none;
+//     background-color: yellow;
+//     color:var(--color-quaternary);
+//     border-radius: var(--spacing);
+//     border: none;
+//     width:25%;
+//     margin:auto;
+// }
+
+// .readless-button{
+//     display : none;
+// }
 
 .heart-solid{
         cursor: pointer;
         position: absolute;
-        z-index: 1000;
         color: red;
-        right: calc(var(--spacing)*2.5);
-        top: 58%;
+        right: calc(var(--spacing)*1.8);
+        top: 55%;
         width: calc(var(--spacing)*2.0);
         height: calc(var(--spacing)*2.0);
         &:active {
@@ -106,10 +141,9 @@
 .heart-outline{
         cursor: pointer;
         position: absolute;
-        z-index: 1000;
         color: red;
-        right: calc(var(--spacing)*2.5);
-        top: 58%;
+        right: calc(var(--spacing)*1.8);
+        top: 55%;
         width: calc(var(--spacing)*2);
         height: calc(var(--spacing)*2);
         &:active {
@@ -117,47 +151,49 @@
         }
     }
 
-@media screen and (min-width: 768px){
-
+@media screen and (min-width: 590px){
     .game{
-
-        &__img{
-            width: 100%;
-            height: 50vh;
-            margin : auto;
-        }
-
-        &__desc{
-            padding:25px;
-        }
-       
-        &__information{
-            top : 32%;
-        }
-
-        &__information--box{
-          margin : 20px;
-        }
-
-    
-        
+        width: 90%;
+        margin: 15vh auto 0;
     }
-
-    // .readmore-button{
-    //     display: none;
-    // }
+   .platforms__list{
+         padding-left: 60%;
+   }
+   .genres__list{
+        padding-left: 60%;
+   }
+   .heart-outline{
+        right: 10%;
+   }
+   .heart-solid{
+        right: 10%;
+   }
+   
+}
+@media screen and (min-width: 768px){
+    .game{
+        margin: 10vh auto 0;
+        width: 80vw;
+    }
 
     .heart-outline{
-        top:60%;
-        right: calc(var(--spacing)*4);
-        width: calc(var(--spacing)*2.3);
-        height: calc(var(--spacing)*2.3);
-    }
+        right: 15%;
+        top: 50%;
+   }
+   .heart-solid{
+        right: 15%;
+        top: 50%
+   }
+}
 
-    .heart-solid{
-        top:60%;
-        right: calc(var(--spacing)*4);
-        width: calc(var(--spacing)*2.3);
-        height: calc(var(--spacing)*2.3);
+@media screen and (min-width: 1200px){
+    .game{
+        width: 50vw;
     }
+    .heart-outline{
+        right: 28%;    
+   }
+   .heart-solid{
+        right: 28%;   
+   }
 }
