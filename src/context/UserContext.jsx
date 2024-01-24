@@ -61,8 +61,7 @@ export const UserController = ({children}) => {
             
             const response = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}/games`)
             const favorites = response.data;
-            setFavoriteGames(favorites);
-            
+            setFavoriteGames(favorites); 
 
         } catch (error) {
             setError(error)
@@ -70,8 +69,10 @@ export const UserController = ({children}) => {
             setIsLoading(false)
         }
     }
-    useEffect(() => {
-        getProfil()
+
+
+   useEffect(() => {
+        getProfil();
     }, [isAuthenticated]);
 
 
