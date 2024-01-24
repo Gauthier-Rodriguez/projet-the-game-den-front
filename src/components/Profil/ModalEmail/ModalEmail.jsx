@@ -12,7 +12,7 @@ const ModalEmail = ({onClose}) => {
     e.preventDefault();
     const newEmail = e.target[0].value;
      console.log(newEmail);
-    await axios.patch(`http://localhost:3000/api/users/${details.id}`, {Email : newEmail});
+    await axios.patch(`https://game-den-back.onrender.com/api/users/${details.id}`, {Email : newEmail});
     setDetails((prevDetails) => ({...prevDetails, Email : newEmail}))
     onClose();
   };

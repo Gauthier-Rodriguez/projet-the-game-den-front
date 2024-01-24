@@ -13,7 +13,7 @@ const ModalPseudo = ({onClose}) => {
     console.log(details.id);
     const newPseudo = e.target[0].value;
      console.log(newPseudo);
-    await axios.patch(`http://localhost:3000/api/users/${details.id}`, {Pseudo : newPseudo});
+    await axios.patch(`https://game-den-back.onrender.com/api/users/${details.id}`, {Pseudo : newPseudo});
     setDetails((prevDetails) => ({...prevDetails, Pseudo : newPseudo}))
     onClose();
   }
