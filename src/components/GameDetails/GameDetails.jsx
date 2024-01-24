@@ -44,6 +44,10 @@ const GameDetails = () => {
 
     useEffect(() => { fetchGameDetails()}, []);
 
+    useEffect(() => {
+      window.scrollTo(0, 0); 
+    }, [gameDetails]);
+
     const handleToggleFavorite = async () => {
         const currentGame = { gameId : gameDetails.id, gameName : gameDetails.name, gameImage : gameDetails.background_image};
         if(!isAuthenticated) return(
@@ -69,14 +73,14 @@ const GameDetails = () => {
           
           <div className='game'>
             {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /></>}
-            
+           
             <div className='game__information'>
             {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
               <div className='game__information game__information--right'>
                 <div className='game__information--box'>
-                  <h2 className='game__information--box-title'>Platforms:</h2>
+                  <h2 className='game__information--box-title-right'>Platforms:</h2>
                   {gameDetails && gameDetails.parent_platforms && (
-                    <div className='plateforms__list'>
+                    <div className='platforms__list'>
                       {gameDetails.platforms.map((platform) => (
                         <p key={platform.id} className="platforms__name">{platform.platform.name}</p>
                       ))}
@@ -84,11 +88,11 @@ const GameDetails = () => {
                   )}
                 </div>
                 <div className='game__information--box'>
-                  <h2 className='game__information--box-title'>Genres:</h2>
+                  <h2 className='game__information--box-title-right'>Genres:</h2>
                   {gameDetails && gameDetails.genres && (
                   < div className='genres__list'>
                       {gameDetails.genres.map((genre) => (
-                        <p key={genre.id} className="game__name">{genre.name}</p>
+                        <p key={genre.id} className="genres__name">{genre.name}</p>
                       ))}
                   </div>
                   )}
@@ -97,7 +101,10 @@ const GameDetails = () => {
             
               <div className='game__information game__information--left'>
                 <div className='game__information--box'>
-                  {gameDetails && gameDetails.released && <p className="game__release"><h2 className='game__information--box-title'>Release date:</h2> {gameDetails.released}</p>}
+                <h2 className='game__information--box-title'>Release date:</h2>
+                  {gameDetails && gameDetails.released && (
+                   <p className="game__release">{gameDetails.released}</p>
+                  )}
                 </div>
                 <div className='game__information--box'> 
                   {gameDetails && gameDetails.publishers && (
@@ -123,11 +130,11 @@ const GameDetails = () => {
             </div>            
             {gameDetails && gameDetails.description_raw && 
             <p className="game__desc">
-            {!showFullDescription ? gameDetails.description_raw : gameDetails.description_raw.slice(0,300) + "..."}
-          </p>}
-            {/* {showFullDescription && (
+            {gameDetails.description_raw}
+            </p>}
+            {/* {!showFullDescription && (
               <button className="readmore-button" onClick={()=>setShowFullDescription(true)}>
-              Read more...
+              Read more
               </button>
             )}
             {showFullDescription && (

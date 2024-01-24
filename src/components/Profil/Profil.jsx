@@ -1,7 +1,7 @@
 import './Profil.scss';
 import ModalGenre from './ModalGenre/ModalGenre';
 import ModalPlatform from './ModalPlatform/ModalPlatform';
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, useRef} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import ModalPseudo from './ModalPseudo/ModalPseudo';
@@ -23,6 +23,7 @@ const Profil = () => {
     const [isModalPassword, setModalPassword] = useState(false);
     const [isModalGenre, setModalGenre] = useState(false);
     const [isModalPlatform, setModalPlatform] = useState(false);
+    const modalContainerRef = useRef();
    
     const openPseudoModal = (e) => {
         setModalPseudo(true)
@@ -74,8 +75,22 @@ const Profil = () => {
 
     };
 
+    const handleClickOutsideModal = (e) => {
+        if (modalContainerRef.current && !modalContainerRef.current.contains(e.target)) {
+           closePseudoModal();
+           closeEmailModal();
+           closePasswordModal();
+           closeGenreModal();
+           closePlatformModal();
+        }
+    };
 
-    
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutsideModal);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutsideModal);
+        };
+    },[modalContainerRef]);
 
     if(isAuthenticated){ 
     return(
@@ -85,35 +100,35 @@ const Profil = () => {
             </Link>
           <h1 className="profil__title">Hello {details.Pseudo}</h1>
             
-        	<div className='profil__pseudo'>Pseudo
+        	<div className='profil__pseudo' ref={modalContainerRef}>Pseudo
             <button className="profil__button" onClick={(e) => {openPseudoModal(e)}}>...</button>
             </div>
             {isModalPseudo ? (<>
             <ModalPseudo onClose={closePseudoModal}/>
             </>) : null}
 
-        	<div className='profil__email'>Email
+        	<div className='profil__email' ref={modalContainerRef}>Email
             <button className="profil__button" onClick={(e) => {openEmailModal(e)}}>...</button>
             </div>
             {isModalEmail ? (<>
             <ModalEmail onClose={closeEmailModal}/>
             </>) : null}
 
-        	<div className='profil__password'>Password
+        	<div className='profil__password' ref={modalContainerRef}>Password
             <button className="profil__button" onClick={(e) => {openPasswordModal(e)}}>...</button>
             </div>
             {isModalPassword ? (<>
             <ModalPassword onClose={closePasswordModal}/>
             </>) : null}
 
-        	<div className='profil__genre'>{details.genre ? details.genre : "Genres"}
+        	<div className='profil__genre' ref={modalContainerRef}>{details.genre ? details.genre : "Genres"}
             <button className="profil__button" onClick={(e) => {openGenreModal(e)}}>...</button>
             </div>
             {isModalGenre ? (<>
             <ModalGenre onClose={closeGenreModal}/>
             </>) : null}
 
-        	<div className='profil__platform'>{details.platform ? details.platform : "Platfom"}
+        	<div className='profil__platform' ref={modalContainerRef}>{details.platform ? details.platform : "Platfom"}
             <button className="profil__button" onClick={(e) => {openPlatformModal(e)}}>...</button>
             </div>
             {isModalPlatform ? (<>

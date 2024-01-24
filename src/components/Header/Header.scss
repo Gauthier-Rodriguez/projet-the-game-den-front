@@ -29,10 +29,10 @@
     }
 
     &__input{
-        width: 95%;
+        width: 90%;
         height: 4vh;
         border-radius: var(--spacing);
-        background-color: var(--color-quaternary);
+        background-color: white;
         margin: auto;
         padding : 2px;
         border-style: none;
@@ -40,14 +40,15 @@
 
     &__input::placeholder{
         color: var(--color-primary);
+        
     }
 
     &__login{
-        font-size: calc(var(--spacing)/1.1);
+        font-size: calc(var(--spacing)/1.2);
         color: var(--color-quaternary);
         position: absolute;
         right: calc(var(--spacing) / 2);
-        top: 50%;
+        top: 36%;
         transform: translateY(-65%);
         padding-right: var(--spacing);
         text-decoration: none;
