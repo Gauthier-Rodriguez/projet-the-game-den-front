@@ -51,13 +51,13 @@ const GameDetails = () => {
             );
 
         if (!isFavoriteGame) {
-            await axios.post(`http://localhost:3000/api/users/${userId}/games`, currentGame);
+            await axios.post(`https://game-den-back.onrender.com/api/users/${userId}/games`, currentGame);
             setFavorites((prevFavorites) => [...prevFavorites, currentGame]);
             setIsFavoriteGame(true);
           };
 
         if (isFavoriteGame) {
-            await axios.delete(`http://localhost:3000/api/users/${userId}/games`, {data : currentGame});
+            await axios.delete(`https://game-den-back.onrender.com/api/users/${userId}/games`, {data : currentGame});
             setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.gameId !== currentGame.gameId));
             setIsFavoriteGame(false);
         };
