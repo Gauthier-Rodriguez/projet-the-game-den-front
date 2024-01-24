@@ -22,16 +22,12 @@ const ModalPlatform = ({onClose}) => {
 
     const addPlatform = async (e) => {
         const newPlatform = e.target.id;
-        console.log("genreId :", newPlatform);
-        console.log("id :", details.id);
         await axios.post(`https://game-den-back.onrender.com/api/users/${details.id}/platform`, {platformId : newPlatform});
         savedPlatforms((prevUserPlatforms) => [...prevUserPlatforms, newPlatform]);
     }
     
     const removePlatform = async (e) => {
         const newPlatform = e.target.id;
-        console.log("genreId :", newPlatform);
-        console.log("id :", details.id);
         await axios.delete(`https://game-den-back.onrender.com/api/users/${details.id}/platform`, {data: { platformId: newPlatform }});
         savedPlatforms((prevUserPlatforms) => prevUserPlatforms.filter((userPlatform) => userPlatform.id !== newPlatform));
     }
@@ -39,7 +35,6 @@ const ModalPlatform = ({onClose}) => {
 
     const savedPlatforms = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}`);
-        console.log(response.data.platforms);
         const userPlatforms = response.data.platforms;
         setUserPlatforms(userPlatforms);
     }
