@@ -15,7 +15,9 @@ const Home = () => {
     const {filters} = useContext(FilterContext);
     const {value1, value4, value7} = useContext(UserContext)
     const [details] = value1
+
     const [isAuthenticated, setIsAuthenticated] = value4
+
     const [recoGames, setRecoGames] = value7
     
     useEffect(() => {
@@ -46,6 +48,7 @@ const Home = () => {
         const jwt = localStorage.getItem('usertoken');
         if(jwt){{setIsAuthenticated(true)}
         }}, [])
+
 
     const filteredGames = popular.results && popular.results.filter((game) => {
         return (

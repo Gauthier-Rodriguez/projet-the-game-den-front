@@ -77,7 +77,7 @@ const Login = () => {
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-github"></i></a>
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
                         </div> */}
-                        <p className="container__text">Enter your email address to register</p>
+                        <p className="container__text">Enter yours information to register</p>
                         <input className="container__input" type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         <input className="container__input" type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         <input className="container__input" type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
