@@ -34,6 +34,7 @@
         border-radius: var(--spacing);
         background-color: var(--color-quaternary);
         margin: auto;
+        padding : 2px;
         border-style: none;
     }
 
@@ -42,7 +43,7 @@
     }
 
     &__login{
-        font-size: 1rem;
+        font-size: calc(var(--spacing)/1.1);
         color: var(--color-quaternary);
         position: absolute;
         right: calc(var(--spacing) / 2);
@@ -133,15 +134,22 @@
         }
             
         &__login{
-            top: 70%;
+            top: 55%;
             padding-right: calc(2*var(--spacing));
             font-size: calc(1.3*var(--spacing));
+
+            &:hover{
+                transition-duration: 0.8s;
+                transition: all 0.8s ease-in-out;
+                color: white;
+            }
         }
 
 
         &__logo{
             width: 100%;
             height: 100%;
+        }
 
         &__pseudo{
             top: 70%;

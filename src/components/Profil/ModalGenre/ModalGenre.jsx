@@ -2,6 +2,7 @@ import './ModalGenre.scss'
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../context/UserContext';
+import close from '../../../assets/close.svg';
 
 
 const ModalGenre = ({onClose}) => {
@@ -48,17 +49,20 @@ const ModalGenre = ({onClose}) => {
     }, []);
 
     return(
-        <fieldset>
-            <legend>Choose your genre</legend>
-        {genres.map((genre, index) => (    
-            <div>
-                <input key={index} type="checkbox" id={genre.id} name={genre.Name}
-                checked={userGenres.some((userGenre) => userGenre.id === genre.id)}
-                 onChange={(e) => {e.target.checked ? addGenre(e):removeGenre(e)}}/>
-                <label for={genre.Name}>{genre.Name}</label>
-            </div>))
-            }
-            <button className="modal__button" onClick={onClose}>X</button>
+        <fieldset className="modal-checkbox">
+            <button className="modal__close-button" onClick={onClose}><img className="modal__close-img" src={close} alt="close" /></button>
+        
+            <div className="modal-checkbox__content">
+            <h2 className="modal-checkbox__title">Your Genres</h2> 
+                {genres.map((genre, index) => (    
+                    <div className="modal-checkbox__input">
+                        <input key={index} type="checkbox" id={genre.id} name={genre.Name}
+                        checked={userGenres.some((userGenre) => userGenre.id === genre.id)}
+                        onChange={(e) => {e.target.checked ? addGenre(e):removeGenre(e)}}/>
+                        <label for={genre.Name}>{genre.Name}</label>
+                     </div>))
+                }
+            </div>
         </fieldset>
     )
 }

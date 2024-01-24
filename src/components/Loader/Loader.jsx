@@ -4,17 +4,22 @@ import {Puff} from 'react-loader-spinner'
 const Loader = () => {
 
     return(
-        <div className='loader'>
-            <Puff height="80"
-                        width="80"
-                        radius={1}
-                        color="#b5bac0"
-                        ariaLabel="puff-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}/>
+        <div className="loader">
+            <div className="symbol">
+                <div className="symbol__triangle"></div>
+            </div>
+            <div className="symbol">
+                <div className="symbol__circle"></div>
+             </div>
+             <div className="symbol">
+                 <div className="symbol__cross"></div>
+             </div>
+            <div className="symbol">
+                <div className="symbol__square"></div>
+             </div>
         </div>
     )
 }
 
 export default Loader
+

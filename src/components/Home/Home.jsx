@@ -8,14 +8,39 @@ import Filter from '../Filter/Filter'
 import Footer from '../Footer/Footer'
 import axios from 'axios'
 //import InfiniteScroll from 'react-infinite-scroll-component'
+const API_KEY = import.meta.env.VITE_API_KEY
 
 const Home = () => {
     const [popular] = useContext(HomeContext)
-    const { filters } = useContext(FilterContext);
-    const {value4, value7} = useContext(UserContext)
+    const {filters} = useContext(FilterContext);
+    const {value1, value4, value7} = useContext(UserContext)
+    const [details] = value1
     const [isAuthenticated] = value4
-    const [recoGames] = value7
-    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular.results;
+    const [recoGames, setRecoGames] = value7
+    
+    useEffect(() => {
+        console.log(recoGames)
+    }, [recoGames])
+
+    const recommendations = async () => { 
+      
+        if(isAuthenticated){
+            
+                const GenreID = details.genres.map(id => id.GenreID);
+                const userGenre = GenreID.join(',');
+                const PlatformID = details.platforms.map(id => id.PlatformID);
+                const userPlatform = PlatformID.join(',');
+                console.log(userGenre)
+
+                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
+                const reco = genreAndPlatformMatch.data.results;
+                setRecoGames(reco);
+        } 
+    } 
+
+    useEffect(() => {
+        recommendations()
+    }, []); 
 
     const filteredGames = popular.results && popular.results.filter((game) => {
         return (
@@ -23,7 +48,7 @@ const Home = () => {
             (!filters.genre || game.genres.some((genre) => genre.name === filters.genre))
         );
     });
-
+    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular.results;
    
      //affichage des recommandations - si utilisateur connecté
      if(isAuthenticated){
@@ -57,7 +82,7 @@ const Home = () => {
         )
     }
      //sinon affichage des jeux populaires
-    //possibilité de filtrer en cliquant sur les boutons plaform/genre/noteMC     
+    //possibilité de filtrer en cliquant sur les boutons plaform/genre/noteMC
     else{ 
    
         return(
@@ -66,7 +91,7 @@ const Home = () => {
                 <h1 className="home__title">Popular games in 2023</h1>
                     
                 <div className="home__list">
-                    {gamesToDisplay.map((game) => ( 
+                    {gamesToDisplay && gamesToDisplay.map((game) => ( 
                     <>
                         <div key={game.id} className="card">
                                 <Link className="card__img-container" to={`/game/${game.id}`}>

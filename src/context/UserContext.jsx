@@ -76,38 +76,10 @@ export const UserController = ({children}) => {
     useEffect(() => {
         getProfil()
     }, [isAuthenticated]);
-    const recommendations = async () => { 
-      
-        if(isAuthenticated){
-            try{ 
-                const GenreID = details.genres.map(id => id.GenreID);
-                const userGenre = GenreID.join(',');
-                const PlatformID = details.platforms.map(id => id.PlatformID);
-                const userPlatform = PlatformID.join(',');
-                console.log(userGenre)
-
-                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
-                const reco = genreAndPlatformMatch.data.results;
-                setRecoGames(reco);
-            }
-            catch (error) {
-            setError(error)
-            }
-            finally{
-                setIsLoading(false)
-            }
-        } 
-    } 
-   
-    useEffect(() => {
-        recommendations()
-    }, []); 
-   
-
 
     return(
 
-        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames], value7 : [recoGames], value8 : [userGenres, setUserGenres],value9 : [userPlatform, setUserPlatform]}}>
+        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames], value7 : [recoGames, setRecoGames], value8 : [userGenres, setUserGenres],value9 : [userPlatform, setUserPlatform]}}>
             {(children)}
 
         </UserContext.Provider>
