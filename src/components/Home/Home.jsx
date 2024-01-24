@@ -19,10 +19,6 @@ const Home = () => {
     const [isAuthenticated, setIsAuthenticated] = value4
 
     const [recoGames, setRecoGames] = value7
-    
-    useEffect(() => {
-        console.log(recoGames)
-    }, [recoGames])
 
     const recommendations = async () => { 
       
@@ -32,7 +28,6 @@ const Home = () => {
                 const userGenre = GenreID.join(',');
                 const PlatformID = details.platforms.map(id => id.PlatformID);
                 const userPlatform = PlatformID.join(',');
-                console.log(userGenre)
 
                 const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
                 const reco = genreAndPlatformMatch.data.results;
@@ -42,7 +37,7 @@ const Home = () => {
 
     useEffect(() => {
         recommendations()
-    }, []); 
+    }, [isAuthenticated]); 
 
     useEffect(() => {
         const jwt = localStorage.getItem('usertoken');
@@ -73,8 +68,8 @@ const Home = () => {
                                 <img className="card__img" src={game.background_image} alt={game.name} />
                                 </Link>
                                 <div className="card__list-platforms">
-                                {game.parent_platforms.map((platform) => (
-                                        <img key={platform.id} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+                                {game.parent_platforms.map((platform, index) => (
+                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
 
 
                                     ))}
@@ -100,20 +95,18 @@ const Home = () => {
                     
                 <div className="home__list">
                     {gamesToDisplay && gamesToDisplay.map((game) => ( 
-                    <>
                         <div key={game.id} className="card">
                                 <Link className="card__img-container" to={`/game/${game.id}`}>
                                 <img className="card__img" src={game.background_image} alt={game.name} />
                                 </Link>
                                 <div className="card__list-platforms">
-                                    {game.parent_platforms.map((platform) => (
-                                        <img key={platform.id} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+                                    {game.parent_platforms.map((platform, index) => (
+                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
 
                                     ))}
                                 </div> 
                                 <h2 className="card__title">{game.name}</h2>
                         </div>
-                    </>
                        ))}
                 </div>
                 <Footer />

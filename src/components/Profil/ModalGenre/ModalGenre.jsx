@@ -13,7 +13,6 @@ const ModalGenre = ({onClose}) => {
 
     const allGenres = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/genre`);
-        console.log(response.data);
         const genres = response.data;
         setGenres(genres);
     }
@@ -23,16 +22,13 @@ const ModalGenre = ({onClose}) => {
 
     const addGenre = async (e) => {
         const newGenre = e.target.id;
-        console.log("genreId :", newGenre);
-        console.log("id :", details.id);
+  
         await axios.post(`https://game-den-back.onrender.com/api/users/${details.id}/genre`, {genreId : newGenre});
         savedGenres((prevUserGenres) => [...prevUserGenres, newGenre]);
     }
     
     const removeGenre = async (e) => {
         const newGenre = e.target.id;
-        console.log("genreId :", newGenre);
-        console.log("id :", details.id);
         await axios.delete(`https://game-den-back.onrender.com/api/users/${details.id}/genre`, {data: { genreId: newGenre }});
         savedGenres((prevUserGenres) => prevUserGenres.filter((userGenre) => userGenre.id !== newGenre));
     }
@@ -40,7 +36,6 @@ const ModalGenre = ({onClose}) => {
 
     const savedGenres = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}`);
-        console.log(response.data.genres);
         const userGenres = response.data.genres;
         setUserGenres(userGenres);
     }

@@ -44,7 +44,6 @@ export const UserController = ({children}) => {
         }
         )
         .then(res => {
-            // console.log(res.headers.get('auth-token'))
             localStorage.setItem('usertoken', res.data) // sets a usertoken into the localstorage coming from res.data
             return res.data
         })
@@ -55,17 +54,15 @@ export const UserController = ({children}) => {
             const token = await localStorage.usertoken;
             
             const decoded = await jwtDecode(token);
-            console.log(decoded);
 
             const userData = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}`)
            
-            console.log(userData.data)
-
             setDetails({ ...userData.data, id: decoded.id })
             
             const response = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}/games`)
             const favorites = response.data;
             setFavoriteGames(favorites);
+            
 
         } catch (error) {
             setError(error)

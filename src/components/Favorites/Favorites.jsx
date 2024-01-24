@@ -11,9 +11,8 @@ const [favorites, setFavorites] = value6;
 const [details, setDetails] = value1;
 
 const savedFavorites = async () => {
-    const response = await axios.get(`http://localhost:3000/api/users/${details.id}/games`);
+    const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}/games`);
     setFavorites(response.data);
-    console.log(response.data);
 } 
 
 useEffect(() => {

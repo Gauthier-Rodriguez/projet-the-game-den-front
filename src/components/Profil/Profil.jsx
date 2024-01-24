@@ -73,7 +73,6 @@ const Profil = () => {
        setIsAuthenticated(false);
 
     };
-    console.log(isAuthenticated)
 
 
     
