@@ -3,9 +3,9 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--spacing);
+    
    
     &__title{
-
         background-color: var(--color-primary);
         color: var(--color-quaternary);
         border-radius: 8px;
@@ -14,7 +14,7 @@
 
     &__option{
         color: var(--color-primary);
-
+        opacity: 0.2;
     }
     
 }

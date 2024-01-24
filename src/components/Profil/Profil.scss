@@ -1,3 +1,123 @@
 .profil{
-  color : white
+  display: flex;
+  flex-direction: column;
+  gap: calc(2*var(--spacing));
+  background-color: var(--color-secondary);
+  width: 80vw;
+  height: 100vh;
+  margin: auto;
+  border-radius: var(--spacing);
+  padding: calc(2*var(--spacing)) 0;
+
+  &__link{
+    width: 70%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  &__title{
+    font-size: calc(2*var(--spacing));
+    color: var(--color-quaternary);
+    text-align: center;
+  }
+
+  &__pseudo{
+    height: 5vh;
+    background-color: var(--color-quaternary);
+    width: 70%;
+    padding: calc(var(--spacing)/5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    position: relative;
+  }
+
+  &__email{
+    height: 5vh;
+    background-color: var(--color-quaternary);
+    width: 70%;
+    padding: calc(var(--spacing)/5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    position: relative;
+
+  }
+
+  &__password{
+    height: 5vh;
+    background-color: var(--color-quaternary);
+    width: 70%;
+    padding: calc(var(--spacing)/5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    position: relative;
+
+  }
+
+  &__genre{
+    height: 5vh;
+    background-color: var(--color-quaternary);
+    width: 70%;
+    padding: calc(var(--spacing)/5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    position: relative;
+
+  }
+
+  &__platform{
+    height: 5vh;
+    background-color: var(--color-quaternary);
+    width: 70%;
+    padding: calc(var(--spacing)/5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    position: relative;
+
+  }
+
+
+  &__logout{
+    width: 50%;
+    align-self: center;
+    background-color: var(--color-quaternary);
+    border-radius: calc(3*var(--spacing));
+    border-style: none;
+    font-size: calc(1.5*var(--spacing));
+    color: var(--color-primary);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+  }
+  &__button{
+    position: absolute;
+    right: 5px;
+  }
 }
+
+
+@media  screen and (min-width: 768px){
+    .profil{
+        width: 50vw;
+        height: 100vh;
+        margin: auto;
+        background-color: var(--color-secondary);
+        border-radius: calc(2*var(--spacing));
+    }
+}
+

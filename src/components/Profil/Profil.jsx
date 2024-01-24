@@ -7,6 +7,7 @@ import { UserContext } from '../../context/UserContext';
 import ModalPseudo from './ModalPseudo/ModalPseudo';
 import ModalEmail from './ModalEmail/ModalEmail';
 import ModalPassword from './ModalPassword/ModalPassword';
+import logo from '../../assets/logo.svg'
 
 
 const Profil = () => {
@@ -22,24 +23,6 @@ const Profil = () => {
     const [isModalGenre, setModalGenre] = useState(false);
     const [isModalPlatform, setModalPlatform] = useState(false);
    
-
-// modification des inputs des données du profil   
-    const handlePseudoChange = (e) => {
-        e.preventDefault();
-        const newPseudo = e.target.value;
-        setDetails((prevDetails) => ({...prevDetails, Pseudo : newPseudo}))
-    };
-
-    const handleEmailChange = (e) => {
-        const newEmail = e.target.value; 
-        setDetails((prevDetails) => ({...prevDetails, email : newEmail}))
-    }
-
-    const handlePasswordChange = (e) => {
-        const newPassword = e.target.value;
-        setDetails((prevDetails) => ({...prevDetails, password : newPassword}))
-    }
-
     const openPseudoModal = (e) => {
         setModalPseudo(true)
     }
@@ -97,53 +80,55 @@ const Profil = () => {
     if(isAuthenticated){ 
     return(
         <div className='profil'>
-            <Link to='/'>HOME</Link>
+            <Link className="profil__link" to="/">
+                     <img className="profil__logo" src={logo} alt="logo The Game Den" />
+                 </Link>
           <h1 className="profil__title">Hello {details.Pseudo}</h1>
             
-        	<div className='pseudo'>{details.Pseudo}
+        	<div className='profil__pseudo'>{details.Pseudo}
             <button className="profil__button" onClick={(e) => {openPseudoModal(e)}}>Edit</button>
             </div>
             {isModalPseudo ? (<>
             <ModalPseudo onClose={closePseudoModal}/>
             </>) : null}
 
-        	<div className='email'>{details.Email}
+        	<div className='profil__email'>{details.Email}
             <button className="profil__button" onClick={(e) => {openEmailModal(e)}}>Edit</button>
             </div>
             {isModalEmail ? (<>
             <ModalEmail onClose={closeEmailModal}/>
             </>) : null}
 
-        	<div className='password'>*******
+        	<div className='profil__password'>*******
             <button className="profil__button" onClick={(e) => {openPasswordModal(e)}}>Edit</button>
             </div>
             {isModalPassword ? (<>
             <ModalPassword onClose={closePasswordModal}/>
             </>) : null}
 
-        	<div className='genre'>{details.genre ? details.genre : "Genres"}
+        	<div className='profil__genre'>{details.genre ? details.genre : "Genres"}
             <button className="profil__button" onClick={(e) => {openGenreModal(e)}}>Edit</button>
             </div>
             {isModalGenre ? (<>
             <ModalGenre onClose={closeGenreModal}/>
             </>) : null}
 
-        	<div className='platform'>{details.platform ? details.platform : "Platfom"}
+        	<div className='profil__platform'>{details.platform ? details.platform : "Platfom"}
             <button className="profil__button" onClick={(e) => {openPlatformModal(e)}}>Edit</button>
             </div>
             {isModalPlatform ? (<>
             <ModalPlatform onClose={closePlatformModal}/>
             </>) : null}
 
-        	<button className="profil__button" onClick={(e) => logOut(e)}>Log out</button> 
+        	<button className="profil__logout" onClick={(e) => logOut(e)}>Log out</button> 
         </div>
     )
 } else {
     return(
-    <>
-    <p>Please login</p>
-    <Link className="header__login" to="/login">Login/Sign up</Link>    
-    </>
+    <div className='error'>
+    <p className>Please login</p>  
+    <Link className="error-link" to="/">Go to Home</Link>
+    </div>
 )}
 }
 

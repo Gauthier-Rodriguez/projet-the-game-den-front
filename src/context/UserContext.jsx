@@ -25,7 +25,7 @@ export const UserController = ({children}) => {
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const register = (obj) => {
-        return axios.post('http://localhost:3000/api/register', {
+        return axios.post('https://game-den-back.onrender.com/api/register', {
             lastname: obj.lastname,
             firstname: obj.firstname,
             pseudo: obj.pseudo,
@@ -38,7 +38,7 @@ export const UserController = ({children}) => {
 }
 
     const login = (user) => {
-        return axios.post('http://localhost:3000/api/login', {
+        return axios.post('https://game-den-back.onrender.com/api/login', {
             email : user.email,
             password : user.password
         }
@@ -57,13 +57,13 @@ export const UserController = ({children}) => {
             const decoded = await jwtDecode(token);
             console.log(decoded);
 
-            const userData = await axios.get(`http://localhost:3000/api/users/${decoded.id}`)
+            const userData = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}`)
            
             console.log(userData.data)
 
             setDetails({ ...userData.data, id: decoded.id })
             
-            const response = await axios.get(`http://localhost:3000/api/users/${decoded.id}/games`)
+            const response = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}/games`)
             const favorites = response.data;
             setFavoriteGames(favorites);
 
@@ -76,40 +76,16 @@ export const UserController = ({children}) => {
     useEffect(() => {
         getProfil()
     }, [isAuthenticated]);
-    const recommendations = async () => { 
-      
-        if(isAuthenticated){
-            try{ 
-                const GenreID = details.genres.map(id => id.GenreID);
-                const userGenre = GenreID.join(',');
-                const PlatformID = details.platforms.map(id => id.PlatformID);
-                const userPlatform = PlatformID.join(',');
-                console.log(userGenre)
 
-                const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&plateforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
-                const reco = genreAndPlatformMatch.data.results;
-                setRecoGames(reco);
-            }
-            catch (error) {
-            setError(error)
-            }
-            finally{
-                setIsLoading(false)
-            }
-        } 
-    } 
-   
     useEffect(() => {
-        recommendations()
-    }, []); 
-   
-
+        const jwt = localStorage.getItem('usertoken');
+        if(jwt){{setIsAuthenticated(true)}
+        }}, [])
 
     return(
 
-        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames], value7 : [recoGames], value8 : [userGenres, setUserGenres],value9 : [userPlatform, setUserPlatform]}}>
+        <UserContext.Provider value={{value1 : [details, setDetails], value2 : [getProfil], value3 : [login, register], value4 : [isAuthenticated, setIsAuthenticated], value5 : [error, isLoading], value6 : [favoriteGames, setFavoriteGames], value7 : [recoGames, setRecoGames], value8 : [userGenres, setUserGenres],value9 : [userPlatform, setUserPlatform]}}>
             {(children)}
-
         </UserContext.Provider>
     )
 }
