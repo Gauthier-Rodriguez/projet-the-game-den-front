@@ -13,7 +13,6 @@ const ModalPlatform = ({onClose}) => {
 
     const allPlatforms = async () => {
         const response = await axios.get(`http://localhost:3000/api/platform`);
-        console.log(response.data);
         const platforms = response.data;
         setPlatforms(platforms);
     }

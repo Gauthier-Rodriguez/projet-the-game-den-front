@@ -22,8 +22,10 @@ const Filter = () => {
         <>
             <div className='filter'>
                 <select className="filter__title" name="platform" onChange={handlePlatformChange} >
+
                     <option>Platform</option>
                     {platforms && platforms.map(platform => (
+
                     <option key={platform.id} className="filter__option" value={platform.name}>{platform.name}</option>
                 ))}
                 </select>
