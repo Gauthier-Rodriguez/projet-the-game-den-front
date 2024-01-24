@@ -37,7 +37,7 @@ const Header = () => {
                  </Link>
                  <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
 
-                 <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>                     
+                 <input ref={inputRef} className="header__input"  type="text"  placeholder=" Search "/>                     
 
                  </form>
 
