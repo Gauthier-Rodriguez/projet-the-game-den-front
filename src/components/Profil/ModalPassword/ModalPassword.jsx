@@ -12,7 +12,7 @@ const ModalPassword = ({onClose}) => {
     e.preventDefault();
     const newPassword = e.target[0].value;
 
-    await axios.patch(`http://localhost:3000/api/users/${details.id}`, {Password : newPassword});
+    await axios.patch(`https://game-den-back.onrender.com/api/users/${details.id}`, {Password : newPassword});
     onClose();
   }
 

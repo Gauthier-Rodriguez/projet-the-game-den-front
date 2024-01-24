@@ -12,7 +12,7 @@ const ModalPlatform = ({onClose}) => {
     const [userPlatforms, setUserPlatforms] = useState([]);
 
     const allPlatforms = async () => {
-        const response = await axios.get(`http://localhost:3000/api/platform`);
+        const response = await axios.get(`https://game-den-back.onrender.com/api/platform`);
         const platforms = response.data;
         setPlatforms(platforms);
     }
@@ -24,7 +24,7 @@ const ModalPlatform = ({onClose}) => {
         const newPlatform = e.target.id;
         console.log("genreId :", newPlatform);
         console.log("id :", details.id);
-        await axios.post(`http://localhost:3000/api/users/${details.id}/platform`, {platformId : newPlatform});
+        await axios.post(`https://game-den-back.onrender.com/api/users/${details.id}/platform`, {platformId : newPlatform});
         savedPlatforms((prevUserPlatforms) => [...prevUserPlatforms, newPlatform]);
     }
     
@@ -32,13 +32,13 @@ const ModalPlatform = ({onClose}) => {
         const newPlatform = e.target.id;
         console.log("genreId :", newPlatform);
         console.log("id :", details.id);
-        await axios.delete(`http://localhost:3000/api/users/${details.id}/platform`, {data: { platformId: newPlatform }});
+        await axios.delete(`https://game-den-back.onrender.com/api/users/${details.id}/platform`, {data: { platformId: newPlatform }});
         savedPlatforms((prevUserPlatforms) => prevUserPlatforms.filter((userPlatform) => userPlatform.id !== newPlatform));
     }
 
 
     const savedPlatforms = async () => {
-        const response = await axios.get(`http://localhost:3000/api/users/${details.id}`);
+        const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}`);
         console.log(response.data.platforms);
         const userPlatforms = response.data.platforms;
         setUserPlatforms(userPlatforms);
