@@ -77,10 +77,12 @@ export const UserController = ({children}) => {
         getProfil()
     }, [isAuthenticated]);
 
+
     useEffect(() => {
         const jwt = localStorage.getItem('usertoken');
         if(jwt){{setIsAuthenticated(true)}
         }}, [])
+
 
     return(
 

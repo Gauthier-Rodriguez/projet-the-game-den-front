@@ -11,9 +11,7 @@
         color: var(--color-quaternary);
         text-align: center;
         font-weight: bold;
-
         font-size: calc(2*var(--spacing));
-
         margin-bottom: var(--spacing);
         
     }
@@ -103,7 +101,8 @@
         }
 
         &__title{
-            font-size: calc(3*var(--spacing));
+            font-size: var(--spacing);
+            margin-bottom: 40px;
         }
     }
 

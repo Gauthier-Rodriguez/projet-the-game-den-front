@@ -18,20 +18,30 @@ const GameDetails = () => {
     const [showFullDescription, setShowFullDescription]=useState(true)
     const userId=details.id;
     const API_KEY = import.meta.env.VITE_API_KEY
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const fetchGameDetails = async () => {
-        const gameId = id
-        const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
-        setGameDetails(apiCall.data)
-        const currentGame = apiCall.data.id
-        const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
-        if (isFavorite) {
-            setIsFavoriteGame(true)
-        }else{
-            setIsFavoriteGame(false)
+
+      try{
+          setIsLoading(true)
+          const gameId = id
+          const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
+          setGameDetails(apiCall.data)
+          const currentGame = apiCall.data.id
+          const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
+          if (isFavorite) {
+              setIsFavoriteGame(true)
+          }else{
+              setIsFavoriteGame(false)
+          }
+        } catch (err) {
+            console.log(err)
+        } finally{
+            setIsLoading(false)
         }
     }
+
     useEffect(() => { fetchGameDetails()}, []);
 
     const handleToggleFavorite = async () => {
@@ -56,10 +66,12 @@ const GameDetails = () => {
 
     return (
         <>
+          
           <div className='game'>
             {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /></>}
+            
             <div className='game__information'>
-              {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
+            {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
               <div className='game__information game__information--right'>
                 <div className='game__information--box'>
                   <h2 className='game__information--box-title'>Platforms:</h2>
@@ -71,7 +83,7 @@ const GameDetails = () => {
                     </div>
                   )}
                 </div>
-                <div className='game_information--box'>
+                <div className='game__information--box'>
                   <h2 className='game__information--box-title'>Genres:</h2>
                   {gameDetails && gameDetails.genres && (
                   < div className='genres__list'>
@@ -111,18 +123,18 @@ const GameDetails = () => {
             </div>            
             {gameDetails && gameDetails.description_raw && 
             <p className="game__desc">
-              {showFullDescription ? gameDetails.description_raw : gameDetails.description_raw.slice(0,300) + "..."}
-            </p>}
-              {!showFullDescription && (
-                <button className="readmore-button" onClick={setShowFullDescription(true)}>
-                Read more...
-                </button>
-              )}
-              {/* {showFullDescription && (
-                <button onClick={setShowFullDescription(false)}>
-                Read less...
-                </button>
-              )} */}
+            {!showFullDescription ? gameDetails.description_raw : gameDetails.description_raw.slice(0,300) + "..."}
+          </p>}
+            {/* {showFullDescription && (
+              <button className="readmore-button" onClick={()=>setShowFullDescription(true)}>
+              Read more...
+              </button>
+            )}
+            {showFullDescription && (
+              <button className="readless-button" onClick={()=>setShowFullDescription(false)}>
+              Read less
+              </button>
+            ) } */}
           </div>            
            {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="heart-solid" src={solidHeart} /></div>)
            : (<div onClick={handleToggleFavorite}><img className="heart-outline" src={heart}/></div>)} 

@@ -2,6 +2,7 @@ import './ModalPlatform.scss'
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../context/UserContext';
+import close from '../../../assets/close.svg';
 
 
 const ModalPlatform = ({onClose}) => {
@@ -47,17 +48,20 @@ const ModalPlatform = ({onClose}) => {
     }, []);
 
     return(
-        <fieldset>
-            <legend>Choose your platform</legend><button className="modal__button" onClick={onClose}>X</button>
-        {platforms.map((platform, index) => (    
-            <div>
-                <input key={index} type="checkbox" id={platform.id} name={platform.Name}
-                checked={userPlatforms.some((userPlatform) => userPlatform.id === platform.id)}
-                 onChange={(e) => {e.target.checked ? addPlatform(e):removePlatform(e)}}/>
-                <label for={platform.Name}>{platform.Name}</label>
-            </div>))
-            }
-            
+        <fieldset className="modal-checkbox">
+            <button className="modal__close-button" onClick={onClose}><img className="modal__close-img" src={close} alt="close" /></button>
+           
+                <div className="modal-checkbox__content"> 
+                    <h2 className="modal-checkbox__title">Your Platforms</h2>
+                {platforms.map((platform, index) => (    
+                <div className="modal-checkbox__input">
+                    <input key={index} type="checkbox" id={platform.id} name={platform.Name}
+                    checked={userPlatforms.some((userPlatform) => userPlatform.id === platform.id)}
+                    onChange={(e) => {e.target.checked ? addPlatform(e):removePlatform(e)}}/>
+                    <label for={platform.Name}>{platform.Name}</label>
+                </div>))
+                }
+            </div>
         </fieldset>
     )
 }
