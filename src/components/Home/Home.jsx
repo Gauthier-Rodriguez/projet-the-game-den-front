@@ -61,7 +61,9 @@ const Home = () => {
                                 </Link>
                                 <div className="card__list-platforms">
                                 {game.parent_platforms.map((platform, index) => (
-                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`./src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+
+                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`/src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+
 
 
                                     ))}

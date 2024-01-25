@@ -58,7 +58,7 @@
         font-size: 1.2rem;
         color: var(--color-quaternary);
         position: absolute;
-        top: 50%;
+        top: 36%;
         right: calc(var(--spacing) / 2);
         transform: translateY(-65%);
         padding-right: calc(4.5*var(--spacing));
@@ -67,7 +67,7 @@
     &__like-link{
         position: absolute;
         right: calc(var(--spacing) / 2);
-        top: 50%;
+        top: 36%;
         transform: translateY(-65%);
         padding-right: calc(var(--spacing)*2.8);
     }
@@ -76,7 +76,7 @@
         color: var(--color-quaternary);
         position: absolute;
         right: calc(var(--spacing) / 2);
-        top: 50%;
+        top: 36%;
         transform: translateY(-65%);
         padding-right: var(--spacing);
     }
@@ -133,6 +133,10 @@
             left: 20%;
             transform: translateY(-30%);
         }
+
+        &__input {
+            align-items: center;
+        }
             
         &__login{
             top: 55%;
@@ -154,17 +158,17 @@
         }
 
         &__pseudo{
-            top: 70%;
+            top: 55%;
             padding-right: calc(5*var(--spacing));
         }
         
         &__like-link{
-            top: 70%;
+            top: 55%;
             padding-right: calc(3*var(--spacing));
         }
 
         &__profil-link{
-            top: 70%;
+            top: 55%;
             padding-right: var(--spacing);
 
 
@@ -181,14 +185,17 @@
         &__pseudo{
             font-size: 1.8rem;
             padding-right: calc(7*var(--spacing));
+            top : 58%;
         }
 
         &__like-link{
             padding-right: calc(4.5*var(--spacing));
+            top : 58%;
         }
 
         &__profil-link{
             padding-right: calc(2*var(--spacing));
+            top : 58%;
         }
 
         &__like-img{

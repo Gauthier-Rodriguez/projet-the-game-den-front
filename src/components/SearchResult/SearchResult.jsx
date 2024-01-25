@@ -25,10 +25,10 @@ const SearchResult = () => {
 
 
     return (
-        <div className="home__container">
+        <div className="search__container">
         <Filter />
-        <h1 className="home__title">Results</h1>    
-        <div className="home__list">
+        <h1 className="search__title">Results</h1>    
+        <div className="search__list">
             {gamesToDisplay.map((game) => ( 
             <>
             <div key={game.id} className="card">

@@ -4,15 +4,26 @@ import { UserContext } from '../../context/UserContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer'
+import Loader from '../Loader/Loader';
 
 const Favorites = () => {
 const {value1, value6} = useContext(UserContext);
 const [favorites, setFavorites] = value6;
 const [details, setDetails] = value1;
+const [isLoading, setIsLoading] = useState(false);
 
 const savedFavorites = async () => {
-    const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}/games`);
-    setFavorites(response.data);
+    try{
+        setIsLoading(true);
+        const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}/games`);
+        setFavorites(response.data);
+    }
+    catch(err){
+        console.log(err)
+    }
+    finally{
+        setIsLoading(false);
+    }
 } 
 
 useEffect(() => {
@@ -21,6 +32,7 @@ useEffect(() => {
 
     return (
         <div className="favorites__container">
+             {isLoading && <Loader />}
         {favorites.length > 0 ? (
             <>
                 <h1 className="favorites__title">Liked</h1>
@@ -34,13 +46,13 @@ useEffect(() => {
                         </div>
                     ))}
                 </div>
-
+                
             </>
         ) : (
             <p className="error">No liked games yet. Start adding your favorite games!</p>
         )}
     </div>
     )
-};
+ }   
 
 export default Favorites;

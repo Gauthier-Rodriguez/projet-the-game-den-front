@@ -5,6 +5,8 @@ import { UserContext} from '../../context/UserContext';
 import heart from '../../assets/heart.svg';
 import solidHeart from '../../assets/solidHeart.svg';
 import axios from 'axios';
+import Loader from '../Loader/Loader';
+import pc from '../../assets/pc.svg';
 
 const GameDetails = () => {
 
@@ -19,6 +21,7 @@ const GameDetails = () => {
     const userId=details.id;
     const API_KEY = import.meta.env.VITE_API_KEY
     const [isLoading, setIsLoading] = useState(false)
+   
 
 
     const fetchGameDetails = async () => {
@@ -29,6 +32,7 @@ const GameDetails = () => {
           const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
           setGameDetails(apiCall.data)
           const currentGame = apiCall.data.id
+          console.log(apiCall.data)
           const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
           if (isFavorite) {
               setIsFavoriteGame(true)
@@ -69,85 +73,107 @@ const GameDetails = () => {
     //page détail du jeu avec image en fond   
 
     return (
-        <>
-          
-          <div className='game'>
-            {gameDetails && gameDetails.background_image && <><img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} /></>}
-           
-            <div className='game__information'>
-            {gameDetails && gameDetails.name && <h1 className="game__title">{gameDetails.name}</h1>}
-              <div className='game__information game__information--right'>
-                <div className='game__information--box'>
-                  <h2 className='game__information--box-title-right'>Platforms:</h2>
-                  {gameDetails && gameDetails.parent_platforms && (
-                    <div className='platforms__list'>
-                      {gameDetails.platforms.map((platform) => (
-                        <p key={platform.id} className="platforms__name">{platform.platform.name}</p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className='game__information--box'>
-                  <h2 className='game__information--box-title-right'>Genres:</h2>
-                  {gameDetails && gameDetails.genres && (
-                  < div className='genres__list'>
-                      {gameDetails.genres.map((genre) => (
-                        <p key={genre.id} className="genres__name">{genre.name}</p>
-                      ))}
-                  </div>
-                  )}
-                </div>
-              </div>
-            
-              <div className='game__information game__information--left'>
-                <div className='game__information--box'>
-                <h2 className='game__information--box-title'>Release date:</h2>
-                  {gameDetails && gameDetails.released && (
-                   <p className="game__release">{gameDetails.released}</p>
-                  )}
-                </div>
-                <div className='game__information--box'> 
-                  {gameDetails && gameDetails.publishers && (
-                    <>
-                      <h2 className='game__information--box-title'>Publishers:</h2>
-                      {gameDetails.publishers.map((publisher) => (
-                        <p key={publisher.id} className="game__publisher">{publisher.name}</p>
-                      ))}
-                    </>
-                  )}
-                </div>
-                <div className='game__information--box'>
-                  {gameDetails && gameDetails.developers && (
-                    <>
-                      <h2 className='game__information--box-title'>Developers:</h2>
-                      {gameDetails.developers.map((developer) => (
-                        <p key={developer.id} className="game__dev">{developer.name}</p>
-                      ))}
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>            
+      <>
+        {isLoading && <Loader />}
+        <div className='game'>
+          {gameDetails && gameDetails.background_image && (
+            <img className="game__img" src={gameDetails.background_image} alt={gameDetails.name} />
+          )}
+          {gameDetails && gameDetails.released && (
+            <p className="game__release">{gameDetails.released}</p>
+          )}
+          {gameDetails && gameDetails.parent_platforms && (
+            <div className='game__list-parent'>
+              {gameDetails.parent_platforms.map((platform) => (
+                <img
+                  key={`${platform.id}-${platform.platform.id}`}
+                  className="game__parent-platform"
+                  src={`/src/assets/${platform.platform.slug}.svg`}
+                  alt={platform.platform.name}
+                />
+              ))}
+            </div>
+          )}
+          {gameDetails && gameDetails.name && (
+            <h1 className="game__title">{gameDetails.name}</h1>
+          )}
+          {isFavoriteGame ? (
+            <div onClick={handleToggleFavorite}>
+              <img className="heart-solid" src={solidHeart} alt="Solid Heart" />
+            </div>
+          ) : (
+            <div onClick={handleToggleFavorite}>
+              <img className="heart-outline" src={heart} alt="Outline Heart" />
+            </div>
+          )}
+    
+          <div className='game__description'>
+            <h2 className='game__title-desc'>About</h2>
             {gameDetails && gameDetails.description_raw && 
-            <p className="game__desc">
-            {gameDetails.description_raw}
-            </p>}
-            {/* {!showFullDescription && (
-              <button className="readmore-button" onClick={()=>setShowFullDescription(true)}>
-              Read more
+              <p className="game__text">{gameDetails.description_raw.slice(0,200)+"..."}</p>}
+            
+            {showFullDescription && (
+              <button className="game__button" onClick={()=> setShowFullDescription(true)}>
+                Read more
               </button>
             )}
-            {showFullDescription && (
-              <button className="readless-button" onClick={()=>setShowFullDescription(false)}>
-              Read less
+            {!showFullDescription && (
+              <button className="game__button" onClick={()=> setShowFullDescription(false)}>
+                Read less
               </button>
-            ) } */}
-          </div>            
-           {isFavoriteGame ? (<div onClick={handleToggleFavorite}><img className="heart-solid" src={solidHeart} /></div>)
-           : (<div onClick={handleToggleFavorite}><img className="heart-outline" src={heart}/></div>)} 
-        </>
-    );
-}      
+            )}
+          </div>
+
+    
+          <div className='game__information game__information--left'>
+            {gameDetails && gameDetails.platforms && (
+              <div className='information'>
+                <h2 className='information__title'>Platforms:</h2>
+                {gameDetails.platforms.map((platform) => (
+                  <p key={platform.platform.id} className="information__name">
+                    {platform.platform.name}
+                  </p>
+                ))}
+              </div>
+            )}
+            {gameDetails && gameDetails.publishers && (
+              <div className='information'>
+                <h2 className='information__title'>Publishers:</h2>
+                {gameDetails.publishers.map((publisher) => (
+                  <p key={publisher.id} className="information__name">
+                    {publisher.name}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+    
+          <div className='game__information game__information--right'>
+            {gameDetails && gameDetails.genres && (
+              <div className='information'>
+                <h2 className='information__title'>Genres:</h2>
+                {gameDetails.genres.map((genre) => (
+                  <p key={genre.id} className="information__name">
+                    {genre.name}
+                  </p>
+                ))}
+              </div>
+            )}
+            {gameDetails && gameDetails.developers && (
+              <div className='information'>
+                <h2 className='information__title'>Developers:</h2>
+                {gameDetails.developers.map((developer) => (
+                  <p key={developer.id} className="information__name">
+                    {developer.name}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    );   
+}     
 
 
 export default GameDetails

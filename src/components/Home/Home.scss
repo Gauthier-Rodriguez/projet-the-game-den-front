@@ -11,7 +11,7 @@
         color: var(--color-quaternary);
         text-align: center;
         font-weight: bold;
-        font-size: calc(1.7*var(--spacing));
+        font-size: calc(1.5*var(--spacing));
         margin-bottom: var(--spacing);
         
     }
@@ -101,7 +101,7 @@
         }
 
         &__title{
-            font-size: var(--spacing);
+            font-size: calc(2*var(--spacing));
             margin-bottom: 40px;
         }
     }
@@ -134,6 +134,12 @@
 }
 
 @media screen and (min-width: 1200px){
+
+    .home{
+        &__title{
+            font-size: calc(2*var(--spacing));
+        }
+    }
     .card{
         width: 20vw;
         height: 40vh;
@@ -146,6 +152,7 @@
 
         &__title{
             box-sizing: border-box;
+            
         }
     }
 
