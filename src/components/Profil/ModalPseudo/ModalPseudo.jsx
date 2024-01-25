@@ -1,6 +1,6 @@
 import './ModalPseudo.scss';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../context/UserContext';
 import close from '../../../assets/close.svg'
 
@@ -15,6 +15,7 @@ const ModalPseudo = ({onClose}) => {
     setDetails((prevDetails) => ({...prevDetails, Pseudo : newPseudo}))
     onClose();
   }
+
 
 
     return (
@@ -34,4 +35,5 @@ const ModalPseudo = ({onClose}) => {
             </div>
   );
 }
+
 export default ModalPseudo;

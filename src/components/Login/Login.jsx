@@ -1,8 +1,9 @@
 import './Login.scss'
 import {useState, useContext} from 'react'
 import { UserContext } from '../../context/UserContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { addActiveClass, removeActiveClass } from './utils';
+import back from '../../assets/back.svg'
 
 const Login = () => {
     const {value3, value4} = useContext(UserContext)
@@ -57,10 +58,12 @@ const Login = () => {
 
     const handleRegisterClick = () => {
         addActiveClass('container');
+        addActiveClass('back__link');
       };
     
       const handleLoginClick = () => {
         removeActiveClass('container');
+        removeActiveClass('back__link');
       };
       
     return(
@@ -100,14 +103,18 @@ const Login = () => {
                         <button className="container__button" type="submit">LOGIN</button>
                         {/* <a className="container__link" href="#">Forgot your password?</a> */}
                     </form>
+                   
                 </div>
-
+                    <Link to="/">
+                    <img className="back__link" id="back__link" src={back} alt="back home" />
+                    </Link>
                 <div className="toggle-container">
                     <div className="toggle">
                         <div className="toggle__panel toggle-left">
                             <h1 className="toggle__title"> Nice to see you again!</h1>
                             <p className="toggle__text">Enter your personal data</p>
                             <button className="container__button hidden" id="login" onClick={handleLoginClick}>LOGIN</button>
+                        
                         </div>
                         <div className="toggle__panel toggle-right">
                             <h1 className="toggle__title"> Welcome! </h1>
@@ -117,6 +124,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+           
         </div>
     )
 }

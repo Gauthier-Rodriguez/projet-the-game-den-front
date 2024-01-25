@@ -74,8 +74,26 @@ const Profil = () => {
     };
     console.log(isAuthenticated)
 
+    const handleClick = (e) => {
+        e.stopPropagation();
+        console.log('open');
 
-    
+        const handelClose = (event) => {
+            const clickableClass = ['profil', 'profil__pseudo', 'profil__email', 'profil__password', 'profil__genre', 'profil__platform', 'profil__logout', 'profil__link', 'profil__logo', 'profil__title', 'profil__button'];
+            const clickableId = ['root'];
+            if (clickableClass.includes(event.target.className) || clickableId.includes(event.target.id)) {
+                setModalPseudo(false);
+                setModalEmail(false);
+                setModalPassword(false);
+                setModalGenre(false);
+                setModalPlatform(false);
+                console.log('close');
+                document.removeEventListener('click', handelClose);
+            }
+    };
+    setTimeout(() => {document.addEventListener('click', handelClose)}, 0);
+};
+
 
     if(isAuthenticated){ 
     return(
@@ -86,35 +104,35 @@ const Profil = () => {
           <h1 className="profil__title">Hello {details.Pseudo}</h1>
             
         	<div className='profil__pseudo'>Pseudo
-            <button className="profil__button" onClick={(e) => {openPseudoModal(e)}}>...</button>
+            <button className="profil__button" onClick={(e) => {handleClick(e), openPseudoModal(e)}}>...</button>
             </div>
             {isModalPseudo ? (<>
             <ModalPseudo onClose={closePseudoModal}/>
             </>) : null}
 
         	<div className='profil__email'>Email
-            <button className="profil__button" onClick={(e) => {openEmailModal(e)}}>...</button>
+            <button className="profil__button" onClick={(e) => {handleClick(e), openEmailModal(e)}}>...</button>
             </div>
             {isModalEmail ? (<>
             <ModalEmail onClose={closeEmailModal}/>
             </>) : null}
 
         	<div className='profil__password'>Password
-            <button className="profil__button" onClick={(e) => {openPasswordModal(e)}}>...</button>
+            <button className="profil__button" onClick={(e) => {handleClick(e), openPasswordModal(e)}}>...</button>
             </div>
             {isModalPassword ? (<>
             <ModalPassword onClose={closePasswordModal}/>
             </>) : null}
 
         	<div className='profil__genre'>{details.genre ? details.genre : "Genres"}
-            <button className="profil__button" onClick={(e) => {openGenreModal(e)}}>...</button>
+            <button className="profil__button" onClick={(e) => {handleClick(e), openGenreModal(e)}}>...</button>
             </div>
             {isModalGenre ? (<>
             <ModalGenre onClose={closeGenreModal}/>
             </>) : null}
 
         	<div className='profil__platform'>{details.platform ? details.platform : "Platfom"}
-            <button className="profil__button" onClick={(e) => {openPlatformModal(e)}}>...</button>
+            <button className="profil__button" onClick={(e) => {handleClick(e), openPlatformModal(e)}}>...</button>
             </div>
             {isModalPlatform ? (<>
             <ModalPlatform onClose={closePlatformModal}/>

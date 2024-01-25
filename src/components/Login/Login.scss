@@ -62,6 +62,7 @@
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
+    position: relative;
 }
 .container__input{
     background-color: #eee;
@@ -196,6 +197,26 @@
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
+}
+
+.back__link{
+    width: 8vh;
+    height: 8vh;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0%;
+}
+
+.back__link.active{
+    width: 8vw;
+    height: 8vh;
+    position: absolute;
+    z-index: 1001;
+    top: 0;
+    left: 0%;
+    filter: brightness(0) invert(1);
+            -webkit-filter: brightness(0) invert(1);
 }
 
 
