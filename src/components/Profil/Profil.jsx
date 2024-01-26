@@ -131,7 +131,7 @@ const Profil = () => {
             <ModalGenre onClose={closeGenreModal}/>
             </>) : null}
 
-        	<div className='profil__platform'>{details.platform ? details.platform : "Platfom"}
+        	<div className='profil__platform'>{details.platform ? details.platform : "Platforms"}
             <button className="profil__button" onClick={(e) => {handleClick(e), openPlatformModal(e)}}>...</button>
             </div>
             {isModalPlatform ? (<>

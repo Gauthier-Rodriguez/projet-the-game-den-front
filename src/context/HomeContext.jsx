@@ -11,7 +11,6 @@ export const HomeController = ({children}) => {
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     
-
     const API_KEY = import.meta.env.VITE_API_KEY
 
     const fetchPopular = async () => {
@@ -26,8 +25,6 @@ export const HomeController = ({children}) => {
             });
             
             setPopular({ ...apiCall.data, results: sortedResults });
-            
-             
         } catch (err) {
             setError(err)
         }
@@ -41,7 +38,6 @@ export const HomeController = ({children}) => {
         fetchPopular()
     }, [])
 
-   
 
     return(
         <HomeContext.Provider value={[popular, setPopular, fetchPopular]}>
