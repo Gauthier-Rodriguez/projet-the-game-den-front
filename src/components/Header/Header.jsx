@@ -30,37 +30,32 @@ const Header = () => {
 
       if(isAuthenticated){
      //affichage du coeur pour pouvoir accéder à sa page de favoris-pas visible pour visiteur    
-         return(
-             <div className="header">
-                 <Link className="header__link" to="/">
-                     <img className="header__logo" src={logo} alt="logo The Game Den" />
-                 </Link>
-                 <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
-
-                 <input ref={inputRef} className="header__input"  type="text"  placeholder=" Search "/>                     
-
-                 </form>
-
+        return(
+            <div className="header">
+                <Link className="header__link" to="/">
+                    <img className="header__logo" src={logo} alt="logo The Game Den" />
+                </Link>
+                <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
+                <input ref={inputRef} className="header__input"  type="text"  placeholder=" Search "/>                     
+                </form>
                 <p className="header__pseudo">{details.Pseudo } {'-'}</p>
                 <Link className="header__like-link" to="/favorites">
                     <img className="header__like-img" src={solidHeart} alt="logo like" />
-                 </Link>
-                 <Link className="header__profil-link" to="/profil">
+                </Link>
+                <Link className="header__profil-link" to="/profil">
                     <img className="header__profil-img" src={profil} alt="logo profil" />
                 </Link>
-             </div>
-         )
-     }
+            </div>
+        )
+        }
      else{ 
         return(
-        
             <div className="header">
                 <Link className="header__link" to="/">
                     <img className="header__logo" src={logo} alt="logo The Game Den" />
                 </Link>
                 <form className="header__form" onSubmit={(e) => {handleSubmit(e)}}>
                     <input ref={inputRef} className="header__input"  type="text"  placeholder="Search"/>
-                
                 </form>
                 <Link className="header__login" to="/login">LOGIN/SIGN UP</Link>    
             </div> 

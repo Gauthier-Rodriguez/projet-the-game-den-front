@@ -4,12 +4,13 @@
     position: relative;
 
     &__img{
-        max-width: 100%;
+        max-width: 100vw;
         height: 100vh;
         object-fit: cover;
         position:relative;
         z-index: 1;
     }
+
     &::before {
         content: "";
         position: absolute;
@@ -59,19 +60,30 @@
 
       &__description{
             position: absolute;
-            top: 35%;
+            top: 85%;
             left: 10%;
             color: var(--color-quaternary);
             font-size: calc(var(--spacing)/1.2);
-            z-index: 3;
+            z-index: 4;
             width: 80%;
             text-align: justify;
+            line-height: calc(var(--spacing));
       }
 
       &__title-desc{
-        font-size: calc(1.3*var(--spacing));
+        font-size: calc(1.1*var(--spacing));
         font-weight: bold;
         margin-bottom: calc(var(--spacing)/2);
+      }
+
+      &__text{
+        overflow: hidden;
+        max-height: 200px;
+        transition: max-height 0.5s ease-in-out;
+      }
+
+      &__text.expanded{
+        max-height: none;
       }
 
       &__button{
@@ -83,22 +95,23 @@
       &__information{
         width: 40%;
         height: 30vh;
+        line-height: calc(var(--spacing)/1.1);
       }
 
       &__information--left{
         position: absolute;
-        top: 55%;
+        top: 45%;
         left: 10%;
         z-index: 3;
         display: flex;
         flex-direction: column;
         gap:var(--spacing);
-        color: var(--color-quaternary)
+        color: var(--color-quaternary);
       }
 
       &__information--right{
         position: absolute;
-        top: 55%;
+        top: 45%;
         left: 60%;
         z-index: 3;
         display: flex;
@@ -112,10 +125,11 @@
 .information{
     
     &__title{
-        font-size: calc(1.3*var(--spacing));
+        font-size: calc(1.1*var(--spacing));
         font-weight: bold;
         margin-bottom: calc(var(--spacing)/2);
     }
+
     &__name{
         font-size: calc(var(--spacing)/1.2);
     }
@@ -124,8 +138,8 @@
 .heart-solid{
     position: absolute;
     cursor: pointer;
-    top: 10%;
-    left: 60%;
+    top: 5%;
+    left: 85%;
     z-index: 3;
     width: calc(var(--spacing)*2.0);
     height: calc(var(--spacing)*2.0);
@@ -146,3 +160,157 @@
         transform: scale(.9);
     }
 }
+
+@media screen and (min-width: 450px){
+  .game{
+
+    &__img{
+      width: 100vw;
+    }
+    &__release{
+      left: 14%;
+    }
+
+    &__title{
+      left: 14%;
+    }
+
+    &__information--left{
+      left: 14%;
+    }
+
+    &__information--right{
+      left: 64%;
+    }
+
+    &__description{
+      left: 14%;
+    }
+  }
+}
+
+@media screen and (min-width: 600px){
+  .game{
+    &__release{
+      left: 18%;
+    }
+    
+
+    &__title{
+      left: 18%;
+    }
+
+    &__information--left{
+      left: 18%;
+    }
+
+    &__information--right{
+      left: 68%;
+    }
+    
+    &__description{
+      left: 18%;
+      width: 65%;
+    }
+  }
+}
+
+@media screen and (min-width: 768px){
+  .game{
+    margin: 10vh auto;
+    width: 100%;
+    height: 100vh;
+    border-radius: calc(var(--spacing)*2);
+
+    &__img{
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      position:relative;
+      z-index: 1;
+    }
+
+    &__release{
+      left: 10%;
+      top: 5%;
+    }
+
+    &__list-parent{
+      left: 20%;
+      top: 5%;
+    }
+
+    &__title{
+      left: 10%;
+      top: 8%;
+      font-size: calc(var(--spacing)*3);
+    }
+
+    &__information--left{
+      top: 20%;
+      left: 10%;
+    }
+
+    &__information--right{
+      top: 20%;
+      left: 38%;
+    }
+    
+    &__description{
+      left: 10%;
+      top: 52%;
+      width: 80%;
+    }
+  }
+  .heart-outline{
+    top: 4%;
+    left: 28%;
+    width: calc(var(--spacing)*2);
+    height: calc(var(--spacing)*2);
+  }
+
+  .heart-solid{
+    top: 40%;
+
+  }
+}
+
+@media  screen and (min-width: 1024px){
+  .game{
+    &__list-parent{
+      left: 18%;
+    }
+
+    &__information--right{
+      left: 32%;
+    }
+  }
+}
+
+@media  screen and (min-width: 1200px){
+  .game{
+    &__list-parent{
+      left: 17%;
+    }
+
+    &__information--right{
+      left: 28%;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px){
+  .game{
+    &__list-parent{
+      left: 15%;
+    }
+
+    &__information--right{
+      left: 24%;
+    }
+  }
+  
+}
+  
+
+
