@@ -37,7 +37,6 @@ const ModalGenre = ({onClose}) => {
     const savedGenres = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}`);
         const userGenres = response.data.genres;
-        console.log(userGenres)
         setUserGenres(userGenres);
     }
     useEffect(() => {

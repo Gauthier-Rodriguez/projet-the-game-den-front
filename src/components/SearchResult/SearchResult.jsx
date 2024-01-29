@@ -12,10 +12,7 @@ const SearchResult = () => {
     const [search, setSearch, fetchSearch, isLoading, setIsLoading, fetchResult] = useContext(SearchContext)
     const { filters } = useContext(FilterContext);
 
-    console.log(fetchResult)
-
     const gamesToDisplay = fetchResult;
-    console.log(gamesToDisplay)
     return (
         <div className="search__container">
             
@@ -29,7 +26,7 @@ const SearchResult = () => {
                     </Link>
                     <div className="card__list-platforms">
                     {game.platforms && game.platforms.map((platform) => (
-                        <img key={platform.id} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />      
+                        <img key={platform.id} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />      
                     ))}
                     </div> 
                     <h2 className="card__title">{game.name}</h2>     

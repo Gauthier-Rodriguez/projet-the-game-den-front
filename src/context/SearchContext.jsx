@@ -24,11 +24,7 @@ export const SearchController = ({children}) => {
                 return releaseDateB - releaseDateA;
                 
             });
-            console.log(sortedResults)
-            console.log(apiCall.data) 
-            
             setFetchResult(apiCall.data);
-            console.log(fetchResult)
         } 
         catch (error){
             setError(error)

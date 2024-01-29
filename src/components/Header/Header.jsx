@@ -22,7 +22,6 @@ const Header = () => {
         e.preventDefault();
         const newSearch = e.target[0].value.toLowerCase();
         setSearch(newSearch);
-        console.log(search)
         fetchSearch(newSearch);
         navigate('/search');
         inputRef.current.value = '';

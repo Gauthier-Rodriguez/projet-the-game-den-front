@@ -72,11 +72,9 @@ const Profil = () => {
        setIsAuthenticated(false);
 
     };
-    console.log(isAuthenticated)
 
     const handleClick = (e) => {
         e.stopPropagation();
-        console.log('open');
 
         const handelClose = (event) => {
             const clickableClass = ['profil', 'profil__pseudo', 'profil__email', 'profil__password', 'profil__genre', 'profil__platform', 'profil__logout', 'profil__link', 'profil__logo', 'profil__title', 'profil__button'];
@@ -87,7 +85,6 @@ const Profil = () => {
                 setModalPassword(false);
                 setModalGenre(false);
                 setModalPlatform(false);
-                console.log('close');
                 document.removeEventListener('click', handelClose);
             }
     };
