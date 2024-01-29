@@ -20,47 +20,55 @@ const Home = () => {
     const [recoGames, setRecoGames] = value7;
 
     const recommendations = async () => {
-            const GenreID = details.genres.map(id => id.GenreID);
-            const userGenre = GenreID.join(',');
-            const PlatformID = details.platforms.map(id => id.PlatformID);
-            const userPlatform = PlatformID.join(',');
-            const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&platforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
-            const reco = genreAndPlatformMatch.data.results;
-            setRecoGames(reco);
+
+        if(isAuthenticated){
+           
+                const GenreID = details.genres.map(id => id.GenreID);
+                const userGenre = GenreID.join(',');
+                console.log(userGenre)
+                const PlatformID = details.platforms.map(id => id.PlatformID);
+                const userPlatform = PlatformID.join(',');
+                console.log(userPlatform)
+                const genreAndPlatformMatch = await axios.get(`https://game-den-back.onrender.com/api/ext/recommendations?genres=${userGenre}&platforms=${userPlatform}`);
+                const reco = genreAndPlatformMatch.data;
+        
+                setRecoGames(reco);
+        }
+
     };
 
     useEffect(() => {
        recommendations();
-    }, [isAuthenticated, details, recoGames]); 
+    }, [isAuthenticated, details.genres, details.platforms]); 
 
-    const filteredGames = popular.results && popular.results.filter((game) => {
+     const filteredGames = popular && popular.filter((game) => {
         return (
-            (!filters.platform || game.platforms.some((platform) => platform.platform.name === filters.platform)) &&
+            (!filters.platform || game.platforms.some((platform) => platform.name === filters.platform)) &&
             (!filters.genre || game.genres.some((genre) => genre.name === filters.genre))
         );
     });
-    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular.results;
+    const gamesToDisplay = filters.platform || filters.genre ? filteredGames : popular;
    
      //affichage des recommandations - si utilisateur connecté
      return (
         <div className="home__container">
             <Filter />
             {isAuthenticated ? (
-                recommendations.length > 0 ? ( 
-                    <>
-                        <h1 className="home__title">Recommendations</h1>
-                        <div className="home__list">
-                            {recoGames.map((game) => (
-                                <div key={game.id} className="card">
-                                    <Link className="card__img-container" to={`/game/${game.id}`}>
-                                        <img className="card__img" src={game.background_image} alt={game.name} />
-                                    </Link>
-                                    <div className="card__list-platforms">
-                                        {game.parent_platforms.map((platform, index) => (
-                                            <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`/src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
-                                        ))}
-                                    </div>
-                                    <h2 className="card__title">{game.name}</h2>
+
+                <>
+                    <h1 className="home__title">Recommendations</h1>
+                    <div className="home__list">
+                        {recoGames.map((game) => (
+                            <div key={game.id} className="card">
+                                <Link className="card__img-container" to={`/game/${game.id}`}>
+                                    <img className="card__img" src={game.cover} alt={game.name} />
+                                </Link>
+                                <div className="card__list-platforms">
+                                {game.platforms.map((platform, index) => (
+
+                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />
+                                    ))}
+
                                 </div>
                             ))}
                         </div>
@@ -75,11 +83,11 @@ const Home = () => {
                         {gamesToDisplay && gamesToDisplay.map((game) => (
                             <div key={game.id} className="card">
                                 <Link className="card__img-container" to={`/game/${game.id}`}>
-                                    <img className="card__img" src={game.background_image} alt={game.name} />
+                                    <img className="card__img" src={game.cover} alt={game.name} />
                                 </Link>
                                 <div className="card__list-platforms">
-                                    {game.parent_platforms.map((platform, index) => (
-                                        <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
+                                    {game.platforms.map((platform, index) => (
+                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />
                                     ))}
                                 </div>
                                 <h2 className="card__title">{game.name}</h2>

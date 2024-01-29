@@ -16,8 +16,9 @@ export const FilterController = ({children}) => {
     const fetchGenres = async () =>{
 
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-            setGenres(apiCall.data.results)
+            const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/genres`)
+            
+            setGenres(apiCall.data)
         } catch (error) {
             setError(error)
         }
@@ -29,8 +30,8 @@ export const FilterController = ({children}) => {
     const fetchPlatforms = async () =>{
 
         try{
-            const apiCall = await axios.get(`https://api.rawg.io/api/platforms?key=${API_KEY}`)
-            setPlatforms(apiCall.data.results)
+            const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/platforms`)
+            setPlatforms(apiCall.data)
             
         } catch (error) {
             setError(error)

@@ -6,10 +6,10 @@ import close from '../../../assets/close.svg';
 
 
 const ModalPlatform = ({onClose}) => {
-    const {value1} = useContext(UserContext);
+    const {value1, value8} = useContext(UserContext);
     const [details, setDetails] = value1;
     const [platforms, setPlatforms] = useState([]);
-    const [userPlatforms, setUserPlatforms] = useState([]);
+    const [userPlatforms, setUserPlatforms] = value8;
 
     const allPlatforms = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/platform`);

@@ -15,8 +15,7 @@ export const UserController = ({children}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [favoriteGames, setFavoriteGames] = useState([])
     const [details, setDetails] = useState({
-        pseudo: "",
-        email: ""
+       
     })
     const [recoGames, setRecoGames] = useState([])
     const [userGenres, setUserGenres] = useState([]);
@@ -37,6 +36,7 @@ export const UserController = ({children}) => {
         .catch(error => {
             throw error
         })
+
     }
 
     const login = (user) => {
@@ -58,13 +58,12 @@ export const UserController = ({children}) => {
             const decoded = await jwtDecode(token);
 
             const userData = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}`)
-           
             setDetails({ ...userData.data, id: decoded.id })
+            
             
             const response = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}/games`)
             const favorites = response.data;
-            setFavoriteGames(favorites); 
-
+            setFavoriteGames(favorites);
         } catch (error) {
             setError(error)
         } finally{
@@ -72,17 +71,13 @@ export const UserController = ({children}) => {
         }
     }
 
-
-   useEffect(() => {
-        getProfil();
-    }, [isAuthenticated]);
-
+    useEffect(() => {
+    getProfil()}, [isAuthenticated, userGenres, userPlatform]);
 
     useEffect(() => {
         const jwt = localStorage.getItem('usertoken');
         if(jwt){{setIsAuthenticated(true)}
         }}, [])
-
 
     return(
 

@@ -24,7 +24,8 @@ const ModalPseudo = ({onClose}) => {
       }
     }
   }
-    
+
+
 
   return (
     
