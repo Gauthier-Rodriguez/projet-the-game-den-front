@@ -27,7 +27,6 @@ const GameDetails = () => {
           const gameId = id
           const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/game/${gameId}`)
           setGameDetails(apiCall.data[0])
-          console.log(gameDetails) 
           const currentGame = apiCall.data[0].id
           if(favorites.length > 0){
           const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
@@ -92,7 +91,7 @@ const GameDetails = () => {
                 <img
                   key={`${platform.id}-${platform.id}`}
                   className="game__parent-platform"
-                  src={`/public/logo/${platform.logo}`}
+                  src={`/logo/${platform.logo}`}
                   alt={platform.name}
                 />
               ))}

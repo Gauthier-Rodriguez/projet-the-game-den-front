@@ -25,10 +25,8 @@ const Home = () => {
            
                 const GenreID = details.genres.map(id => id.GenreID);
                 const userGenre = GenreID.join(',');
-                console.log(userGenre)
                 const PlatformID = details.platforms.map(id => id.PlatformID);
                 const userPlatform = PlatformID.join(',');
-                console.log(userPlatform)
                 const genreAndPlatformMatch = await axios.get(`https://game-den-back.onrender.com/api/ext/recommendations?genres=${userGenre}&platforms=${userPlatform}`);
                 const reco = genreAndPlatformMatch.data;
         
@@ -66,7 +64,7 @@ const Home = () => {
                                 <div className="card__list-platforms">
                                 {game.platforms.map((platform, index) => (
 
-                                    <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />
+                                    <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
                                 ))}
                                 </div>
                                 <h2 className="card__title">{game.name}</h2>
@@ -89,7 +87,7 @@ const Home = () => {
                                 </Link>
                                 <div className="card__list-platforms">
                                     {game.platforms.map((platform, index) => (
-                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />
+                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
                                     ))}
                                 </div>
                                 <h2 className="card__title">{game.name}</h2>
