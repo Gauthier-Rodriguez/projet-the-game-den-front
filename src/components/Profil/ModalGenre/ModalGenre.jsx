@@ -49,14 +49,14 @@ const ModalGenre = ({onClose}) => {
         
             <div className="modal-checkbox__content">
             <h2 className="modal-checkbox__title">Your Genres</h2> 
-                {genres.map((genre, index) => (    
-                    <div className="modal-checkbox__input">
-                        <input key={index} type="checkbox" id={genre.id} name={genre.Name}
-                        checked={userGenres.some((userGenre) => userGenre.id === genre.id)}
-                        onChange={(e) => {e.target.checked ? addGenre(e):removeGenre(e)}}/>
-                        <label for={genre.Name}>{genre.Name}</label>
-                     </div>))
-                }
+            {genres.map((genre) => (    
+                <div key={genre.id} className="modal-checkbox__input">
+                    <input type="checkbox" id={genre.id} name={genre.Name}
+                    checked={userGenres.some((userGenre) => userGenre.id === genre.id)}
+                    onChange={(e) => {e.target.checked ? addGenre(e):removeGenre(e)}}/>
+                    <label htmlFor={genre.Name}>{genre.Name}</label>
+                </div>
+            ))}
             </div>
         </fieldset>
     )

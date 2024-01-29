@@ -10,13 +10,13 @@ const Loader = () => {
             </div>
             <div className="symbol">
                 <div className="symbol__circle"></div>
-             </div>
-             <div className="symbol">
-                 <div className="symbol__cross"></div>
-             </div>
+            </div>
+            <div className="symbol">
+                <div className="symbol__cross"></div>
+            </div>
             <div className="symbol">
                 <div className="symbol__square"></div>
-             </div>
+            </div>
         </div>
     )
 }
