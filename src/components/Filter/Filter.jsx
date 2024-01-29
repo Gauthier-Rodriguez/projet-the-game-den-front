@@ -1,21 +1,35 @@
 import { FilterContext } from '../../context/FilterContext'
 import './Filter.scss'
-import {useContext, useState} from 'react'
+import {useContext, useState, useEffect} from 'react'
 
 const Filter = () => {
 
     const {genres, platforms, setFilters} = useContext(FilterContext)
     const [selectedPlatform, setSelectedPlatform] = useState('')
     const [selectedGenre, setSelectedGenre] = useState('')
+
+    useEffect(() => {
+        const storedFilters = JSON.parse(localStorage.getItem('filters'));
+        if (storedFilters) {
+            setSelectedPlatform(storedFilters.platform)
+            setSelectedGenre(storedFilters.genre)
+        }
+    }, []);
     
     const handlePlatformChange = (e) => {
-        setSelectedPlatform(e.target.value)
-        setFilters({ platform: e.target.value, genre: selectedGenre });
+        const platform = e.target.value
+        setSelectedPlatform(platform)
+        setFilters({ platform, genre: selectedGenre });
+
+        localStorage.setItem('filters', JSON.stringify({ platform, genre: selectedGenre }));
     }
 
     const handleGenreChange = (e) => {
-        setSelectedGenre(e.target.value)
-        setFilters({ platform: selectedPlatform, genre: e.target.value });
+        const genre = e.target.value
+        setSelectedGenre(genre)
+        setFilters({ platform: selectedPlatform, genre });
+
+        localStorage.setItem('filters', JSON.stringify({ platform: selectedPlatform, genre }));
     }
     
     return(

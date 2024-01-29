@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from "jwt-decode"
 import axios from 'axios';
 
@@ -31,9 +31,12 @@ export const UserController = ({children}) => {
             email : obj.email,
             password : obj.password
         }
-    )
-    .then(res => console.log('Registered'))
-    .catch(err => console.log(err))
+        )
+        .then(res => console.log('Registered'))
+        .catch(error => {
+            throw error
+        })
+
     }
 
     const login = (user) => {

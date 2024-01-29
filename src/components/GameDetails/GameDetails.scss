@@ -244,6 +244,7 @@
       left: 10%;
       top: 8%;
       font-size: calc(var(--spacing)*3);
+      display: flex;
     }
 
     &__information--left{
@@ -263,8 +264,6 @@
     }
   }
   .heart-outline{
-    top: 4%;
-    left: 28%;
     width: calc(var(--spacing)*2);
     height: calc(var(--spacing)*2);
   }
@@ -272,6 +271,10 @@
   .heart-solid{
     top: 40%;
 
+  }
+  .heart-container{
+    width: 10%;
+    justify-content: flex-end;
   }
 }
 

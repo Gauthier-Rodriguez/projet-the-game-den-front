@@ -14,35 +14,39 @@ const Login = () => {
     const [pseudo, setPseudo] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
+    const [errorLogin, setErrorLogin] = useState('');
+    const [errorRegister, setErrorRegister] = useState('');
+
     const navigate = useNavigate();
 
    const createUser = (e) => {
         e.preventDefault();
    
-        const newUser = { // creates new object with name,email, password
+        const newUser = { 
           lastname: lastName,
           firstname: firstName,
           pseudo : pseudo,
           email: email,
           password: password
-        }
+        };
     
         register(newUser)
-            .then(res => { // calls the register function from UserFunctions.js and passes newUser as argument
+            .then(res => { 
         
                 setLastName("");
                 setFirstName("");
                 setPseudo("");
                 setEmail("");
                 setPassword("");
-                setError(null);
+                setErrorRegister("");
             })
             .catch(error => {
+                console.log('Register error:', error)
                 if (error.response && error.response.data && error.response.data.error) {
-                    setError(error.response.data.error);
+                    setErrorRegister(error.response.data.error);
                 } else {
-                    setError('An error occurred. Please try again later.');
+                    setErrorRegister('An error occurred. Please try again later.');
                 }
             });
     };    
@@ -62,9 +66,9 @@ const Login = () => {
             })
             .catch(error => {
                 if (error.response && error.response.data && error.response.data.error) {
-                    setError(error.response.data.error);
+                    setErrorLogin(error.response.data.error);
                 } else {
-                    setError('An error occurred. Please try again later.');
+                    setErrorLogin('An error occurred. Please try again later.');
                 }
             });
     };
@@ -94,13 +98,13 @@ const Login = () => {
                             <a className="social-icons__link container__link" href="#" ><i className="fa-brands fa-linkedin-in"></i></a>
                         </div> */}
                         <p className="container__text">Enter yours information to register</p>
+                        {errorRegister && <p className="error-message">{errorRegister}</p>}
                         <input className="container__input" type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         <input className="container__input" type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         <input className="container__input" type="text" placeholder="Pseudo" value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
                         <input className="container__input" type="email" placeholder="Email" value={email}onChange={(e) => setEmail(e.target.value)}/>
                         <input className="container__input" type="password" placeholder="Password" value={password}onChange={(e) => setPassword(e.target.value)}/>
-                        <button className="container__button" type="submit">SIGN UP</button>
-                        {error && <p className="error-message">{error}</p>} {console.log(error)}
+                        <button className="container__button" type="submit">SIGN UP</button>                   
                     </form>
                 </div>
 
@@ -118,7 +122,7 @@ const Login = () => {
                         <input className="container__input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         <button className="container__button" type="submit">LOGIN</button>
                         {/* <a className="container__link" href="#">Forgot your password?</a> */}
-                        {error && <p className="error-message">{error}</p>}
+                        {errorLogin && <p className="error-message">{errorLogin}</p>}
                     </form>
                 </div>
 
