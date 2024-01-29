@@ -28,8 +28,6 @@ const GameDetails = () => {
           const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/game/${gameId}`)
           setGameDetails(apiCall.data[0])
           console.log(gameDetails) 
-
-          setIsLoading(false)
           const currentGame = apiCall.data[0].id
           if(favorites.length > 0){
           const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
@@ -172,5 +170,4 @@ const GameDetails = () => {
 }     
 
 
-export default GameDetails
-
+export default GameDetails;
