@@ -98,17 +98,17 @@ const GameDetails = () => {
           </div>
           )}
           {gameDetails && gameDetails.name && (
-            <h1 className="game__title">{gameDetails.name}</h1>
+            <h1 className="game__title">{gameDetails.name} <span className='heart-container'>{isFavoriteGame ? (
+              <div onClick={handleToggleFavorite}>
+                <img className="heart-solid" src={solidHeart} alt="Solid Heart" />
+              </div>
+            ) : (
+              <div onClick={handleToggleFavorite}>
+                <img className="heart-outline" src={heart} alt="Outline Heart" />
+              </div>
+            )}</span></h1>
           )}
-          {isFavoriteGame ? (
-            <div onClick={handleToggleFavorite}>
-              <img className="heart-solid" src={solidHeart} alt="Solid Heart" />
-            </div>
-          ) : (
-            <div onClick={handleToggleFavorite}>
-              <img className="heart-outline" src={heart} alt="Outline Heart" />
-            </div>
-          )}
+          
     
           <div className='game__information game__information--left'>
             {gameDetails && gameDetails.genres && (
