@@ -35,7 +35,7 @@ export const UserController = ({children}) => {
     )
     .then(res => console.log('Registered'))
     .catch(err => console.log(err))
-}
+    }
 
     const login = (user) => {
         return axios.post('https://game-den-back.onrender.com/api/login', {
@@ -59,10 +59,11 @@ export const UserController = ({children}) => {
            
             setDetails({ ...userData.data, id: decoded.id })
             
+            
             const response = await axios.get(`https://game-den-back.onrender.com/api/users/${decoded.id}/games`)
             const favorites = response.data;
-            setFavoriteGames(favorites); 
-
+            setFavoriteGames(favorites);
+            console.log(details)
         } catch (error) {
             setError(error)
         } finally{
@@ -70,17 +71,13 @@ export const UserController = ({children}) => {
         }
     }
 
-
-   useEffect(() => {
-        getProfil();
-    }, [isAuthenticated]);
-
+useEffect(() => {
+getProfil()}, [isAuthenticated]);
 
     useEffect(() => {
         const jwt = localStorage.getItem('usertoken');
         if(jwt){{setIsAuthenticated(true)}
         }}, [])
-
 
     return(
 

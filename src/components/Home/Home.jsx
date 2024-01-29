@@ -21,10 +21,12 @@ const Home = () => {
 
     const recommendations = async () => {
         if(isAuthenticated){
-           
-                const GenreID = details.genres.map(id => id.GenreID);
+                console.log(details)
+                const GenreID = details.genres && details.genres.map(id => id.GenreID);
+                console.log(GenreID)
                 const userGenre = GenreID.join(',');
-                const PlatformID = details.platforms.map(id => id.PlatformID);
+                const PlatformID = details.platform && details.platforms.map(id => id.PlatformID);
+                console.log(PlatformID)
                 const userPlatform = PlatformID.join(',');
                 const genreAndPlatformMatch = await axios.get(`https://api.rawg.io/api/games?genres=${userGenre}&platforms=${userPlatform}&key=${API_KEY}&ordering=-added&page_size=40`);
                 const reco = genreAndPlatformMatch.data.results;
@@ -33,9 +35,8 @@ const Home = () => {
     } 
 
     useEffect(() => {
-        getProfil();
        recommendations();
-    }, [isAuthenticated, recoGames]); 
+    }, [isAuthenticated, recoGames, details]); 
 
     const filteredGames = popular.results && popular.results.filter((game) => {
         return (
@@ -61,11 +62,7 @@ const Home = () => {
                                 </Link>
                                 <div className="card__list-platforms">
                                 {game.parent_platforms.map((platform, index) => (
-
                                         <img key={`${game.id}-${platform.platform.id}`} className="card__platforms" src={`/src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />
-
-
-
                                     ))}
                                 </div> 
                                 <h2 className="card__title">{game.name}</h2>

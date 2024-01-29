@@ -22,8 +22,6 @@ const GameDetails = () => {
     const API_KEY = import.meta.env.VITE_API_KEY
     const [isLoading, setIsLoading] = useState(false)
    
-
-
     const fetchGameDetails = async () => {
 
       try{
@@ -32,7 +30,6 @@ const GameDetails = () => {
           const apiCall = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`)
           setGameDetails(apiCall.data)
           const currentGame = apiCall.data.id
-          console.log(apiCall.data)
           const isFavorite = await favorites.find((favorite) => favorite.GameID === currentGame)
           if (isFavorite) {
               setIsFavoriteGame(true)

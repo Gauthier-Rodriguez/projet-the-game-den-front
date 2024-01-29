@@ -16,8 +16,6 @@ const ModalPseudo = ({onClose}) => {
     onClose();
   }
 
-
-
     return (
     
     <div className="modal">
