@@ -100,7 +100,7 @@ const Login = () => {
                         <input className="container__input" type="email" placeholder="Email" value={email}onChange={(e) => setEmail(e.target.value)}/>
                         <input className="container__input" type="password" placeholder="Password" value={password}onChange={(e) => setPassword(e.target.value)}/>
                         <button className="container__button" type="submit">SIGN UP</button>
-                        {error && <p className="error-message">{error}</p>} {console.log(error)}
+                        {error && <p className="error-message">{error}</p>}
                     </form>
                 </div>
 
