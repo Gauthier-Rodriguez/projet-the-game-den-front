@@ -14,7 +14,7 @@ const Login = () => {
     const [pseudo, setPseudo] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
    const createUser = (e) => {

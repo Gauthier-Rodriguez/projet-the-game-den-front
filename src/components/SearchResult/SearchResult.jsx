@@ -9,30 +9,27 @@ import Footer from '../Footer/Footer'
 
 const SearchResult = () => {
 
-    const [search, setSearch, isLoading, fetchSearch] = useContext(SearchContext)
+    const [search, setSearch, fetchSearch, isLoading, setIsLoading, fetchResult] = useContext(SearchContext)
     const { filters } = useContext(FilterContext);
-    const filteredGames = (search.results || []).filter((game) => {
-        return (
-            (!filters || !filters.platform || game.platforms.some((platform) => platform.platform.name === filters.platform)) &&
-            (!filters || !filters.genre || game.genres.some((genre) => genre.name === filters.genre))
-        );
-    });
-    const gamesToDisplay = (search.results || []).length > 0 ? (filters.platform || filters.genre ? filteredGames : search.results) : [];
 
+    console.log(fetchResult)
+
+    const gamesToDisplay = fetchResult;
+    console.log(gamesToDisplay)
     return (
         <div className="search__container">
-            <Filter />
+            
             <h1 className="search__title">Results</h1>    
             <div className="search__list">
-            {gamesToDisplay.map((game) => ( 
+            {gamesToDisplay && gamesToDisplay.map((game) => ( 
             <>
                 <div key={game.id} className="card">
                     <Link className="card__img-container" to={`/game/${game.id}`}>
-                        <img className="card__img" src={game.background_image} alt={game.name} />
+                        <img className="card__img" src={game.cover} alt={game.name} />
                     </Link>
                     <div className="card__list-platforms">
-                    {game.parent_platforms.map((platform) => (
-                        <img key={platform.id} className="card__platforms" src={`src/assets/${platform.platform.slug}.svg`} alt={platform.platform.name} />      
+                    {game.platforms && game.platforms.map((platform) => (
+                        <img key={platform.id} className="card__platforms" src={`public/logo/${platform.logo}`} alt={platform.name} />      
                     ))}
                     </div> 
                     <h2 className="card__title">{game.name}</h2>     

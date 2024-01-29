@@ -17,14 +17,9 @@ export const HomeController = ({children}) => {
     
         try{
             setIsLoading(true)
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&dates=2023-01-01,2023-12-31&ordering=-added&page_size=60`)
-            const sortedResults = apiCall.data.results.sort((a, b) => {
-                const releaseDateA = new Date(a.released).getTime() || 0;
-                const releaseDateB = new Date(b.released).getTime() || 0;
-                return releaseDateB - releaseDateA;
-            });
-            
-            setPopular({ ...apiCall.data, results: sortedResults });
+            const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/popular`)
+            const popularGames = apiCall.data
+            setPopular(popularGames)
         } catch (err) {
             setError(err)
         }

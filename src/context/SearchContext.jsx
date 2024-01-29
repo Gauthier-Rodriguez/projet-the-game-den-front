@@ -7,6 +7,7 @@ export const SearchContext = createContext()
 export const SearchController = ({children}) => {
 
     const [search, setSearch] = useState('')
+    const [fetchResult, setFetchResult] = useState([{}])
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     
@@ -15,16 +16,19 @@ export const SearchController = ({children}) => {
     const fetchSearch = async (search) => {
         try{
             setIsLoading(true)
-            const apiCall = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${search}&search_exact=true&ordering=-added&exclude_stores=9,8,4&parent_platforms=1,2,3,7&page_size=100`)
+            const apiCall = await axios.get(`https://game-den-back.onrender.com/api/ext/search?search=${search}`)
             
-            const sortedResults = apiCall.data.results.sort((a, b) => {
-                const releaseDateA = new Date(a.released).getTime() || 0;
-                const releaseDateB = new Date(b.released).getTime() || 0;
+            const sortedResults = apiCall.data.sort((a, b) => {
+                const releaseDateA = (a.first_release_date)|| 0;
+                const releaseDateB = (b.first_release_date)|| 0;
                 return releaseDateB - releaseDateA;
+                
             });
-
-            setSearch({ ...apiCall.data, results: sortedResults });
-    
+            console.log(sortedResults)
+            console.log(apiCall.data) 
+            
+            setFetchResult(apiCall.data);
+            console.log(fetchResult)
         } 
         catch (error){
             setError(error)
@@ -40,7 +44,7 @@ export const SearchController = ({children}) => {
     }, [])
 
     return(
-        <SearchContext.Provider value={[search, setSearch, fetchSearch, isLoading, setIsLoading]}>
+        <SearchContext.Provider value={[search, setSearch, fetchSearch, isLoading, setIsLoading, fetchResult]}>
             {isLoading ? ( <Loader />) : (children)}
          </SearchContext.Provider>
      )

@@ -6,10 +6,10 @@ import close from '../../../assets/close.svg';
 
 
 const ModalGenre = ({onClose}) => {
-    const {value1} = useContext(UserContext);
+    const {value1, value8} = useContext(UserContext);
     const [details, setDetails] = value1;
     const [genres, setGenres] = useState([]);
-    const [userGenres, setUserGenres] = useState([]);
+    const [userGenres, setUserGenres] = value8;
 
     const allGenres = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/genre`);
@@ -37,6 +37,7 @@ const ModalGenre = ({onClose}) => {
     const savedGenres = async () => {
         const response = await axios.get(`https://game-den-back.onrender.com/api/users/${details.id}`);
         const userGenres = response.data.genres;
+        console.log(userGenres)
         setUserGenres(userGenres);
     }
     useEffect(() => {
