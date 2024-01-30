@@ -1,11 +1,11 @@
 import './Home.scss';
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import { HomeContext } from '../../context/HomeContext';
 import {FilterContext} from '../../context/FilterContext';
 import {UserContext} from '../../context/UserContext';
 import {Link} from  'react-router-dom';
+import Loader from '../Loader/Loader';
 import Filter from '../Filter/Filter';
-import Footer from '../Footer/Footer';
 import axios from 'axios';
 
 const API_KEY = import.meta.env.VITE_API_KEY
@@ -18,6 +18,7 @@ const Home = () => {
     const [getProfil] = value2;
     const [isAuthenticated, setIsAuthenticated] = value4;
     const [recoGames, setRecoGames] = value7;
+    const [isLoading, setIsLoading] = useState(true);
 
     const recommendations = async () => {
 
@@ -29,7 +30,7 @@ const Home = () => {
                 const userPlatform = PlatformID.join(',');
                 const genreAndPlatformMatch = await axios.get(`https://game-den-back.onrender.com/api/ext/recommendations?genres=${userGenre}&platforms=${userPlatform}`);
                 const reco = genreAndPlatformMatch.data;
-        
+                setIsLoading(false);
                 setRecoGames(reco);
         }
 
@@ -52,6 +53,9 @@ const Home = () => {
         <div className="home__container">
             <Filter />
             {isAuthenticated ? (
+                isLoading ? (
+                    <Loader />
+               ) :
                 recoGames.length > 0 ? (
                 <>
                     <h1 className="home__title">Recommendations</h1>
@@ -96,7 +100,6 @@ const Home = () => {
                     </div>
                 </>
             )}
-            <Footer />
         </div>
     );
 };

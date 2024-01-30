@@ -3,54 +3,52 @@ import './Filter.scss'
 import {useContext, useState, useEffect} from 'react'
 
 const Filter = () => {
-
-    const {genres, platforms, setFilters} = useContext(FilterContext)
-    const [selectedPlatform, setSelectedPlatform] = useState('')
-    const [selectedGenre, setSelectedGenre] = useState('')
+    const { genres, platforms, setFilters } = useContext(FilterContext);
+    const [selectedFilters, setSelectedFilters] = useState({ platform: '', genre: '' });
 
     useEffect(() => {
         const storedFilters = JSON.parse(localStorage.getItem('filters'));
         if (storedFilters) {
-            setSelectedPlatform(storedFilters.platform)
-            setSelectedGenre(storedFilters.genre)
+            setSelectedFilters(storedFilters);
         }
     }, []);
-    
-    const handlePlatformChange = (e) => {
-        const platform = e.target.value
-        setSelectedPlatform(platform)
-        setFilters({ platform, genre: selectedGenre });
 
-        localStorage.setItem('filters', JSON.stringify({ platform, genre: selectedGenre }));
-    }
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setSelectedFilters((prevFilters) => ({
+            ...prevFilters,
+            [name]: prevFilters[name] === value ? '' : value,
+        }));
+    };
 
-    const handleGenreChange = (e) => {
-        const genre = e.target.value
-        setSelectedGenre(genre)
-        setFilters({ platform: selectedPlatform, genre });
+    useEffect(() => {
+        setFilters(selectedFilters);
+        localStorage.setItem('filters', JSON.stringify(selectedFilters));
+    }, [selectedFilters, setFilters]);
 
-        localStorage.setItem('filters', JSON.stringify({ platform: selectedPlatform, genre }));
-    }
-    
-    return(
-        <>
-            <div className='filter'>
-                <select className="filter__title" name="platform" onChange={handlePlatformChange} >
-                    <option>Platform</option>
-                    {platforms && platforms.map(platform => (
-                        <option key={platform.id} className="filter__option" value={platform.name}>{platform.name}</option>
+    return (
+        <div className="filter">
+            <select className="filter__title" name="platform" value={selectedFilters.platform} onChange={handleFilterChange}>
+                <option value="">Platform</option>
+                {platforms &&
+                    platforms.map((platform) => (
+                        <option key={platform.id} className="filter__option" value={platform.name}>
+                            {platform.name}
+                        </option>
                     ))}
-                </select>
+            </select>
 
-                <select className="filter__title" name="genre"  onChange={handleGenreChange}>
-                    <option>Genre</option>
-                    {genres && genres.map(genre => (
-                        <option key={genre.id} className="filter__option" value={genre.name}>{genre.name}</option>
+            <select className="filter__title" name="genre" value={selectedFilters.genre} onChange={handleFilterChange}>
+                <option value="">Genre</option>
+                {genres &&
+                    genres.map((genre) => (
+                        <option key={genre.id} className="filter__option" value={genre.name}>
+                            {genre.name}
+                        </option>
                     ))}
-                </select>
-            </div>    
-        </>
-    )
-}
+            </select>
+        </div>
+    );
+};
 
-export default Filter
+export default Filter;

@@ -34,7 +34,6 @@ const SearchResult = () => {
             </>
             ))}
         </div>
-        <Footer />
     </div>
     )
 }
