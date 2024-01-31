@@ -52,15 +52,16 @@ const Home = () => {
      //affichage des recommandations - si utilisateur connecté
     return (
         <div className="home__container">
-            <Filter />
+            
             {isAuthenticated ? (
                 isLoading ? (
                     <Loader />
                ) :
-                recoGames.length > 0 ? (
+               recoGames.length > 0 ? (
                 <>
                     <h1 className="home__title">Recommendations</h1>
                     <div className="home__list">
+
                             {recoGames.map((game) => {
                                 const displayedPlatformsInGame = [];
                                 return (
@@ -87,13 +88,16 @@ const Home = () => {
                             })}
                         </div>
                     </>
+
                 ) : (
                     <p className="error">No recommended games yet. Complete your profile !</p>
                 )
             ) : (
                 <>
+                <Filter />
                     <h1 className="home__title">Popular games in 2023</h1>
                     <div className="home__list">
+
                         {gamesToDisplay && gamesToDisplay.map((game) => {
                             const displayedPlatformsInGame = [];
                             return (
@@ -115,6 +119,7 @@ const Home = () => {
                                         })}
                                     </div>
                                     <h2 className="card__title">{game.name}</h2>
+
                                 </div>
                             );
                         })}
