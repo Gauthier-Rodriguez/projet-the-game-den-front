@@ -60,11 +60,13 @@
   &__heart-solid{
     width: calc(var(--spacing)*2);
     height: calc(var(--spacing)*2);
+    cursor: pointer;
   }
   
   &__heart-outline{
     width: calc(var(--spacing)*2);
     height: calc(var(--spacing)*2);
+    cursor: pointer;
   }
 
   &__description{
@@ -124,7 +126,7 @@
     margin-top: 10vh;
     height: 90vh;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     
 

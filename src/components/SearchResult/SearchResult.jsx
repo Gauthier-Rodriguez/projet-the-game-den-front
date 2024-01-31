@@ -12,28 +12,36 @@ const SearchResult = () => {
     const { filters } = useContext(FilterContext);
 
     const gamesToDisplay = fetchResult;
+
     return (
         <div className="search__container">
-            
-            <h1 className="search__title">Results</h1>    
+            <Filter />
+            <h1 className="search__title">Results</h1>
             <div className="search__list">
-            {gamesToDisplay && gamesToDisplay.map((game) => ( 
-            <>
-                <div key={game.id} className="card">
-                    <Link className="card__img-container" to={`/game/${game.id}`}>
-                        <img className="card__img" src={game.cover} alt={game.name} />
-                    </Link>
-                    <div className="card__list-platforms">
-                    {game.platforms && game.platforms.map((platform) => (
-                        <img key={platform.id} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />      
-                    ))}
-                    </div> 
-                    <h2 className="card__title">{game.name}</h2>     
-                </div>
-            </>
-            ))}
+                {gamesToDisplay && gamesToDisplay.map((game) => (
+                    <>
+                        <div key={game.id} className="card">
+                            <Link className="card__img-container" to={`/game/${game.id}`}>
+                                <img className="card__img" src={game.cover} alt={game.name} />
+                            </Link>
+                            <div className="card__list-platforms">
+                                {game.platforms && game.platforms.map((platform, index) => {
+                                    const platformFamily = platform.logo.split('.')[0];
+                                    if (index === 0 || !game.platforms.some((p, idx) => idx < index && p.logo.split('.')[0] === platformFamily)) {
+                                        return (
+                                            <img key={platform.id} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
+                                        );
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                            </div>
+                            <h2 className="card__title">{game.name}</h2>
+                        </div>
+                    </>
+                ))}
+            </div>
         </div>
-    </div>
     )
 }
 
