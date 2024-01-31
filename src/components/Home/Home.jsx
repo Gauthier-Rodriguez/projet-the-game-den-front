@@ -51,23 +51,22 @@ const Home = () => {
      //affichage des recommandations - si utilisateur connecté
     return (
         <div className="home__container">
-            <Filter />
+            
             {isAuthenticated ? (
                 isLoading ? (
                     <Loader />
                ) :
-                recoGames.length > 0 ? (
+               recoGames.length > 0 ? (
                 <>
                     <h1 className="home__title">Recommendations</h1>
                     <div className="home__list">
-                        {recoGames.map((game) => (
+                        {recoGames && recoGames.map((game) => (
                             <div key={game.id} className="card">
                                 <Link className="card__img-container" to={`/game/${game.id}`}>
                                     <img className="card__img" src={game.cover} alt={game.name} />
                                 </Link>
                                 <div className="card__list-platforms">
                                 {game.platforms.map((platform, index) => (
-
                                     <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
                                 ))}
                                 </div>
@@ -82,6 +81,7 @@ const Home = () => {
             
             ) : (
                 <>
+                <Filter />
                     <h1 className="home__title">Popular games in 2023</h1>
                     <div className="home__list">
                         {gamesToDisplay && gamesToDisplay.map((game) => (
@@ -90,9 +90,9 @@ const Home = () => {
                                     <img className="card__img" src={game.cover} alt={game.name} />
                                 </Link>
                                 <div className="card__list-platforms">
-                                    {game.platforms.map((platform, index) => (
+                                {game.platforms.map((platform, index) => (
                                         <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
-                                    ))}
+                                ))}
                                 </div>
                                 <h2 className="card__title">{game.name}</h2>
                             </div>
