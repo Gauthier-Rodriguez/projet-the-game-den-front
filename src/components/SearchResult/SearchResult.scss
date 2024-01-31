@@ -24,7 +24,7 @@
 
 .card{
     width: 90%;
-    height: 45vh;
+    height: 65vh;
     background-color: var(--color-primary);
     border-radius: var(--spacing);
     margin: auto;
@@ -42,7 +42,7 @@
 
     &__img-container{
         width: 100%;
-        height: 65%;
+        height: 75%;
         clip-path: polygon(0 0,100% 0, 100% 85%, 0 100% );
     }
     &__img{
@@ -110,7 +110,7 @@
     }
 
     .card{
-        width: 25vw;
+        width: 12vw;
         height: 40vh;
 
         &__list-platforms{
@@ -121,7 +121,7 @@
 
 @media screen and (min-width: 1200px){
     .card{
-        width: 20vw;
+        width: 12vw;
         height: 40vh;
         
         &__platforms{
