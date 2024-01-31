@@ -5,7 +5,6 @@ import { SearchContext } from '../../context/SearchContext'
 import {FilterContext} from '../../context/FilterContext'
 import Filter from '../Filter/Filter'
 import Loader from '../Loader/Loader'
-import Footer from '../Footer/Footer'
 
 const SearchResult = () => {
 
@@ -34,7 +33,6 @@ const SearchResult = () => {
             </>
             ))}
         </div>
-        <Footer />
     </div>
     )
 }
