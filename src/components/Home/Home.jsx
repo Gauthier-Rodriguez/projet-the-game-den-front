@@ -19,6 +19,7 @@ const Home = () => {
     const [isAuthenticated, setIsAuthenticated] = value4;
     const [recoGames, setRecoGames] = value7;
     const [isLoading, setIsLoading] = useState(true);
+    const [displayedPlatforms, setDisplayedPlatforms] = useState({});
 
     const recommendations = async () => {
 
@@ -60,48 +61,68 @@ const Home = () => {
                 <>
                     <h1 className="home__title">Recommendations</h1>
                     <div className="home__list">
-                        {recoGames.map((game) => (
-                            <div key={game.id} className="card">
-                                <Link className="card__img-container" to={`/game/${game.id}`}>
-                                    <img className="card__img" src={game.cover} alt={game.name} />
-                                </Link>
-                                <div className="card__list-platforms">
-                                {game.platforms.map((platform, index) => (
-
-                                    <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
-                                ))}
-                                </div>
-                                <h2 className="card__title">{game.name}</h2>
-                            </div>
-                        ))}
-                    </div>
-                </> 
+                            {recoGames.map((game) => {
+                                const displayedPlatformsInGame = [];
+                                return (
+                                    <div key={game.id} className="card">
+                                        <Link className="card__img-container" to={`/game/${game.id}`}>
+                                            <img className="card__img" src={game.cover} alt={game.name} />
+                                        </Link>
+                                        <div className="card__list-platforms">
+                                                {game.platforms.map((platform, index) => {
+                                                const platformFamily = platform.logo.split('.')[0];
+                                                if (!displayedPlatformsInGame.includes(platformFamily)) {
+                                                    displayedPlatformsInGame.push(platformFamily);
+                                                    return (
+                                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
+                                                    );
+                                                } else {
+                                                    return null;
+                                                }
+                                            })}
+                                        </div>
+                                        <h2 className="card__title">{game.name}</h2>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </>
                 ) : (
                     <p className="error">No recommended games yet. Complete your profile !</p>
                 )
-            
             ) : (
                 <>
                     <h1 className="home__title">Popular games in 2023</h1>
                     <div className="home__list">
-                        {gamesToDisplay && gamesToDisplay.map((game) => (
-                            <div key={game.id} className="card">
-                                <Link className="card__img-container" to={`/game/${game.id}`}>
-                                    <img className="card__img" src={game.cover} alt={game.name} />
-                                </Link>
-                                <div className="card__list-platforms">
-                                    {game.platforms.map((platform, index) => (
-                                        <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
-                                    ))}
+                        {gamesToDisplay && gamesToDisplay.map((game) => {
+                            const displayedPlatformsInGame = [];
+                            return (
+                                <div key={game.id} className="card">
+                                    <Link className="card__img-container" to={`/game/${game.id}`}>
+                                        <img className="card__img" src={game.cover} alt={game.name} />
+                                    </Link>
+                                    <div className="card__list-platforms">
+                                        {game.platforms.map((platform, index) => {
+                                            const platformFamily = platform.logo.split('.')[0];
+                                            if (!displayedPlatformsInGame.includes(platformFamily)) {
+                                                displayedPlatformsInGame.push(platformFamily);
+                                                return (
+                                                    <img key={`${game.id}-${platform.id}`} className="card__platforms" src={`/logo/${platform.logo}`} alt={platform.name} />
+                                                );
+                                            } else {
+                                                return null;
+                                            }
+                                        })}
+                                    </div>
+                                    <h2 className="card__title">{game.name}</h2>
                                 </div>
-                                <h2 className="card__title">{game.name}</h2>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </>
             )}
         </div>
     );
-};
+            };
 
 export default Home;

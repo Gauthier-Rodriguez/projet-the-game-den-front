@@ -77,6 +77,8 @@ const GameDetails = () => {
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("${gameDetails.cover}")`,
     };
 
+    const displayedPlatformFamilies = new Set();
+
     return (
       <>
         {isLoading && <Loader />}
@@ -88,15 +90,23 @@ const GameDetails = () => {
               )}
               {gameDetails && gameDetails.platforms && (
                 <div className='game__list-parent'>
-                  {gameDetails.platforms.map((platform) => (
-                    <img
-                      key={`${platform.id}-${platform.id}`}
-                      className="game__parent-platform"
-                      src={`/logo/${platform.logo}`}
-                      alt={platform.name}
-                    />
-                  ))}
-                </div>
+                  {gameDetails.platforms.map((platform) => {
+                  const platformFamily = platform.logo.split('.')[0];
+                    if (!displayedPlatformFamilies.has(platformFamily)) {
+                      displayedPlatformFamilies.add(platformFamily);
+                      return (
+                          <img
+                              key={`${platform.id}-${platform.id}`}
+                              className="game__parent-platform"
+                              src={`/logo/${platform.logo}`}
+                              alt={platform.name}
+                          />
+                      );
+                    } else {
+                      return null;
+                    }
+                })}
+            </div>
               )}
             </div>
 
